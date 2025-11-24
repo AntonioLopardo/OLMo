@@ -23,7 +23,7 @@
   </a>
 </p>
 
-# ** ⚠️ NOTICE ⚠️ This repository is out of date with our more recent releases and is no longer active. For the latest Olmo releases and updates, please visit: ** https://github.com/allenai/OLMo-core/ 
+# ⚠️ NOTICE ⚠️ This repository is out of date with our more recent releases and is no longer active. For the latest Olmo releases and updates, please visit: https://github.com/allenai/OLMo-core/ 
 
 OLMo is a repository for training and using AI2's state-of-the-art open language models. It is designed by scientists, for scientists.
 
