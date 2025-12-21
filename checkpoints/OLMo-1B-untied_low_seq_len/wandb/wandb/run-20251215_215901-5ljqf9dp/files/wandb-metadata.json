@@ -1,0 +1,92 @@
+{
+  "os":  "Linux-6.8.0-87-generic-x86_64-with-glibc2.39",
+  "python":  "CPython 3.12.3",
+  "startedAt":  "2025-12-15T21:59:01.642772Z",
+  "args":  [
+    "configs/custom/todo/OLMo-1B-untied_low_seq_len.yaml"
+  ],
+  "program":  "/home/vec_norm/OLMo/scripts/train.py",
+  "codePath":  "scripts/train.py",
+  "codePathLocal":  "scripts/train.py",
+  "git":  {
+    "remote":  "https://github.com/allenai/OLMo.git",
+    "commit":  "090253dac6688f2532509daa7aa2eb5fae50e956"
+  },
+  "email":  "antonio.lopardo@outlook.com",
+  "root":  "/home/vec_norm/OLMo/checkpoints/OLMo-1B-untied_low_seq_len/wandb",
+  "host":  "smart-room-falls-fin-03",
+  "executable":  "/home/vec_norm/.venv/bin/python",
+  "cpu_count":  240,
+  "cpu_count_logical":  240,
+  "gpu":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "gpu_count":  8,
+  "disk":  {
+    "/":  {
+      "total":  "758162690048",
+      "used":  "379760164864"
+    }
+  },
+  "memory":  {
+    "total":  "760379682816"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "memoryTotal":  "102641958912",
+      "cudaCores":  24064,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-4addb0d9-48c8-19a2-afde-038e26415010"
+    },
+    {
+      "name":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "memoryTotal":  "102641958912",
+      "cudaCores":  24064,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-a28141ce-7852-4cb9-1b5a-6ec3841c9c7e"
+    },
+    {
+      "name":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "memoryTotal":  "102641958912",
+      "cudaCores":  24064,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-b7e4a4ee-298c-65e0-a5e9-6e295b86042c"
+    },
+    {
+      "name":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "memoryTotal":  "102641958912",
+      "cudaCores":  24064,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-f43e5ab3-d9b8-43e3-297e-a0d0dab7c673"
+    },
+    {
+      "name":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "memoryTotal":  "102641958912",
+      "cudaCores":  24064,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-71d16fe9-b9aa-fef7-c2f7-09b80a263d1f"
+    },
+    {
+      "name":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "memoryTotal":  "102641958912",
+      "cudaCores":  24064,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-a591617f-d92a-7546-e8e7-18f3603201ff"
+    },
+    {
+      "name":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "memoryTotal":  "102641958912",
+      "cudaCores":  24064,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-3bb9bab3-819e-5284-c5c1-fdf46561cdff"
+    },
+    {
+      "name":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "memoryTotal":  "102641958912",
+      "cudaCores":  24064,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-9c0d5e53-a3e1-2a38-5790-08632025ebc0"
+    }
+  ],
+  "cudaVersion":  "13.0",
+  "writerId":  "tfx87g4mfw2mzqvdnaswcobokeoszinf"
+}

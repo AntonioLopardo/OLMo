@@ -1,0 +1,92 @@
+{
+  "os":  "Linux-6.8.0-87-generic-x86_64-with-glibc2.39",
+  "python":  "CPython 3.12.3",
+  "startedAt":  "2025-12-15T22:10:36.331797Z",
+  "args":  [
+    "configs/custom/todo/OLMo-1B-untied_low_seq_len.yaml"
+  ],
+  "program":  "/home/vec_norm/OLMo/scripts/train.py",
+  "codePath":  "scripts/train.py",
+  "codePathLocal":  "scripts/train.py",
+  "git":  {
+    "remote":  "https://github.com/allenai/OLMo.git",
+    "commit":  "090253dac6688f2532509daa7aa2eb5fae50e956"
+  },
+  "email":  "antonio.lopardo@outlook.com",
+  "root":  "/home/vec_norm/OLMo/checkpoints/OLMo-1B-untied_low_seq_len/wandb",
+  "host":  "short-room-smiles-fin-03",
+  "executable":  "/home/vec_norm/.venv/bin/python",
+  "cpu_count":  240,
+  "cpu_count_logical":  240,
+  "gpu":  "NVIDIA B200",
+  "gpu_count":  8,
+  "disk":  {
+    "/":  {
+      "total":  "758162690048",
+      "used":  "379759816704"
+    }
+  },
+  "memory":  {
+    "total":  "1555216609280"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA B200",
+      "memoryTotal":  "192265846784",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-ca7c48a9-cc0e-e136-b5d6-de310bcf8c60"
+    },
+    {
+      "name":  "NVIDIA B200",
+      "memoryTotal":  "192265846784",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-62378429-571f-e455-e269-31de8a9af68b"
+    },
+    {
+      "name":  "NVIDIA B200",
+      "memoryTotal":  "192265846784",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-5a70a4fc-3cf3-8548-6ad6-71c793712652"
+    },
+    {
+      "name":  "NVIDIA B200",
+      "memoryTotal":  "192265846784",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-11e51956-aa73-764f-53fd-e801c933725a"
+    },
+    {
+      "name":  "NVIDIA B200",
+      "memoryTotal":  "192265846784",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-3dd96484-7252-e980-ed1a-c495486b3e88"
+    },
+    {
+      "name":  "NVIDIA B200",
+      "memoryTotal":  "192265846784",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-87229d9e-b1e1-16b0-9db8-a5b440c5961d"
+    },
+    {
+      "name":  "NVIDIA B200",
+      "memoryTotal":  "192265846784",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-d501c326-6628-9149-17b7-eed308e6c9f1"
+    },
+    {
+      "name":  "NVIDIA B200",
+      "memoryTotal":  "192265846784",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-21f061fe-514a-369c-c0dc-0dd272883b64"
+    }
+  ],
+  "cudaVersion":  "13.0",
+  "writerId":  "zd23h2j1qc7e3tji125bwlnjlkceboik"
+}

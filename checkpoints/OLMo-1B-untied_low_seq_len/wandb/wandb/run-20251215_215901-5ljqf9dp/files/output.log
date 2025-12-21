@@ -1,0 +1,220 @@
+2025-12-15 21:59:04.635	smart-room-falls-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-15 21:59:04.942	smart-room-falls-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-1B-untied_low_seq_len/train_data/global_indices.npy'
+2025-12-15 21:59:04.994	smart-room-falls-fin-03:0	train:139	INFO	Building model...
+2025-12-15 21:59:05.074	smart-room-falls-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-15 21:59:05.089	smart-room-falls-fin-03:0	train:141	INFO	Total number of parameters: 1,279,787,008
+2025-12-15 21:59:05.090	smart-room-falls-fin-03:0	train:142	INFO	Number of non-embedding parameters: 1,176,764,416
+2025-12-15 21:59:05.119	smart-room-falls-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 5123
+2025-12-15 21:59:05.120	smart-room-falls-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-15 21:59:05.126	smart-room-falls-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-15 21:59:05.339	smart-room-falls-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 10242
+2025-12-15 21:59:05.339	smart-room-falls-fin-03:0	train:233	INFO	Model:
+2025-12-15 21:59:05.339	smart-room-falls-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 2048)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-15): 16 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=2048, out_features=2048, bias=False)
+          (ff_out): Linear(in_features=8192, out_features=2048, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=2048, out_features=6144, bias=False)
+          (ff_proj): Linear(in_features=2048, out_features=16384, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+      (ff_out): Linear(in_features=2048, out_features=50304, bias=False)
+    )
+  )
+)
+2025-12-15 21:59:05.340	smart-room-falls-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-15 21:59:05.341	smart-room-falls-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-15 21:59:06.199	smart-room-falls-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-15 21:59:09.946	smart-room-falls-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-15 21:59:09.947	smart-room-falls-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-15 21:59:09.948	smart-room-falls-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-15 21:59:10.747	smart-room-falls-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-untied_low_seq_len/step0-unsharded
+2025-12-15 21:59:10.747	smart-room-falls-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-15 21:59:13.123	smart-room-falls-fin-03:0	olmo.train:409	INFO	Resetting learning rate...
+2025-12-15 21:59:13.123	smart-room-falls-fin-03:0	olmo.train:421	INFO	Restoring RNG states...
+2025-12-15 21:59:13.411	smart-room-falls-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-15 21:59:13.412	smart-room-falls-fin-03:0	train:375	INFO	Starting training...
+2025-12-15 21:59:13.413	smart-room-falls-fin-03:0	olmo.train:979	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=10,242
+2025-12-15 21:59:34.102	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=1/10000,epoch=0]
+    optim/total_grad_norm=9.728
+    train/CrossEntropyLoss=11.36
+    train/Perplexity=85,735
+    throughput/total_tokens=2,097,152
+    throughput/total_training_Gflops=17,360,189
+    throughput/total_training_log_Gflops=16.67
+    System/Peak GPU Memory (MB)=59,481
+2025-12-15 21:59:43.324	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=2/10000,epoch=0]
+    optim/total_grad_norm=19.09
+    train/CrossEntropyLoss=10.26
+    train/Perplexity=28,550
+    throughput/total_tokens=4,194,304
+    throughput/total_training_Gflops=34,720,378
+    throughput/total_training_log_Gflops=17.36
+    throughput/device/tokens_per_second=28,435
+    throughput/device/batches_per_second=0.1085
+    System/Peak GPU Memory (MB)=69,720
+2025-12-15 21:59:52.566	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=3/10000,epoch=0]
+    optim/total_grad_norm=8.643
+    train/CrossEntropyLoss=10.22
+    train/Perplexity=27,503
+    throughput/total_tokens=6,291,456
+    throughput/total_training_Gflops=52,080,567
+    throughput/total_training_log_Gflops=17.77
+    throughput/device/tokens_per_second=28,399
+    throughput/device/batches_per_second=0.1083
+2025-12-15 22:00:01.796	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=4/10000,epoch=0]
+    optim/total_grad_norm=12.29
+    train/CrossEntropyLoss=9.942
+    train/Perplexity=20,785
+    throughput/total_tokens=8,388,608
+    throughput/total_training_Gflops=69,440,756
+    throughput/total_training_log_Gflops=18.06
+    throughput/device/tokens_per_second=28,399
+    throughput/device/batches_per_second=0.1083
+2025-12-15 22:00:11.035	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=5/10000,epoch=0]
+    optim/total_grad_norm=8.036
+    train/CrossEntropyLoss=9.599
+    train/Perplexity=14,749
+    throughput/total_tokens=10,485,760
+    throughput/total_training_Gflops=86,800,945
+    throughput/total_training_log_Gflops=18.28
+    throughput/device/tokens_per_second=28,393
+    throughput/device/batches_per_second=0.1083
+2025-12-15 22:00:20.277	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=6/10000,epoch=0]
+    optim/total_grad_norm=16.30
+    train/CrossEntropyLoss=9.453
+    train/Perplexity=12,751
+    throughput/total_tokens=12,582,912
+    throughput/total_training_Gflops=104,161,134
+    throughput/total_training_log_Gflops=18.46
+    throughput/device/tokens_per_second=28,387
+    throughput/device/batches_per_second=0.1083
+2025-12-15 22:00:29.515	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=7/10000,epoch=0]
+    optim/total_grad_norm=14.58
+    train/CrossEntropyLoss=9.379
+    train/Perplexity=11,834
+    throughput/total_tokens=14,680,064
+    throughput/total_training_Gflops=121,521,323
+    throughput/total_training_log_Gflops=18.62
+    throughput/device/tokens_per_second=28,385
+    throughput/device/batches_per_second=0.1083
+2025-12-15 22:00:38.757	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=8/10000,epoch=0]
+    optim/total_grad_norm=6.320
+    train/CrossEntropyLoss=9.239
+    train/Perplexity=10,286
+    throughput/total_tokens=16,777,216
+    throughput/total_training_Gflops=138,881,512
+    throughput/total_training_log_Gflops=18.75
+    throughput/device/tokens_per_second=28,382
+    throughput/device/batches_per_second=0.1083
+2025-12-15 22:00:47.996	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=9/10000,epoch=0]
+    optim/total_grad_norm=5.819
+    train/CrossEntropyLoss=9.153
+    train/Perplexity=9,443
+    throughput/total_tokens=18,874,368
+    throughput/total_training_Gflops=156,241,701
+    throughput/total_training_log_Gflops=18.87
+    throughput/device/tokens_per_second=28,381
+    throughput/device/batches_per_second=0.1083
+2025-12-15 22:00:57.337	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=10/10000,epoch=0]
+    optim/total_grad_norm=3.313
+    train/CrossEntropyLoss=9.050
+    train/Perplexity=8,519
+    throughput/total_tokens=20,971,520
+    throughput/total_training_Gflops=173,601,890
+    throughput/total_training_log_Gflops=18.97
+    throughput/device/tokens_per_second=28,346
+    throughput/device/batches_per_second=0.1081
+    System/Peak GPU Memory (MB)=69,720
+2025-12-15 22:01:06.576	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=11/10000,epoch=0]
+    optim/total_grad_norm=6.899
+    train/CrossEntropyLoss=9.025
+    train/Perplexity=8,310
+    throughput/total_tokens=23,068,672
+    throughput/total_training_Gflops=190,962,080
+    throughput/total_training_log_Gflops=19.07
+    throughput/device/tokens_per_second=28,348
+    throughput/device/batches_per_second=0.1081
+2025-12-15 22:01:15.820	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=12/10000,epoch=0]
+    optim/total_grad_norm=3.105
+    train/CrossEntropyLoss=8.908
+    train/Perplexity=7,392
+    throughput/total_tokens=25,165,824
+    throughput/total_training_Gflops=208,322,269
+    throughput/total_training_log_Gflops=19.15
+    throughput/device/tokens_per_second=28,349
+    throughput/device/batches_per_second=0.1081
+2025-12-15 22:01:25.060	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=13/10000,epoch=0]
+    optim/total_grad_norm=2.982
+    train/CrossEntropyLoss=8.804
+    train/Perplexity=6,663
+    throughput/total_tokens=27,262,976
+    throughput/total_training_Gflops=225,682,458
+    throughput/total_training_log_Gflops=19.23
+    throughput/device/tokens_per_second=28,351
+    throughput/device/batches_per_second=0.1082
+2025-12-15 22:01:34.300	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=14/10000,epoch=0]
+    optim/total_grad_norm=3.247
+    train/CrossEntropyLoss=8.771
+    train/Perplexity=6,446
+    throughput/total_tokens=29,360,128
+    throughput/total_training_Gflops=243,042,647
+    throughput/total_training_log_Gflops=19.31
+    throughput/device/tokens_per_second=28,352
+    throughput/device/batches_per_second=0.1082
+2025-12-15 22:01:43.543	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=15/10000,epoch=0]
+    optim/total_grad_norm=3.320
+    train/CrossEntropyLoss=8.738
+    train/Perplexity=6,232
+    throughput/total_tokens=31,457,280
+    throughput/total_training_Gflops=260,402,836
+    throughput/total_training_log_Gflops=19.38
+    throughput/device/tokens_per_second=28,353
+    throughput/device/batches_per_second=0.1082
+2025-12-15 22:01:52.785	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=16/10000,epoch=0]
+    optim/total_grad_norm=2.888
+    train/CrossEntropyLoss=8.693
+    train/Perplexity=5,963
+    throughput/total_tokens=33,554,432
+    throughput/total_training_Gflops=277,763,025
+    throughput/total_training_log_Gflops=19.44
+    throughput/device/tokens_per_second=28,354
+    throughput/device/batches_per_second=0.1082
+2025-12-15 22:02:02.026	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=17/10000,epoch=0]
+    optim/total_grad_norm=1.578
+    train/CrossEntropyLoss=8.643
+    train/Perplexity=5,668
+    throughput/total_tokens=35,651,584
+    throughput/total_training_Gflops=295,123,214
+    throughput/total_training_log_Gflops=19.50
+    throughput/device/tokens_per_second=28,354
+    throughput/device/batches_per_second=0.1082
+2025-12-15 22:02:11.254	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=18/10000,epoch=0]
+    optim/total_grad_norm=2.631
+    train/CrossEntropyLoss=8.628
+    train/Perplexity=5,586
+    throughput/total_tokens=37,748,736
+    throughput/total_training_Gflops=312,483,403
+    throughput/total_training_log_Gflops=19.56
+    throughput/device/tokens_per_second=28,357
+    throughput/device/batches_per_second=0.1082
+2025-12-15 22:02:20.497	smart-room-falls-fin-03:0	olmo.train:979	INFO	[step=19/10000,epoch=0]
+    optim/total_grad_norm=1.956
+    train/CrossEntropyLoss=8.555
+    train/Perplexity=5,193
+    throughput/total_tokens=39,845,888
+    throughput/total_training_Gflops=329,843,592
+    throughput/total_training_log_Gflops=19.61
+    throughput/device/tokens_per_second=28,358
+    throughput/device/batches_per_second=0.1082

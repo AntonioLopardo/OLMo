@@ -1,0 +1,364 @@
+W1212 12:22:47.669000 49879 torch/distributed/run.py:803] 
+W1212 12:22:47.669000 49879 torch/distributed/run.py:803] *****************************************
+W1212 12:22:47.669000 49879 torch/distributed/run.py:803] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1212 12:22:47.669000 49879 torch/distributed/run.py:803] *****************************************
+2025-12-12 12:23:07.512	quick-rain-shines-fin-03:0	train:417	INFO	CLI environment prepared
+2025-12-12 12:23:08.801	quick-rain-shines-fin-03:0	train:97	INFO	Configuration:
+2025-12-12 12:23:08.801	quick-rain-shines-fin-03:0	train:98	INFO	TrainConfig(run_name='wandb-test-run-2', seed=6198, epoch=None, dry_run=False, model=ModelConfig(d_model=2048, n_heads=16, n_kv_heads=None, clip_qkv=8.0, n_layers=16, mlp_ratio=8, mlp_hidden_size=None, activation_type='swiglu', block_type='sequential', block_group_size=1, alibi=False, alibi_bias_max=8.0, rope=True, rope_full_precision=True, rope_theta=10000, flash_attention=True, attention_dropout=0.0, multi_query_attention=False, attention_layer_norm=False, residual_dropout=0.0, embedding_dropout=0.0, embedding_layer_norm=False, layer_norm_type='default', layer_norm_with_affine=False, layer_norm_eps=1e-05, attention_layer_norm_with_affine=False, max_sequence_length=4096, include_bias=False, bias_for_layer_norm=False, scale_logits=False, vocab_size=50280, embedding_size=50304, weight_tying=False, eos_token_id=50279, pad_token_id=1, init_device='cuda', init_fn='mitchell', init_std=0.02, init_cutoff_factor=None, precision='amp_bf16', scale_emb_init=False, emb_init_std=None, norm_after=False), optimizer=OptimizerConfig(name='adamw', learning_rate=0.0003, weight_decay=0.1, betas=(0.9, 0.95), eps=1e-05, no_decay_norm_and_bias=None, selective_updates=False, decay_norm_and_bias=True, decay_embeddings=True, metrics_log_interval=5, record_update_metrics=False), scheduler=SchedulerConfig(name='cosine_with_warmup', units='steps', t_warmup=10, t_max=None, alpha_f=0.1, grad_clip_warmup_steps=None, grad_clip_warmup_factor=None, warmup_min_lr=None), data=DataConfig(paths=['/home/vec_norm/OLMo/data/dolma_v1_7/dolma_v1_7_30B.npy'], memmap_dtype='uint16', datasets=None, label_mask_paths=None, pad_direction='right', generate_attention_mask=False, generate_doc_lengths=False, num_workers=8, drop_last=True, pin_memory=True, prefetch_factor=2, persistent_workers=True, timeout=0, seed=None, instance_filter=None, custom_dataset=None), restore_dataloader=True, fast_forward_batches=None, evaluators=[], eval_interval=1000, tokenizer=TokenizerConfig(identifier='tokenizers/allenai_eleuther-ai-gpt-neox-20b-pii-special.json', truncate_direction='right'), save_folder='/home/vec_norm/OLMo/checkpoints/wandb-test', remote_save_folder=None, canceled_check_interval=50, save_interval=1000, save_interval_unsharded=None, save_interval_ephemeral=None, save_num_checkpoints_to_keep=1, save_num_unsharded_checkpoints_to_keep=0, save_overwrite=True, force_save_unsharded=False, no_pre_train_checkpoint=True, load_path=None, load_path_sharded_checkpointer=None, try_load_latest_save=False, reset_optimizer_state=False, reset_trainer_state=False, sharded_checkpointer='torch_legacy', new_style_checkpoints=None, max_duration=20, global_train_batch_size=512, device_train_batch_size=64, device_train_microbatch_size=8, device_eval_batch_size=16, eval_subset_num_batches=-1, eval_on_load=False, device_train_grad_accum=8, max_grad_norm=1.0, max_grad_norm_ratio=None, precision='amp_bf16', wandb=WandbConfig(project='VecNorm', entity='antoniolopardo', group='wandb-tests', name='wandb-test-run-2', tags=['watching'], log_artifacts=False, rank_zero_only=True, log_interval=1), speed_monitor=SpeedMonitorConfig(window_size=5, gpu_flops_available=None), console_log_interval=1, gen1_gc_interval=1, compile=None, distributed_strategy='ddp', fsdp=FSDPConfig(use_orig_params=True, sharding_strategy=<ShardingStrategy.FULL_SHARD: 1>, wrapping_strategy=None, precision='pure', hybrid_sharding_num_model_replicas=None), ddp=DDPConfig(grad_sync_mode='batch', find_unused_params=False), single=SingleGPUConfig(device='auto'), softmax_auxiliary_loss=False, auxiliary_loss_multiplier=0.0001, time_limit=None, extra_steps_after_cancel=10, early_stopping_factor=None, save_data_indices=True, python_profiling=False, torch_profiling=False, stop_at=None, stop_after=None, activation_checkpointing=None, fused_loss=None, hf_datasets_cache_dir=None, module_outputs_save_steps=None)
+2025-12-12 12:23:08.802	quick-rain-shines-fin-03:0	train:105	INFO	Saving config to /home/vec_norm/OLMo/checkpoints/wandb-test/config.yaml
+wandb: Currently logged in as: antoniolopardo to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run oapudqx7
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /home/vec_norm/OLMo/checkpoints/wandb-test/wandb/wandb/run-20251212_122309-oapudqx7
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run wandb-test-run-2
+wandb: ⭐️ View project at https://wandb.ai/antoniolopardo/VecNorm
+wandb: 🚀 View run at https://wandb.ai/antoniolopardo/VecNorm/runs/oapudqx7
+2025-12-12 12:23:12.547	quick-rain-shines-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-12 12:23:12.871	quick-rain-shines-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/wandb-test/train_data/global_indices.npy'
+2025-12-12 12:23:13.002	quick-rain-shines-fin-03:0	train:139	INFO	Building model...
+2025-12-12 12:23:13.222	quick-rain-shines-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 12:23:13.276	quick-rain-shines-fin-03:0	train:141	INFO	Total number of parameters: 1,279,787,008
+2025-12-12 12:23:13.277	quick-rain-shines-fin-03:0	train:142	INFO	Number of non-embedding parameters: 1,176,764,416
+2025-12-12 12:23:13.285	quick-rain-shines-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 5125
+2025-12-12 12:23:13.286	quick-rain-shines-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-12 12:23:13.304	quick-rain-shines-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 12:23:13.317	quick-rain-shines-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 10244
+2025-12-12 12:23:13.317	quick-rain-shines-fin-03:0	train:233	INFO	Model:
+2025-12-12 12:23:13.317	quick-rain-shines-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 2048)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-15): 16 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=2048, out_features=2048, bias=False)
+          (ff_out): Linear(in_features=8192, out_features=2048, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=2048, out_features=6144, bias=False)
+          (ff_proj): Linear(in_features=2048, out_features=16384, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+      (ff_out): Linear(in_features=2048, out_features=50304, bias=False)
+    )
+  )
+)
+2025-12-12 12:23:13.319	quick-rain-shines-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-12 12:23:13.319	quick-rain-shines-fin-03:0	train:375	INFO	Starting training...
+2025-12-12 12:23:13.321	quick-rain-shines-fin-03:0	olmo.train:979	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=10,244
+2025-12-12 12:23:30.125	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=1/20,epoch=0]
+    optim/total_grad_norm=11.53
+    train/CrossEntropyLoss=11.24
+    train/Perplexity=76,058
+    throughput/total_tokens=2,097,152
+    throughput/total_training_Gflops=19,049,038
+    throughput/total_training_log_Gflops=16.76
+    System/Peak GPU Memory (MB)=101,234
+2025-12-12 12:23:33.951	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=2/20,epoch=0]
+    optim/total_grad_norm=103.5
+    train/CrossEntropyLoss=12.07
+    train/Perplexity=174,527
+    throughput/total_tokens=4,194,304
+    throughput/total_training_Gflops=38,098,077
+    throughput/total_training_log_Gflops=17.46
+    throughput/device/tokens_per_second=68,602
+    throughput/device/batches_per_second=0.2617
+    System/Peak GPU Memory (MB)=111,477
+2025-12-12 12:23:37.769	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=3/20,epoch=0]
+    optim/total_grad_norm=12.91
+    train/CrossEntropyLoss=10.91
+    train/Perplexity=54,724
+    throughput/total_tokens=6,291,456
+    throughput/total_training_Gflops=57,147,116
+    throughput/total_training_log_Gflops=17.86
+    throughput/device/tokens_per_second=68,612
+    throughput/device/batches_per_second=0.2617
+2025-12-12 12:23:41.589	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=4/20,epoch=0]
+    optim/total_grad_norm=22.59
+    train/CrossEntropyLoss=11.55
+    train/Perplexity=103,877
+    throughput/total_tokens=8,388,608
+    throughput/total_training_Gflops=76,196,155
+    throughput/total_training_log_Gflops=18.15
+    throughput/device/tokens_per_second=68,617
+    throughput/device/batches_per_second=0.2618
+2025-12-12 12:23:45.498	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=5/20,epoch=0]
+    optim/total_grad_norm=9.553
+    train/CrossEntropyLoss=11.31
+    train/Perplexity=81,465
+    throughput/total_tokens=10,485,760
+    throughput/total_training_Gflops=95,245,194
+    throughput/total_training_log_Gflops=18.37
+    throughput/device/tokens_per_second=68,224
+    throughput/device/batches_per_second=0.2603
+2025-12-12 12:23:49.316	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=6/20,epoch=0]
+    optim/total_grad_norm=6.912
+    train/CrossEntropyLoss=10.85
+    train/Perplexity=51,652
+    throughput/total_tokens=12,582,912
+    throughput/total_training_Gflops=114,294,233
+    throughput/total_training_log_Gflops=18.55
+    throughput/device/tokens_per_second=68,308
+    throughput/device/batches_per_second=0.2606
+2025-12-12 12:23:53.129	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=7/20,epoch=0]
+    optim/total_grad_norm=20.86
+    train/CrossEntropyLoss=10.53
+    train/Perplexity=37,494
+    throughput/total_tokens=14,680,064
+    throughput/total_training_Gflops=133,343,272
+    throughput/total_training_log_Gflops=18.71
+    throughput/device/tokens_per_second=68,347
+    throughput/device/batches_per_second=0.2607
+2025-12-12 12:23:56.945	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=8/20,epoch=0]
+    optim/total_grad_norm=3.759
+    train/CrossEntropyLoss=10.08
+    train/Perplexity=23,810
+    throughput/total_tokens=16,777,216
+    throughput/total_training_Gflops=152,392,311
+    throughput/total_training_log_Gflops=18.84
+    throughput/device/tokens_per_second=68,358
+    throughput/device/batches_per_second=0.2608
+2025-12-12 12:24:00.748	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=9/20,epoch=0]
+    optim/total_grad_norm=3.257
+    train/CrossEntropyLoss=9.509
+    train/Perplexity=13,475
+    throughput/total_tokens=18,874,368
+    throughput/total_training_Gflops=171,441,350
+    throughput/total_training_log_Gflops=18.96
+    throughput/device/tokens_per_second=68,417
+    throughput/device/batches_per_second=0.2610
+2025-12-12 12:24:04.620	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=10/20,epoch=0]
+    optim/total_grad_norm=7.396
+    train/CrossEntropyLoss=9.058
+    train/Perplexity=8,582
+    throughput/total_tokens=20,971,520
+    throughput/total_training_Gflops=190,490,389
+    throughput/total_training_log_Gflops=19.07
+    throughput/device/tokens_per_second=68,577
+    throughput/device/batches_per_second=0.2616
+    System/Peak GPU Memory (MB)=111,477
+2025-12-12 12:24:08.424	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=11/20,epoch=0]
+    optim/total_grad_norm=3.695
+    train/CrossEntropyLoss=8.708
+    train/Perplexity=6,049
+    throughput/total_tokens=23,068,672
+    throughput/total_training_Gflops=209,539,428
+    throughput/total_training_log_Gflops=19.16
+    throughput/device/tokens_per_second=68,602
+    throughput/device/batches_per_second=0.2617
+2025-12-12 12:24:12.229	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=12/20,epoch=0]
+    optim/total_grad_norm=4.241
+    train/CrossEntropyLoss=8.553
+    train/Perplexity=5,182
+    throughput/total_tokens=25,165,824
+    throughput/total_training_Gflops=228,588,467
+    throughput/total_training_log_Gflops=19.25
+    throughput/device/tokens_per_second=68,633
+    throughput/device/batches_per_second=0.2618
+2025-12-12 12:24:16.030	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=13/20,epoch=0]
+    optim/total_grad_norm=5.007
+    train/CrossEntropyLoss=8.427
+    train/Perplexity=4,569
+    throughput/total_tokens=27,262,976
+    throughput/total_training_Gflops=247,637,506
+    throughput/total_training_log_Gflops=19.33
+    throughput/device/tokens_per_second=68,684
+    throughput/device/batches_per_second=0.2620
+2025-12-12 12:24:19.841	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=14/20,epoch=0]
+    optim/total_grad_norm=2.092
+    train/CrossEntropyLoss=8.253
+    train/Perplexity=3,837
+    throughput/total_tokens=29,360,128
+    throughput/total_training_Gflops=266,686,545
+    throughput/total_training_log_Gflops=19.40
+    throughput/device/tokens_per_second=68,654
+    throughput/device/batches_per_second=0.2619
+2025-12-12 12:24:23.705	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=15/20,epoch=0]
+    optim/total_grad_norm=2.001
+    train/CrossEntropyLoss=8.118
+    train/Perplexity=3,355
+    throughput/total_tokens=31,457,280
+    throughput/total_training_Gflops=285,735,584
+    throughput/total_training_log_Gflops=19.47
+    throughput/device/tokens_per_second=68,695
+    throughput/device/batches_per_second=0.2621
+2025-12-12 12:24:27.510	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=16/20,epoch=0]
+    optim/total_grad_norm=1.568
+    train/CrossEntropyLoss=8.039
+    train/Perplexity=3,099
+    throughput/total_tokens=33,554,432
+    throughput/total_training_Gflops=304,784,623
+    throughput/total_training_log_Gflops=19.54
+    throughput/device/tokens_per_second=68,681
+    throughput/device/batches_per_second=0.2620
+2025-12-12 12:24:31.327	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=17/20,epoch=0]
+    optim/total_grad_norm=1.973
+    train/CrossEntropyLoss=8.021
+    train/Perplexity=3,045
+    throughput/total_tokens=35,651,584
+    throughput/total_training_Gflops=323,833,662
+    throughput/total_training_log_Gflops=19.60
+    throughput/device/tokens_per_second=68,633
+    throughput/device/batches_per_second=0.2618
+2025-12-12 12:24:35.132	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=18/20,epoch=0]
+    optim/total_grad_norm=2.217
+    train/CrossEntropyLoss=7.981
+    train/Perplexity=2,925
+    throughput/total_tokens=37,748,736
+    throughput/total_training_Gflops=342,882,701
+    throughput/total_training_log_Gflops=19.65
+    throughput/device/tokens_per_second=68,620
+    throughput/device/batches_per_second=0.2618
+2025-12-12 12:24:38.935	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=19/20,epoch=0]
+    optim/total_grad_norm=1.848
+    train/CrossEntropyLoss=7.969
+    train/Perplexity=2,888
+    throughput/total_tokens=39,845,888
+    throughput/total_training_Gflops=361,931,740
+    throughput/total_training_log_Gflops=19.71
+    throughput/device/tokens_per_second=68,651
+    throughput/device/batches_per_second=0.2619
+2025-12-12 12:24:42.803	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=20/20,epoch=0]
+    optim/total_grad_norm=1.267
+    train/CrossEntropyLoss=7.961
+    train/Perplexity=2,868
+    throughput/total_tokens=41,943,040
+    throughput/total_training_Gflops=380,980,779
+    throughput/total_training_log_Gflops=19.76
+    throughput/device/tokens_per_second=68,664
+    throughput/device/batches_per_second=0.2619
+    System/Peak GPU Memory (MB)=111,477
+2025-12-12 12:24:46.609	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=21/20,epoch=0]
+    optim/total_grad_norm=0.8852
+    train/CrossEntropyLoss=7.948
+    train/Perplexity=2,828
+    throughput/total_tokens=44,040,192
+    throughput/total_training_Gflops=400,029,817
+    throughput/total_training_log_Gflops=19.81
+    throughput/device/tokens_per_second=68,633
+    throughput/device/batches_per_second=0.2618
+2025-12-12 12:24:50.410	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=22/20,epoch=0]
+    optim/total_grad_norm=0.8458
+    train/CrossEntropyLoss=7.902
+    train/Perplexity=2,702
+    throughput/total_tokens=46,137,344
+    throughput/total_training_Gflops=419,078,856
+    throughput/total_training_log_Gflops=19.85
+    throughput/device/tokens_per_second=68,694
+    throughput/device/batches_per_second=0.2620
+2025-12-12 12:24:54.225	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=23/20,epoch=0]
+    optim/total_grad_norm=0.9294
+    train/CrossEntropyLoss=7.892
+    train/Perplexity=2,675
+    throughput/total_tokens=48,234,496
+    throughput/total_training_Gflops=438,127,895
+    throughput/total_training_log_Gflops=19.90
+    throughput/device/tokens_per_second=68,657
+    throughput/device/batches_per_second=0.2619
+2025-12-12 12:24:58.031	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=24/20,epoch=0]
+    optim/total_grad_norm=0.9600
+    train/CrossEntropyLoss=7.885
+    train/Perplexity=2,657
+    throughput/total_tokens=50,331,648
+    throughput/total_training_Gflops=457,176,934
+    throughput/total_training_log_Gflops=19.94
+    throughput/device/tokens_per_second=68,646
+    throughput/device/batches_per_second=0.2619
+2025-12-12 12:25:01.893	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=25/20,epoch=0]
+    optim/total_grad_norm=0.8862
+    train/CrossEntropyLoss=7.908
+    train/Perplexity=2,718
+    throughput/total_tokens=52,428,800
+    throughput/total_training_Gflops=476,225,973
+    throughput/total_training_log_Gflops=19.98
+    throughput/device/tokens_per_second=68,679
+    throughput/device/batches_per_second=0.2620
+2025-12-12 12:25:05.703	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=26/20,epoch=0]
+    optim/total_grad_norm=0.8330
+    train/CrossEntropyLoss=7.865
+    train/Perplexity=2,604
+    throughput/total_tokens=54,525,952
+    throughput/total_training_Gflops=495,275,012
+    throughput/total_training_log_Gflops=20.02
+    throughput/device/tokens_per_second=68,649
+    throughput/device/batches_per_second=0.2619
+2025-12-12 12:25:09.511	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=27/20,epoch=0]
+    optim/total_grad_norm=0.7332
+    train/CrossEntropyLoss=7.876
+    train/Perplexity=2,632
+    throughput/total_tokens=56,623,104
+    throughput/total_training_Gflops=514,324,051
+    throughput/total_training_log_Gflops=20.06
+    throughput/device/tokens_per_second=68,625
+    throughput/device/batches_per_second=0.2618
+2025-12-12 12:25:13.320	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=28/20,epoch=0]
+    optim/total_grad_norm=0.7526
+    train/CrossEntropyLoss=7.835
+    train/Perplexity=2,528
+    throughput/total_tokens=58,720,256
+    throughput/total_training_Gflops=533,373,090
+    throughput/total_training_log_Gflops=20.09
+    throughput/device/tokens_per_second=68,645
+    throughput/device/batches_per_second=0.2619
+2025-12-12 12:25:17.131	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=29/20,epoch=0]
+    optim/total_grad_norm=0.7900
+    train/CrossEntropyLoss=7.873
+    train/Perplexity=2,624
+    throughput/total_tokens=60,817,408
+    throughput/total_training_Gflops=552,422,129
+    throughput/total_training_log_Gflops=20.13
+    throughput/device/tokens_per_second=68,629
+    throughput/device/batches_per_second=0.2618
+2025-12-12 12:25:21.007	quick-rain-shines-fin-03:0	olmo.train:979	INFO	[step=30/20,epoch=0]
+    optim/total_grad_norm=0.6934
+    train/CrossEntropyLoss=7.814
+    train/Perplexity=2,475
+    throughput/total_tokens=62,914,560
+    throughput/total_training_Gflops=571,471,168
+    throughput/total_training_log_Gflops=20.16
+    throughput/device/tokens_per_second=68,606
+    throughput/device/batches_per_second=0.2617
+    System/Peak GPU Memory (MB)=111,477
+2025-12-12 12:25:21.013	quick-rain-shines-fin-03:0	train:377	INFO	Training complete
+wandb: WARNING The `quiet` argument to `wandb.run.finish()` is deprecated, use `wandb.Settings(quiet=...)` to set this instead.
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 27-30, summary, console lines 283-312
+wandb: 
+wandb: Run history:
+wandb:                                    System/Peak GPU Memory (MB) ▁▇████
+wandb:                                            optim/clipping_rate ████▁▁
+wandb:  optim/exp_avg/module.transformer.blocks.0.att_proj.weight.avg █▄▄▄▁▁
+wandb:  optim/exp_avg/module.transformer.blocks.0.att_proj.weight.max ▅▂▁▂▄█
+wandb:  optim/exp_avg/module.transformer.blocks.0.att_proj.weight.min ▁▆▄█▁▁
+wandb: optim/exp_avg/module.transformer.blocks.0.att_proj.weight.norm █▄▁▁▆█
+wandb:  optim/exp_avg/module.transformer.blocks.0.attn_out.weight.avg ▁▁▂▁▃█
+wandb:  optim/exp_avg/module.transformer.blocks.0.attn_out.weight.max ▆▅▁▁▅█
+wandb:  optim/exp_avg/module.transformer.blocks.0.attn_out.weight.min ▃█▁▂▂▂
+wandb: optim/exp_avg/module.transformer.blocks.0.attn_out.weight.norm █▅▂▁▅▇
+wandb:                                                         +1,057 ...
+wandb: 
+wandb: Run summary:
+wandb:                                    System/Peak GPU Memory (MB) 111477.22656
+wandb:                                            optim/clipping_rate 0
+wandb:  optim/exp_avg/module.transformer.blocks.0.att_proj.weight.avg -0.0
+wandb:  optim/exp_avg/module.transformer.blocks.0.att_proj.weight.max 0.00019
+wandb:  optim/exp_avg/module.transformer.blocks.0.att_proj.weight.min 0.0
+wandb: optim/exp_avg/module.transformer.blocks.0.att_proj.weight.norm 0.02339
+wandb:  optim/exp_avg/module.transformer.blocks.0.attn_out.weight.avg 0.0
+wandb:  optim/exp_avg/module.transformer.blocks.0.attn_out.weight.max 0.00019
+wandb:  optim/exp_avg/module.transformer.blocks.0.attn_out.weight.min 0.0
+wandb: optim/exp_avg/module.transformer.blocks.0.attn_out.weight.norm 0.0278
+wandb:                                                         +1,057 ...
+wandb: 
+wandb: 🚀 View run wandb-test-run-2 at: https://wandb.ai/antoniolopardo/VecNorm/runs/oapudqx7
+wandb: ⭐️ View project at: https://wandb.ai/antoniolopardo/VecNorm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./checkpoints/wandb-test/wandb/wandb/run-20251212_122309-oapudqx7/logs
+[rank0]:[W1212 12:25:25.193984303 ProcessGroupNCCL.cpp:1524] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())

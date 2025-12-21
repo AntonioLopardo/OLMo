@@ -1,0 +1,192 @@
+2025-12-12 22:27:23.533	clean-soul-smiles-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-12 22:27:23.813	clean-soul-smiles-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-1B-untied/train_data/global_indices.npy'
+2025-12-12 22:27:23.884	clean-soul-smiles-fin-03:0	train:139	INFO	Building model...
+2025-12-12 22:27:23.952	clean-soul-smiles-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 22:27:23.968	clean-soul-smiles-fin-03:0	train:141	INFO	Total number of parameters: 1,176,764,416
+2025-12-12 22:27:23.968	clean-soul-smiles-fin-03:0	train:142	INFO	Number of non-embedding parameters: 1,073,741,824
+2025-12-12 22:27:23.993	clean-soul-smiles-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 4710
+2025-12-12 22:27:23.993	clean-soul-smiles-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-12 22:27:24.004	clean-soul-smiles-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 22:27:24.016	clean-soul-smiles-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 9418
+2025-12-12 22:27:24.017	clean-soul-smiles-fin-03:0	train:233	INFO	Model:
+2025-12-12 22:27:24.017	clean-soul-smiles-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 2048)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-15): 16 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=2048, out_features=2048, bias=False)
+          (ff_out): Linear(in_features=8192, out_features=2048, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=2048, out_features=6144, bias=False)
+          (ff_proj): Linear(in_features=2048, out_features=16384, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-12 22:27:24.018	clean-soul-smiles-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-12 22:27:24.018	clean-soul-smiles-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-12 22:27:24.323	clean-soul-smiles-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-12 22:27:27.743	clean-soul-smiles-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-12 22:27:27.744	clean-soul-smiles-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-12 22:27:27.745	clean-soul-smiles-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-12 22:27:28.604	clean-soul-smiles-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-untied/step0-unsharded
+2025-12-12 22:27:28.605	clean-soul-smiles-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-12 22:27:31.263	clean-soul-smiles-fin-03:0	olmo.train:409	INFO	Resetting learning rate...
+2025-12-12 22:27:31.263	clean-soul-smiles-fin-03:0	olmo.train:421	INFO	Restoring RNG states...
+2025-12-12 22:27:31.601	clean-soul-smiles-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-12 22:27:31.601	clean-soul-smiles-fin-03:0	train:375	INFO	Starting training...
+2025-12-12 22:27:31.670	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=9,418
+2025-12-12 22:27:45.605	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=1/10000,epoch=0]
+    optim/total_grad_norm=9.143
+    train/CrossEntropyLoss=11.35
+    train/Perplexity=84,884
+    throughput/total_tokens=2,097,152
+    throughput/total_training_Gflops=16,063,864
+    throughput/total_training_log_Gflops=16.59
+    System/Peak GPU Memory (MB)=99,992
+2025-12-12 22:27:49.051	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=2/10000,epoch=0]
+    optim/total_grad_norm=10.95
+    train/CrossEntropyLoss=10.16
+    train/Perplexity=25,913
+    throughput/total_tokens=4,194,304
+    throughput/total_training_Gflops=32,127,729
+    throughput/total_training_log_Gflops=17.29
+    throughput/device/tokens_per_second=76,114
+    throughput/device/batches_per_second=0.2904
+    System/Peak GPU Memory (MB)=109,410
+2025-12-12 22:27:52.496	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=3/10000,epoch=0]
+    optim/total_grad_norm=29.23
+    train/CrossEntropyLoss=10.39
+    train/Perplexity=32,449
+    throughput/total_tokens=6,291,456
+    throughput/total_training_Gflops=48,191,594
+    throughput/total_training_log_Gflops=17.69
+    throughput/device/tokens_per_second=76,101
+    throughput/device/batches_per_second=0.2903
+2025-12-12 22:27:55.950	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=4/10000,epoch=0]
+    optim/total_grad_norm=12.57
+    train/CrossEntropyLoss=10.30
+    train/Perplexity=29,791
+    throughput/total_tokens=8,388,608
+    throughput/total_training_Gflops=64,255,459
+    throughput/total_training_log_Gflops=17.98
+    throughput/device/tokens_per_second=76,030
+    throughput/device/batches_per_second=0.2900
+2025-12-12 22:27:59.396	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=5/10000,epoch=0]
+    optim/total_grad_norm=7.320
+    train/CrossEntropyLoss=10.06
+    train/Perplexity=23,505
+    throughput/total_tokens=10,485,760
+    throughput/total_training_Gflops=80,319,324
+    throughput/total_training_log_Gflops=18.20
+    throughput/device/tokens_per_second=76,040
+    throughput/device/batches_per_second=0.2901
+2025-12-12 22:28:02.837	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=6/10000,epoch=0]
+    optim/total_grad_norm=12.13
+    train/CrossEntropyLoss=9.778
+    train/Perplexity=17,633
+    throughput/total_tokens=12,582,912
+    throughput/total_training_Gflops=96,383,189
+    throughput/total_training_log_Gflops=18.38
+    throughput/device/tokens_per_second=76,068
+    throughput/device/batches_per_second=0.2902
+2025-12-12 22:28:06.283	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=7/10000,epoch=0]
+    optim/total_grad_norm=12.02
+    train/CrossEntropyLoss=9.539
+    train/Perplexity=13,893
+    throughput/total_tokens=14,680,064
+    throughput/total_training_Gflops=112,447,054
+    throughput/total_training_log_Gflops=18.54
+    throughput/device/tokens_per_second=76,070
+    throughput/device/batches_per_second=0.2902
+2025-12-12 22:28:09.718	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=8/10000,epoch=0]
+    optim/total_grad_norm=14.67
+    train/CrossEntropyLoss=9.537
+    train/Perplexity=13,867
+    throughput/total_tokens=16,777,216
+    throughput/total_training_Gflops=128,510,919
+    throughput/total_training_log_Gflops=18.67
+    throughput/device/tokens_per_second=76,106
+    throughput/device/batches_per_second=0.2903
+2025-12-12 22:28:13.157	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=9/10000,epoch=0]
+    optim/total_grad_norm=6.011
+    train/CrossEntropyLoss=9.354
+    train/Perplexity=11,539
+    throughput/total_tokens=18,874,368
+    throughput/total_training_Gflops=144,574,783
+    throughput/total_training_log_Gflops=18.79
+    throughput/device/tokens_per_second=76,120
+    throughput/device/batches_per_second=0.2904
+2025-12-12 22:28:16.654	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=10/10000,epoch=0]
+    optim/total_grad_norm=3.952
+    train/CrossEntropyLoss=9.184
+    train/Perplexity=9,743
+    throughput/total_tokens=20,971,520
+    throughput/total_training_Gflops=160,638,648
+    throughput/total_training_log_Gflops=18.89
+    throughput/device/tokens_per_second=75,999
+    throughput/device/batches_per_second=0.2899
+    System/Peak GPU Memory (MB)=109,410
+2025-12-12 22:28:20.095	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=11/10000,epoch=0]
+    optim/total_grad_norm=3.947
+    train/CrossEntropyLoss=9.107
+    train/Perplexity=9,016
+    throughput/total_tokens=23,068,672
+    throughput/total_training_Gflops=176,702,513
+    throughput/total_training_log_Gflops=18.99
+    throughput/device/tokens_per_second=76,009
+    throughput/device/batches_per_second=0.2900
+2025-12-12 22:28:23.533	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=12/10000,epoch=0]
+    optim/total_grad_norm=5.227
+    train/CrossEntropyLoss=9.045
+    train/Perplexity=8,475
+    throughput/total_tokens=25,165,824
+    throughput/total_training_Gflops=192,766,378
+    throughput/total_training_log_Gflops=19.08
+    throughput/device/tokens_per_second=76,030
+    throughput/device/batches_per_second=0.2900
+2025-12-12 22:28:26.971	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=13/10000,epoch=0]
+    optim/total_grad_norm=5.523
+    train/CrossEntropyLoss=8.952
+    train/Perplexity=7,722
+    throughput/total_tokens=27,262,976
+    throughput/total_training_Gflops=208,830,243
+    throughput/total_training_log_Gflops=19.16
+    throughput/device/tokens_per_second=76,049
+    throughput/device/batches_per_second=0.2901
+2025-12-12 22:28:30.412	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=14/10000,epoch=0]
+    optim/total_grad_norm=3.494
+    train/CrossEntropyLoss=8.848
+    train/Perplexity=6,957
+    throughput/total_tokens=29,360,128
+    throughput/total_training_Gflops=224,894,108
+    throughput/total_training_log_Gflops=19.23
+    throughput/device/tokens_per_second=76,059
+    throughput/device/batches_per_second=0.2901
+2025-12-12 22:28:33.851	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=15/10000,epoch=0]
+    optim/total_grad_norm=6.287
+    train/CrossEntropyLoss=8.826
+    train/Perplexity=6,809
+    throughput/total_tokens=31,457,280
+    throughput/total_training_Gflops=240,957,973
+    throughput/total_training_log_Gflops=19.30
+    throughput/device/tokens_per_second=76,071
+    throughput/device/batches_per_second=0.2902
+2025-12-12 22:28:37.293	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=16/10000,epoch=0]
+    optim/total_grad_norm=4.849
+    train/CrossEntropyLoss=8.791
+    train/Perplexity=6,573
+    throughput/total_tokens=33,554,432
+    throughput/total_training_Gflops=257,021,838
+    throughput/total_training_log_Gflops=19.36
+    throughput/device/tokens_per_second=76,078
+    throughput/device/batches_per_second=0.2902

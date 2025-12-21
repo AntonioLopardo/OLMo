@@ -1,0 +1,523 @@
+W1212 15:59:44.072000 17688 torch/distributed/run.py:803] 
+W1212 15:59:44.072000 17688 torch/distributed/run.py:803] *****************************************
+W1212 15:59:44.072000 17688 torch/distributed/run.py:803] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1212 15:59:44.072000 17688 torch/distributed/run.py:803] *****************************************
+2025-12-12 16:00:00.341	tiny-time-shines-fin-03:0	train:417	INFO	CLI environment prepared
+2025-12-12 16:00:01.048	tiny-time-shines-fin-03:0	train:97	INFO	Configuration:
+2025-12-12 16:00:01.048	tiny-time-shines-fin-03:0	train:98	INFO	TrainConfig(run_name='OLMo-1B-0724-tied', seed=6198, epoch=None, dry_run=False, model=ModelConfig(d_model=2048, n_heads=16, n_kv_heads=None, clip_qkv=8.0, n_layers=16, mlp_ratio=8, mlp_hidden_size=None, activation_type='swiglu', block_type='sequential', block_group_size=1, alibi=False, alibi_bias_max=8.0, rope=True, rope_full_precision=True, rope_theta=10000, flash_attention=True, attention_dropout=0.0, multi_query_attention=False, attention_layer_norm=False, residual_dropout=0.0, embedding_dropout=0.0, embedding_layer_norm=False, layer_norm_type='default', layer_norm_with_affine=False, layer_norm_eps=1e-05, attention_layer_norm_with_affine=False, max_sequence_length=4096, include_bias=False, bias_for_layer_norm=False, scale_logits=False, vocab_size=50280, embedding_size=50304, weight_tying=True, eos_token_id=50279, pad_token_id=1, init_device='cuda', init_fn='normal', init_std=0.02, init_cutoff_factor=None, precision='amp_bf16', scale_emb_init=False, emb_init_std=None, norm_after=False), optimizer=OptimizerConfig(name='adamw', learning_rate=0.0003, weight_decay=0.1, betas=(0.9, 0.95), eps=1e-05, no_decay_norm_and_bias=None, selective_updates=False, decay_norm_and_bias=True, decay_embeddings=True, metrics_log_interval=10, record_update_metrics=False), scheduler=SchedulerConfig(name='cosine_with_warmup', units='steps', t_warmup=2500, t_max=None, alpha_f=0.1, grad_clip_warmup_steps=None, grad_clip_warmup_factor=None, warmup_min_lr=None), data=DataConfig(paths=['/home/vec_norm/OLMo/data/dolma_v1_7/dolma_v1_7_30B.npy'], memmap_dtype='uint16', datasets=None, label_mask_paths=None, pad_direction='right', generate_attention_mask=False, generate_doc_lengths=False, num_workers=32, drop_last=True, pin_memory=True, prefetch_factor=4, persistent_workers=True, timeout=0, seed=None, instance_filter=None, custom_dataset=None), restore_dataloader=True, fast_forward_batches=None, evaluators=[], eval_interval=500, tokenizer=TokenizerConfig(identifier='tokenizers/allenai_eleuther-ai-gpt-neox-20b-pii-special.json', truncate_direction='right'), save_folder='/home/vec_norm/OLMo/checkpoints/OLMo-1B-tied', remote_save_folder=None, canceled_check_interval=50, save_interval=1000, save_interval_unsharded=500, save_interval_ephemeral=None, save_num_checkpoints_to_keep=5, save_num_unsharded_checkpoints_to_keep=5, save_overwrite=True, force_save_unsharded=False, no_pre_train_checkpoint=False, load_path=None, load_path_sharded_checkpointer=None, try_load_latest_save=False, reset_optimizer_state=False, reset_trainer_state=False, sharded_checkpointer='torch_legacy', new_style_checkpoints=None, max_duration=10000, global_train_batch_size=512, device_train_batch_size=64, device_train_microbatch_size=32, device_eval_batch_size=32, eval_subset_num_batches=-1, eval_on_load=False, device_train_grad_accum=2, max_grad_norm=1.0, max_grad_norm_ratio=None, precision='amp_bf16', wandb=WandbConfig(project='VecNorm', entity='antoniolopardo', group=None, name=None, tags=['watching'], log_artifacts=False, rank_zero_only=True, log_interval=1), speed_monitor=SpeedMonitorConfig(window_size=20, gpu_flops_available=None), console_log_interval=1, gen1_gc_interval=1, compile=None, distributed_strategy='ddp', fsdp=FSDPConfig(use_orig_params=True, sharding_strategy=<ShardingStrategy.FULL_SHARD: 1>, wrapping_strategy=None, precision='pure', hybrid_sharding_num_model_replicas=None), ddp=DDPConfig(grad_sync_mode='batch', find_unused_params=False), single=SingleGPUConfig(device='auto'), softmax_auxiliary_loss=False, auxiliary_loss_multiplier=0.0001, time_limit=None, extra_steps_after_cancel=10, early_stopping_factor=None, save_data_indices=True, python_profiling=False, torch_profiling=False, stop_at=None, stop_after=None, activation_checkpointing=None, fused_loss=None, hf_datasets_cache_dir=None, module_outputs_save_steps=None)
+2025-12-12 16:00:01.049	tiny-time-shines-fin-03:0	train:105	INFO	Saving config to /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied/config.yaml
+wandb: Currently logged in as: antoniolopardo to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run n4kgjz3j
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied/wandb/wandb/run-20251212_160001-n4kgjz3j
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run smart-oath-7
+wandb: ⭐️ View project at https://wandb.ai/antoniolopardo/VecNorm
+wandb: 🚀 View run at https://wandb.ai/antoniolopardo/VecNorm/runs/n4kgjz3j
+2025-12-12 16:00:04.669	tiny-time-shines-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-12 16:00:04.802	tiny-time-shines-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-1B-tied/train_data/global_indices.npy'
+2025-12-12 16:00:04.874	tiny-time-shines-fin-03:0	train:139	INFO	Building model...
+2025-12-12 16:00:05.166	tiny-time-shines-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 16:00:05.167	tiny-time-shines-fin-03:0	train:141	INFO	Total number of parameters: 1,176,764,416
+2025-12-12 16:00:05.167	tiny-time-shines-fin-03:0	train:142	INFO	Number of non-embedding parameters: 1,073,741,824
+2025-12-12 16:00:05.172	tiny-time-shines-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 4711
+2025-12-12 16:00:05.172	tiny-time-shines-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-12 16:00:05.348	tiny-time-shines-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 16:00:05.355	tiny-time-shines-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 9418
+2025-12-12 16:00:05.355	tiny-time-shines-fin-03:0	train:233	INFO	Model:
+2025-12-12 16:00:05.355	tiny-time-shines-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 2048)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-15): 16 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=2048, out_features=2048, bias=False)
+          (ff_out): Linear(in_features=8192, out_features=2048, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=2048, out_features=6144, bias=False)
+          (ff_proj): Linear(in_features=2048, out_features=16384, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-12 16:00:05.356	tiny-time-shines-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-12 16:00:05.356	tiny-time-shines-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-12 16:00:05.684	tiny-time-shines-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-12 16:00:09.323	tiny-time-shines-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-12 16:00:09.325	tiny-time-shines-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-12 16:00:09.326	tiny-time-shines-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-12 16:00:10.194	tiny-time-shines-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied/step0-unsharded
+2025-12-12 16:00:10.194	tiny-time-shines-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-12 16:00:13.006	tiny-time-shines-fin-03:0	olmo.train:409	INFO	Resetting learning rate...
+2025-12-12 16:00:13.007	tiny-time-shines-fin-03:0	olmo.train:421	INFO	Restoring RNG states...
+2025-12-12 16:00:13.366	tiny-time-shines-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-12 16:00:13.366	tiny-time-shines-fin-03:0	train:375	INFO	Starting training...
+2025-12-12 16:00:13.424	tiny-time-shines-fin-03:0	olmo.train:979	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=9,418
+wandb: WARNING The `quiet` argument to `wandb.run.finish()` is deprecated, use `wandb.Settings(quiet=...)` to set this instead.
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: 
+wandb: Run history:
+wandb: System/Peak GPU Memory (MB) ▁
+wandb: 
+wandb: Run summary:
+wandb: System/Peak GPU Memory (MB) 9418.31055
+wandb: 
+wandb: 🚀 View run smart-oath-7 at: https://wandb.ai/antoniolopardo/VecNorm/runs/n4kgjz3j
+wandb: ⭐️ View project at: https://wandb.ai/antoniolopardo/VecNorm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./checkpoints/OLMo-1B-tied/wandb/wandb/run-20251212_160001-n4kgjz3j/logs
+Traceback (most recent call last):
+  File "/home/vec_norm/OLMo/scripts/train.py", line 436, in <module>
+    main(cfg)
+  File "/home/vec_norm/OLMo/scripts/train.py", line 376, in main
+    trainer.fit()
+  File "/home/vec_norm/OLMo/olmo/train.py", line 1226, in fit
+    metrics = self.train_step(batch, reduce_global_loss=should_log_this_step)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 851, in train_step
+    ce_batch_loss, z_batch_loss = self.train_batch(batch)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 813, in train_batch
+    loss, ce_loss, z_loss = self.train_micro_batch(micro_batch, batch_size_in_tokens)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 762, in train_micro_batch
+    ce_loss, z_loss, logits = self.model_forward(
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 735, in model_forward
+    logits = self.dist_model(
+             ^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1661, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1487, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/model.py", line 1455, in forward
+    logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 0 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-12-12 16:00:32.886	tiny-time-shines-fin-03:0	olmo.util:168	CRITICAL	Uncaught OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 0 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/vec_norm/OLMo/scripts/train.py", line 436, in <module>
+    main(cfg)
+  File "/home/vec_norm/OLMo/scripts/train.py", line 376, in main
+    trainer.fit()
+  File "/home/vec_norm/OLMo/olmo/train.py", line 1226, in fit
+    metrics = self.train_step(batch, reduce_global_loss=should_log_this_step)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 851, in train_step
+    ce_batch_loss, z_batch_loss = self.train_batch(batch)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 813, in train_batch
+    loss, ce_loss, z_loss = self.train_micro_batch(micro_batch, batch_size_in_tokens)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 762, in train_micro_batch
+    ce_loss, z_loss, logits = self.model_forward(
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 735, in model_forward
+    logits = self.dist_model(
+             ^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1661, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1487, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/model.py", line 1455, in forward
+    logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 0 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-12-12 16:00:38.012	tiny-time-shines-fin-03:5	olmo.util:168	CRITICAL	Uncaught OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 5 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/vec_norm/OLMo/scripts/train.py", line 436, in <module>
+    main(cfg)
+  File "/home/vec_norm/OLMo/scripts/train.py", line 376, in main
+    trainer.fit()
+  File "/home/vec_norm/OLMo/olmo/train.py", line 1226, in fit
+    metrics = self.train_step(batch, reduce_global_loss=should_log_this_step)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 851, in train_step
+    ce_batch_loss, z_batch_loss = self.train_batch(batch)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 813, in train_batch
+    loss, ce_loss, z_loss = self.train_micro_batch(micro_batch, batch_size_in_tokens)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 762, in train_micro_batch
+    ce_loss, z_loss, logits = self.model_forward(
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 735, in model_forward
+    logits = self.dist_model(
+             ^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1661, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1487, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/model.py", line 1455, in forward
+    logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 5 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-12-12 16:00:38.044	tiny-time-shines-fin-03:1	olmo.util:168	CRITICAL	Uncaught OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 1 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/vec_norm/OLMo/scripts/train.py", line 436, in <module>
+    main(cfg)
+  File "/home/vec_norm/OLMo/scripts/train.py", line 376, in main
+    trainer.fit()
+  File "/home/vec_norm/OLMo/olmo/train.py", line 1226, in fit
+    metrics = self.train_step(batch, reduce_global_loss=should_log_this_step)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 851, in train_step
+    ce_batch_loss, z_batch_loss = self.train_batch(batch)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 813, in train_batch
+    loss, ce_loss, z_loss = self.train_micro_batch(micro_batch, batch_size_in_tokens)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 762, in train_micro_batch
+    ce_loss, z_loss, logits = self.model_forward(
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 735, in model_forward
+    logits = self.dist_model(
+             ^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1661, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1487, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/model.py", line 1455, in forward
+    logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 1 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-12-12 16:00:38.364	tiny-time-shines-fin-03:4	olmo.util:168	CRITICAL	Uncaught OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 4 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/vec_norm/OLMo/scripts/train.py", line 436, in <module>
+    main(cfg)
+  File "/home/vec_norm/OLMo/scripts/train.py", line 376, in main
+    trainer.fit()
+  File "/home/vec_norm/OLMo/olmo/train.py", line 1226, in fit
+    metrics = self.train_step(batch, reduce_global_loss=should_log_this_step)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 851, in train_step
+    ce_batch_loss, z_batch_loss = self.train_batch(batch)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 813, in train_batch
+    loss, ce_loss, z_loss = self.train_micro_batch(micro_batch, batch_size_in_tokens)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 762, in train_micro_batch
+    ce_loss, z_loss, logits = self.model_forward(
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 735, in model_forward
+    logits = self.dist_model(
+             ^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1661, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1487, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/model.py", line 1455, in forward
+    logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 4 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-12-12 16:00:38.864	tiny-time-shines-fin-03:2	olmo.util:168	CRITICAL	Uncaught OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 2 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/vec_norm/OLMo/scripts/train.py", line 436, in <module>
+    main(cfg)
+  File "/home/vec_norm/OLMo/scripts/train.py", line 376, in main
+    trainer.fit()
+  File "/home/vec_norm/OLMo/olmo/train.py", line 1226, in fit
+    metrics = self.train_step(batch, reduce_global_loss=should_log_this_step)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 851, in train_step
+    ce_batch_loss, z_batch_loss = self.train_batch(batch)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 813, in train_batch
+    loss, ce_loss, z_loss = self.train_micro_batch(micro_batch, batch_size_in_tokens)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 762, in train_micro_batch
+    ce_loss, z_loss, logits = self.model_forward(
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 735, in model_forward
+    logits = self.dist_model(
+             ^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1661, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1487, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/model.py", line 1455, in forward
+    logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 2 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-12-12 16:00:39.112	tiny-time-shines-fin-03:3	olmo.util:168	CRITICAL	Uncaught OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 3 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/vec_norm/OLMo/scripts/train.py", line 436, in <module>
+    main(cfg)
+  File "/home/vec_norm/OLMo/scripts/train.py", line 376, in main
+    trainer.fit()
+  File "/home/vec_norm/OLMo/olmo/train.py", line 1226, in fit
+    metrics = self.train_step(batch, reduce_global_loss=should_log_this_step)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 851, in train_step
+    ce_batch_loss, z_batch_loss = self.train_batch(batch)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 813, in train_batch
+    loss, ce_loss, z_loss = self.train_micro_batch(micro_batch, batch_size_in_tokens)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 762, in train_micro_batch
+    ce_loss, z_loss, logits = self.model_forward(
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 735, in model_forward
+    logits = self.dist_model(
+             ^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1661, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1487, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/model.py", line 1455, in forward
+    logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 3 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-12-12 16:00:39.192	tiny-time-shines-fin-03:7	olmo.util:168	CRITICAL	Uncaught OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 7 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/vec_norm/OLMo/scripts/train.py", line 436, in <module>
+    main(cfg)
+  File "/home/vec_norm/OLMo/scripts/train.py", line 376, in main
+    trainer.fit()
+  File "/home/vec_norm/OLMo/olmo/train.py", line 1226, in fit
+    metrics = self.train_step(batch, reduce_global_loss=should_log_this_step)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 851, in train_step
+    ce_batch_loss, z_batch_loss = self.train_batch(batch)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 813, in train_batch
+    loss, ce_loss, z_loss = self.train_micro_batch(micro_batch, batch_size_in_tokens)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 762, in train_micro_batch
+    ce_loss, z_loss, logits = self.model_forward(
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 735, in model_forward
+    logits = self.dist_model(
+             ^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1661, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1487, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/model.py", line 1455, in forward
+    logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 7 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-12-12 16:00:39.267	tiny-time-shines-fin-03:6	olmo.util:168	CRITICAL	Uncaught OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 6 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Traceback (most recent call last):
+  File "/home/vec_norm/OLMo/scripts/train.py", line 436, in <module>
+    main(cfg)
+  File "/home/vec_norm/OLMo/scripts/train.py", line 376, in main
+    trainer.fit()
+  File "/home/vec_norm/OLMo/olmo/train.py", line 1226, in fit
+    metrics = self.train_step(batch, reduce_global_loss=should_log_this_step)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 851, in train_step
+    ce_batch_loss, z_batch_loss = self.train_batch(batch)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 813, in train_batch
+    loss, ce_loss, z_loss = self.train_micro_batch(micro_batch, batch_size_in_tokens)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 762, in train_micro_batch
+    ce_loss, z_loss, logits = self.model_forward(
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/train.py", line 735, in model_forward
+    logits = self.dist_model(
+             ^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1661, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/parallel/distributed.py", line 1487, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/OLMo/olmo/model.py", line 1455, in forward
+    logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 12.28 GiB. GPU 6 has a total capacity of 267.69 GiB of which 4.16 GiB is free. Including non-PyTorch memory, this process has 263.51 GiB memory in use. Of the allocated memory 261.63 GiB is allocated by PyTorch, and 84.36 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+W1212 16:00:50.496000 17688 torch/distributed/elastic/agent/server/api.py:725] Received 15 death signal, shutting down workers
+W1212 16:00:50.529000 17688 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 17841 closing signal SIGTERM
+W1212 16:00:50.529000 17688 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 17842 closing signal SIGTERM
+W1212 16:00:50.530000 17688 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 17843 closing signal SIGTERM
+W1212 16:00:50.533000 17688 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 17844 closing signal SIGTERM
+W1212 16:00:50.533000 17688 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 17845 closing signal SIGTERM
+W1212 16:00:50.533000 17688 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 17846 closing signal SIGTERM
+W1212 16:00:50.533000 17688 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 17847 closing signal SIGTERM
+W1212 16:00:50.534000 17688 torch/distributed/elastic/multiprocessing/api.py:908] Sending process 17848 closing signal SIGTERM
+Traceback (most recent call last):
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 717, in run
+    result = self._invoke_run(role)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 881, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 85, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 17688 got signal: 15
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/vec_norm/.venv/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 357, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/run.py", line 936, in main
+    run(args)
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/run.py", line 927, in run
+    elastic_launch(
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 156, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/launcher/api.py", line 284, in launch_agent
+    result = agent.run()
+             ^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/elastic/metrics/api.py", line 138, in wrapper
+    result = f(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/api.py", line 726, in run
+    self._shutdown(e.sigval)
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/elastic/agent/server/local_elastic_agent.py", line 369, in _shutdown
+    self._pcontext.close(death_sig)
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 578, in close
+    self._close(death_sig=death_sig, timeout=timeout)
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 907, in _close
+    if handler.proc.poll() is None:
+       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 1236, in poll
+    return self._internal_poll()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 1990, in _internal_poll
+    pid, sts = _waitpid(self.pid, _WNOHANG)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vec_norm/.venv/lib/python3.12/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 85, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 17688 got signal: 1
+[W1212 16:01:02.239931908 AllocatorConfig.cpp:28] Warning: PYTORCH_CUDA_ALLOC_CONF is deprecated, use PYTORCH_ALLOC_CONF instead (function operator())

@@ -1,0 +1,11 @@
+{"time":"2025-12-12T15:55:38.193157662Z","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2025-12-12T15:55:38.490133548Z","level":"INFO","msg":"stream: created new stream","id":"mqt845i1"}
+{"time":"2025-12-12T15:55:38.490191528Z","level":"INFO","msg":"handler: started","stream_id":"mqt845i1"}
+{"time":"2025-12-12T15:55:38.490268457Z","level":"INFO","msg":"stream: started","id":"mqt845i1"}
+{"time":"2025-12-12T15:55:38.490340046Z","level":"INFO","msg":"writer: started","stream_id":"mqt845i1"}
+{"time":"2025-12-12T15:55:38.490376636Z","level":"INFO","msg":"sender: started","stream_id":"mqt845i1"}
+{"time":"2025-12-12T15:55:41.294044982Z","level":"INFO","msg":"stream: closing","id":"mqt845i1"}
+{"time":"2025-12-12T15:55:41.984508146Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-12T15:55:42.318491354Z","level":"INFO","msg":"handler: closed","stream_id":"mqt845i1"}
+{"time":"2025-12-12T15:55:42.318626262Z","level":"INFO","msg":"sender: closed","stream_id":"mqt845i1"}
+{"time":"2025-12-12T15:55:42.318632652Z","level":"INFO","msg":"stream: closed","id":"mqt845i1"}

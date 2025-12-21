@@ -1,0 +1,92 @@
+{
+  "os":  "Linux-6.8.0-87-generic-x86_64-with-glibc2.39",
+  "python":  "CPython 3.12.3",
+  "startedAt":  "2025-12-12T21:23:58.708022Z",
+  "args":  [
+    "configs/custom/todo/OLMo-1B-tied_low_seq_len.yaml"
+  ],
+  "program":  "/home/vec_norm/OLMo/scripts/train.py",
+  "codePath":  "scripts/train.py",
+  "codePathLocal":  "scripts/train.py",
+  "git":  {
+    "remote":  "https://github.com/allenai/OLMo.git",
+    "commit":  "090253dac6688f2532509daa7aa2eb5fae50e956"
+  },
+  "email":  "antonio.lopardo@outlook.com",
+  "root":  "/home/vec_norm/OLMo/checkpoints/OLMo-1B-untied/wandb",
+  "host":  "round-name-opens-fin-03",
+  "executable":  "/home/vec_norm/.venv/bin/python",
+  "cpu_count":  240,
+  "cpu_count_logical":  240,
+  "gpu":  "NVIDIA B300 SXM6 AC",
+  "gpu_count":  8,
+  "disk":  {
+    "/":  {
+      "total":  "758162690048",
+      "used":  "302392410112"
+    }
+  },
+  "memory":  {
+    "total":  "2324299124736"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA B300 SXM6 AC",
+      "memoryTotal":  "288400343040",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-53ed8fd9-9f5a-9c77-430d-095ad4fc860d"
+    },
+    {
+      "name":  "NVIDIA B300 SXM6 AC",
+      "memoryTotal":  "288400343040",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-adecbd14-4768-00f8-a2fa-697ced804a8d"
+    },
+    {
+      "name":  "NVIDIA B300 SXM6 AC",
+      "memoryTotal":  "288400343040",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-bc643dc2-a0d1-5ed6-5ecb-0605ca9f340a"
+    },
+    {
+      "name":  "NVIDIA B300 SXM6 AC",
+      "memoryTotal":  "288400343040",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-90fb226c-3937-2448-1052-2e12282a61b9"
+    },
+    {
+      "name":  "NVIDIA B300 SXM6 AC",
+      "memoryTotal":  "288400343040",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-4ae7e013-1aac-31d8-8b8e-c27530f1c6ed"
+    },
+    {
+      "name":  "NVIDIA B300 SXM6 AC",
+      "memoryTotal":  "288400343040",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-fd75ec1b-92a4-ca93-a3ad-976565948d0e"
+    },
+    {
+      "name":  "NVIDIA B300 SXM6 AC",
+      "memoryTotal":  "288400343040",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-619f7fdc-5f98-8c37-fe89-0465d6130baf"
+    },
+    {
+      "name":  "NVIDIA B300 SXM6 AC",
+      "memoryTotal":  "288400343040",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-40e00845-d89c-1393-2c32-a2dca3ee9442"
+    }
+  ],
+  "cudaVersion":  "13.0",
+  "writerId":  "4esxn2ajrvk92kznwfh9zxqn3tct9m55"
+}

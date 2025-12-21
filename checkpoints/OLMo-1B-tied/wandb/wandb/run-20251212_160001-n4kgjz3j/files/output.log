@@ -1,0 +1,48 @@
+2025-12-12 16:00:04.669	tiny-time-shines-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-12 16:00:04.802	tiny-time-shines-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-1B-tied/train_data/global_indices.npy'
+2025-12-12 16:00:04.874	tiny-time-shines-fin-03:0	train:139	INFO	Building model...
+2025-12-12 16:00:05.166	tiny-time-shines-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 16:00:05.167	tiny-time-shines-fin-03:0	train:141	INFO	Total number of parameters: 1,176,764,416
+2025-12-12 16:00:05.167	tiny-time-shines-fin-03:0	train:142	INFO	Number of non-embedding parameters: 1,073,741,824
+2025-12-12 16:00:05.172	tiny-time-shines-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 4711
+2025-12-12 16:00:05.172	tiny-time-shines-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-12 16:00:05.348	tiny-time-shines-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 16:00:05.355	tiny-time-shines-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 9418
+2025-12-12 16:00:05.355	tiny-time-shines-fin-03:0	train:233	INFO	Model:
+2025-12-12 16:00:05.355	tiny-time-shines-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 2048)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-15): 16 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=2048, out_features=2048, bias=False)
+          (ff_out): Linear(in_features=8192, out_features=2048, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=2048, out_features=6144, bias=False)
+          (ff_proj): Linear(in_features=2048, out_features=16384, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-12 16:00:05.356	tiny-time-shines-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-12 16:00:05.356	tiny-time-shines-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-12 16:00:05.684	tiny-time-shines-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-12 16:00:09.323	tiny-time-shines-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-12 16:00:09.325	tiny-time-shines-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-12 16:00:09.326	tiny-time-shines-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-12 16:00:10.194	tiny-time-shines-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied/step0-unsharded
+2025-12-12 16:00:10.194	tiny-time-shines-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-12 16:00:13.006	tiny-time-shines-fin-03:0	olmo.train:409	INFO	Resetting learning rate...
+2025-12-12 16:00:13.007	tiny-time-shines-fin-03:0	olmo.train:421	INFO	Restoring RNG states...
+2025-12-12 16:00:13.366	tiny-time-shines-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-12 16:00:13.366	tiny-time-shines-fin-03:0	train:375	INFO	Starting training...
+2025-12-12 16:00:13.424	tiny-time-shines-fin-03:0	olmo.train:979	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=9,418
+wandb: WARNING The `quiet` argument to `wandb.run.finish()` is deprecated, use `wandb.Settings(quiet=...)` to set this instead.

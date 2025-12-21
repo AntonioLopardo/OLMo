@@ -31,6 +31,10 @@ pyrightconfig.json
 doc/_build/
 *.swp
 .DS_Store
+*.pt
+*.npy
+*.gz
+*latest-unsharded
 
 # python
 

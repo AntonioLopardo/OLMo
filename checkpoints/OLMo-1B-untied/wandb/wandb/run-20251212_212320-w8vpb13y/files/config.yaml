@@ -1,0 +1,321 @@
+_wandb:
+    value:
+        cli_version: 0.23.1
+        e:
+            o5f5xmz70k91lbxluve6crt0hyd8niv3:
+                args:
+                    - configs/custom/todo/OLMo-1B-tied_low_seq_len.yaml
+                codePath: scripts/train.py
+                codePathLocal: scripts/train.py
+                cpu_count: 240
+                cpu_count_logical: 240
+                cudaVersion: "13.0"
+                disk:
+                    /:
+                        total: "758162690048"
+                        used: "302346616832"
+                email: antonio.lopardo@outlook.com
+                executable: /home/vec_norm/.venv/bin/python
+                git:
+                    commit: 090253dac6688f2532509daa7aa2eb5fae50e956
+                    remote: https://github.com/allenai/OLMo.git
+                gpu: NVIDIA B300 SXM6 AC
+                gpu_count: 8
+                gpu_nvidia:
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "288400343040"
+                      name: NVIDIA B300 SXM6 AC
+                      uuid: GPU-53ed8fd9-9f5a-9c77-430d-095ad4fc860d
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "288400343040"
+                      name: NVIDIA B300 SXM6 AC
+                      uuid: GPU-adecbd14-4768-00f8-a2fa-697ced804a8d
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "288400343040"
+                      name: NVIDIA B300 SXM6 AC
+                      uuid: GPU-bc643dc2-a0d1-5ed6-5ecb-0605ca9f340a
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "288400343040"
+                      name: NVIDIA B300 SXM6 AC
+                      uuid: GPU-90fb226c-3937-2448-1052-2e12282a61b9
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "288400343040"
+                      name: NVIDIA B300 SXM6 AC
+                      uuid: GPU-4ae7e013-1aac-31d8-8b8e-c27530f1c6ed
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "288400343040"
+                      name: NVIDIA B300 SXM6 AC
+                      uuid: GPU-fd75ec1b-92a4-ca93-a3ad-976565948d0e
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "288400343040"
+                      name: NVIDIA B300 SXM6 AC
+                      uuid: GPU-619f7fdc-5f98-8c37-fe89-0465d6130baf
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "288400343040"
+                      name: NVIDIA B300 SXM6 AC
+                      uuid: GPU-40e00845-d89c-1393-2c32-a2dca3ee9442
+                host: round-name-opens-fin-03
+                memory:
+                    total: "2324299124736"
+                os: Linux-6.8.0-87-generic-x86_64-with-glibc2.39
+                program: /home/vec_norm/OLMo/scripts/train.py
+                python: CPython 3.12.3
+                root: /home/vec_norm/OLMo/checkpoints/OLMo-1B-untied/wandb
+                startedAt: "2025-12-12T21:23:20.771751Z"
+                writerId: o5f5xmz70k91lbxluve6crt0hyd8niv3
+        m: []
+        python_version: 3.12.3
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 51
+                - 53
+                - 71
+            "2":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 51
+                - 53
+                - 71
+            "3":
+                - 15
+                - 16
+            "4": 3.12.3
+            "5": 0.23.1
+            "6": 4.57.1
+            "12": 0.23.1
+            "13": linux-x86_64
+activation_checkpointing:
+    value: null
+auxiliary_loss_multiplier:
+    value: 0.0001
+canceled_check_interval:
+    value: 50
+compile:
+    value: null
+console_log_interval:
+    value: 1
+data:
+    value:
+        custom_dataset: null
+        datasets: null
+        drop_last: true
+        generate_attention_mask: false
+        generate_doc_lengths: false
+        instance_filter: null
+        label_mask_paths: null
+        memmap_dtype: uint16
+        num_workers: 16
+        pad_direction: right
+        paths:
+            - /home/vec_norm/OLMo/data/dolma_v1_7/dolma_v1_7_30B.npy
+        persistent_workers: true
+        pin_memory: true
+        prefetch_factor: 2
+        seed: null
+        timeout: 0
+ddp:
+    value:
+        find_unused_params: false
+        grad_sync_mode: batch
+device_eval_batch_size:
+    value: 32
+device_train_batch_size:
+    value: 2048
+device_train_grad_accum:
+    value: 64
+device_train_microbatch_size:
+    value: 32
+distributed_strategy:
+    value: ddp
+dry_run:
+    value: false
+early_stopping_factor:
+    value: null
+epoch:
+    value: null
+eval_interval:
+    value: 500
+eval_on_load:
+    value: false
+eval_subset_num_batches:
+    value: -1
+evaluators:
+    value: []
+extra_steps_after_cancel:
+    value: 10
+fast_forward_batches:
+    value: null
+force_save_unsharded:
+    value: false
+fsdp:
+    value:
+        hybrid_sharding_num_model_replicas: null
+        precision: pure
+        sharding_strategy: FULL_SHARD
+        use_orig_params: true
+        wrapping_strategy: null
+fused_loss:
+    value: null
+gen1_gc_interval:
+    value: 1
+global_train_batch_size:
+    value: 2048
+hf_datasets_cache_dir:
+    value: null
+load_path:
+    value: null
+load_path_sharded_checkpointer:
+    value: null
+max_duration:
+    value: 10000
+max_grad_norm:
+    value: 1
+max_grad_norm_ratio:
+    value: null
+model:
+    value:
+        activation_type: swiglu
+        alibi: false
+        alibi_bias_max: 8
+        attention_dropout: 0
+        attention_layer_norm: false
+        attention_layer_norm_with_affine: false
+        bias_for_layer_norm: false
+        block_group_size: 1
+        block_type: sequential
+        clip_qkv: 8
+        d_model: 2048
+        emb_init_std: null
+        embedding_dropout: 0
+        embedding_layer_norm: false
+        embedding_size: 50304
+        eos_token_id: 50279
+        flash_attention: true
+        include_bias: false
+        init_cutoff_factor: null
+        init_device: cpu
+        init_fn: mitchell
+        init_std: 0.02
+        layer_norm_eps: 1e-05
+        layer_norm_type: default
+        layer_norm_with_affine: false
+        max_sequence_length: 2048
+        mlp_hidden_size: null
+        mlp_ratio: 8
+        multi_query_attention: false
+        n_heads: 16
+        n_kv_heads: null
+        n_layers: 16
+        norm_after: false
+        pad_token_id: 1
+        precision: amp_bf16
+        residual_dropout: 0
+        rope: true
+        rope_full_precision: true
+        rope_theta: 10000
+        scale_emb_init: false
+        scale_logits: false
+        vocab_size: 50280
+        weight_tying: true
+module_outputs_save_steps:
+    value: null
+new_style_checkpoints:
+    value: null
+no_pre_train_checkpoint:
+    value: false
+optimizer:
+    value:
+        betas:
+            - 0.9
+            - 0.95
+        decay_embeddings: true
+        decay_norm_and_bias: true
+        eps: 1e-05
+        learning_rate: 0.0003
+        metrics_log_interval: 10
+        name: adamw
+        no_decay_norm_and_bias: null
+        record_update_metrics: false
+        selective_updates: false
+        weight_decay: 0.1
+precision:
+    value: amp_bf16
+python_profiling:
+    value: false
+remote_save_folder:
+    value: null
+reset_optimizer_state:
+    value: false
+reset_trainer_state:
+    value: false
+restore_dataloader:
+    value: true
+run_name:
+    value: OLMo-1B-tied_low_seq_len
+save_data_indices:
+    value: true
+save_folder:
+    value: /home/vec_norm/OLMo/checkpoints/OLMo-1B-untied
+save_interval:
+    value: 1000
+save_interval_ephemeral:
+    value: null
+save_interval_unsharded:
+    value: 500
+save_num_checkpoints_to_keep:
+    value: 3
+save_num_unsharded_checkpoints_to_keep:
+    value: 5
+save_overwrite:
+    value: true
+scheduler:
+    value:
+        alpha_f: 0.1
+        grad_clip_warmup_factor: null
+        grad_clip_warmup_steps: null
+        name: cosine_with_warmup
+        t_max: null
+        t_warmup: 2500
+        units: steps
+        warmup_min_lr: null
+seed:
+    value: 6198
+sharded_checkpointer:
+    value: torch_legacy
+single:
+    value:
+        device: auto
+softmax_auxiliary_loss:
+    value: false
+speed_monitor:
+    value:
+        gpu_flops_available: null
+        window_size: 20
+stop_after:
+    value: null
+stop_at:
+    value: null
+time_limit:
+    value: null
+tokenizer:
+    value:
+        identifier: tokenizers/allenai_eleuther-ai-gpt-neox-20b-pii-special.json
+        truncate_direction: right
+torch_profiling:
+    value: false
+try_load_latest_save:
+    value: false

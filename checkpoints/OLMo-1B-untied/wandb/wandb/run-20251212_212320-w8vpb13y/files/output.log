@@ -1,0 +1,15 @@
+2025-12-12 21:23:23.967	round-name-opens-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-12 21:23:24.238	round-name-opens-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-1B-untied/train_data/global_indices.npy'
+2025-12-12 21:23:24.297	round-name-opens-fin-03:0	train:139	INFO	Building model...
+2025-12-12 21:23:27.173	round-name-opens-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 21:23:29.705	round-name-opens-fin-03:0	train:141	INFO	Total number of parameters: 1,176,764,416
+2025-12-12 21:23:29.706	round-name-opens-fin-03:0	train:142	INFO	Number of non-embedding parameters: 1,073,741,824
+2025-12-12 21:23:29.714	round-name-opens-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 0
+2025-12-12 21:23:29.714	round-name-opens-fin-03:0	train:155	INFO	Wrapping model with DDP...
+Traceback (most recent call last):
+  File "/home/vec_norm/OLMo/scripts/train.py", line 436, in <module>
+    main(cfg)
+  File "/home/vec_norm/OLMo/scripts/train.py", line 159, in main
+    raise OLMoConfigurationError("DDP does not work with init_device set to anything other than `cuda`.")
+olmo.exceptions.OLMoConfigurationError: DDP does not work with init_device set to anything other than `cuda`.
+OLMoConfigurationError: DDP does not work with init_device set to anything other than `cuda`.

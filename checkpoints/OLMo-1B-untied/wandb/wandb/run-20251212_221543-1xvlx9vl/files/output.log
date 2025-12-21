@@ -1,0 +1,55 @@
+2025-12-12 22:15:46.531	clean-soul-smiles-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-12 22:15:46.794	clean-soul-smiles-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-1B-untied/train_data/global_indices.npy'
+2025-12-12 22:15:46.837	clean-soul-smiles-fin-03:0	train:139	INFO	Building model...
+2025-12-12 22:15:46.882	clean-soul-smiles-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 22:15:46.897	clean-soul-smiles-fin-03:0	train:141	INFO	Total number of parameters: 1,176,764,416
+2025-12-12 22:15:46.898	clean-soul-smiles-fin-03:0	train:142	INFO	Number of non-embedding parameters: 1,073,741,824
+2025-12-12 22:15:46.902	clean-soul-smiles-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 4710
+2025-12-12 22:15:46.903	clean-soul-smiles-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-12 22:15:46.906	clean-soul-smiles-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 22:15:46.915	clean-soul-smiles-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 9418
+2025-12-12 22:15:46.915	clean-soul-smiles-fin-03:0	train:233	INFO	Model:
+2025-12-12 22:15:46.915	clean-soul-smiles-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 2048)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-15): 16 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=2048, out_features=2048, bias=False)
+          (ff_out): Linear(in_features=8192, out_features=2048, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=2048, out_features=6144, bias=False)
+          (ff_proj): Linear(in_features=2048, out_features=16384, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-12 22:15:46.916	clean-soul-smiles-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-12 22:15:46.917	clean-soul-smiles-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-12 22:15:47.240	clean-soul-smiles-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-12 22:15:50.270	clean-soul-smiles-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-12 22:15:50.271	clean-soul-smiles-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-12 22:15:50.272	clean-soul-smiles-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-12 22:15:50.567	clean-soul-smiles-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-untied/step0-unsharded
+2025-12-12 22:15:50.567	clean-soul-smiles-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-12 22:15:51.853	clean-soul-smiles-fin-03:0	olmo.train:409	INFO	Resetting learning rate...
+2025-12-12 22:15:51.854	clean-soul-smiles-fin-03:0	olmo.train:421	INFO	Restoring RNG states...
+2025-12-12 22:15:52.131	clean-soul-smiles-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-12 22:15:52.132	clean-soul-smiles-fin-03:0	train:375	INFO	Starting training...
+2025-12-12 22:15:52.133	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=9,418
+2025-12-12 22:16:11.919	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=1/10000,epoch=0]
+    optim/total_grad_norm=9.166
+    train/CrossEntropyLoss=11.35
+    train/Perplexity=85,088
+    throughput/total_tokens=1,048,576
+    throughput/total_training_Gflops=8,031,932
+    throughput/total_training_log_Gflops=15.90
+    System/Peak GPU Memory (MB)=99,998

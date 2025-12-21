@@ -1,0 +1,12 @@
+{"time":"2025-12-15T22:10:36.615829351Z","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2025-12-15T22:10:37.027241196Z","level":"INFO","msg":"stream: created new stream","id":"vkcvc4fj"}
+{"time":"2025-12-15T22:10:37.027367365Z","level":"INFO","msg":"stream: started","id":"vkcvc4fj"}
+{"time":"2025-12-15T22:10:37.027431281Z","level":"INFO","msg":"writer: started","stream_id":"vkcvc4fj"}
+{"time":"2025-12-15T22:10:37.027432483Z","level":"INFO","msg":"sender: started","stream_id":"vkcvc4fj"}
+{"time":"2025-12-15T22:10:37.027851372Z","level":"INFO","msg":"handler: started","stream_id":"vkcvc4fj"}
+{"time":"2025-12-16T08:03:43.982083219Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-16T08:03:44.472757295Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-12-16T08:03:44.48282817Z","level":"INFO","msg":"stream: closing","id":"vkcvc4fj"}
+{"time":"2025-12-16T08:03:44.482838486Z","level":"INFO","msg":"handler: closed","stream_id":"vkcvc4fj"}
+{"time":"2025-12-16T08:03:44.482876613Z","level":"INFO","msg":"sender: closed","stream_id":"vkcvc4fj"}
+{"time":"2025-12-16T08:03:44.482886438Z","level":"INFO","msg":"stream: closed","id":"vkcvc4fj"}

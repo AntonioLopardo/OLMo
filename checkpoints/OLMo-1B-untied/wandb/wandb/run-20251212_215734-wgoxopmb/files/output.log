@@ -1,0 +1,74 @@
+2025-12-12 21:57:37.302	clean-soul-smiles-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-12 21:57:37.538	clean-soul-smiles-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-1B-untied/train_data/global_indices.npy'
+2025-12-12 21:57:37.595	clean-soul-smiles-fin-03:0	train:139	INFO	Building model...
+2025-12-12 21:57:37.715	clean-soul-smiles-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 21:57:37.746	clean-soul-smiles-fin-03:0	train:141	INFO	Total number of parameters: 1,176,764,416
+2025-12-12 21:57:37.746	clean-soul-smiles-fin-03:0	train:142	INFO	Number of non-embedding parameters: 1,073,741,824
+2025-12-12 21:57:37.753	clean-soul-smiles-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 4710
+2025-12-12 21:57:37.753	clean-soul-smiles-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-12 21:57:37.761	clean-soul-smiles-fin-03:0	olmo.model:1174	INFO	Initializing model parameters...
+2025-12-12 21:57:37.769	clean-soul-smiles-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 9418
+2025-12-12 21:57:37.770	clean-soul-smiles-fin-03:0	train:233	INFO	Model:
+2025-12-12 21:57:37.770	clean-soul-smiles-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 2048)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-15): 16 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=2048, out_features=2048, bias=False)
+          (ff_out): Linear(in_features=8192, out_features=2048, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=2048, out_features=6144, bias=False)
+          (ff_proj): Linear(in_features=2048, out_features=16384, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-12 21:57:37.771	clean-soul-smiles-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-12 21:57:37.771	clean-soul-smiles-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-12 21:57:37.782	clean-soul-smiles-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-12 21:57:40.793	clean-soul-smiles-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-12 21:57:40.794	clean-soul-smiles-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-12 21:57:40.794	clean-soul-smiles-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-12 21:57:41.013	clean-soul-smiles-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-untied/step0-unsharded
+2025-12-12 21:57:41.013	clean-soul-smiles-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-12 21:57:42.309	clean-soul-smiles-fin-03:0	olmo.train:409	INFO	Resetting learning rate...
+2025-12-12 21:57:42.309	clean-soul-smiles-fin-03:0	olmo.train:421	INFO	Restoring RNG states...
+2025-12-12 21:57:42.514	clean-soul-smiles-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-12 21:57:42.515	clean-soul-smiles-fin-03:0	train:375	INFO	Starting training...
+2025-12-12 21:57:42.515	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=9,418
+2025-12-12 21:58:16.917	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=1/10000,epoch=0]
+    optim/total_grad_norm=9.143
+    train/CrossEntropyLoss=11.35
+    train/Perplexity=84,884
+    throughput/total_tokens=2,097,152
+    throughput/total_training_Gflops=16,063,864
+    throughput/total_training_log_Gflops=16.59
+    System/Peak GPU Memory (MB)=58,260
+2025-12-12 21:58:45.119	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=2/10000,epoch=0]
+    optim/total_grad_norm=10.95
+    train/CrossEntropyLoss=10.16
+    train/Perplexity=25,912
+    throughput/total_tokens=4,194,304
+    throughput/total_training_Gflops=32,127,729
+    throughput/total_training_log_Gflops=17.29
+    throughput/device/tokens_per_second=74,367
+    throughput/device/batches_per_second=0.0355
+    System/Peak GPU Memory (MB)=67,673
+2025-12-12 21:59:13.317	clean-soul-smiles-fin-03:0	olmo.train:979	INFO	[step=3/10000,epoch=0]
+    optim/total_grad_norm=29.23
+    train/CrossEntropyLoss=10.39
+    train/Perplexity=32,448
+    throughput/total_tokens=6,291,456
+    throughput/total_training_Gflops=48,191,594
+    throughput/total_training_log_Gflops=17.69
+    throughput/device/tokens_per_second=74,370
+    throughput/device/batches_per_second=0.0355
