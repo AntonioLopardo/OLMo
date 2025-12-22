@@ -1073,6 +1073,13 @@ class OLMo(nn.Module):
         self.config = config
         self.__cache = BufferCache()
 
+        # Gradient provenance tracking buffers
+        self._grad_provenance_enabled = False
+        self._embedding_grad_metrics: Dict[str, float] = {}
+        self._output_proj_grad_metrics: Dict[str, float] = {}
+        self._output_proj_input_cache: Optional[torch.Tensor] = None
+        self._grad_provenance_hooks: List[torch.utils.hooks.RemovableHandle] = []
+
         # Validate config.
         if self.config.alibi and self.config.flash_attention:
             raise OLMoConfigurationError("ALiBi is currently not supported with FlashAttention")
@@ -1161,6 +1168,131 @@ class OLMo(nn.Module):
         else:
             for block in self.transformer.blocks:
                 block.set_activation_checkpointing(strategy, checkpoint_func=checkpoint_func)
+
+    def enable_gradient_provenance_tracking(self) -> None:
+        """
+        Enable tracking of gradient provenance for tied embedding weights.
+        When enabled, separate metrics are recorded for gradients from input embeddings
+        vs output projection.
+        """
+        if not self.config.weight_tying:
+            log.warning("Gradient provenance tracking is only meaningful with weight_tying=True")
+            return
+
+        if self._grad_provenance_enabled:
+            return
+
+        self._grad_provenance_enabled = True
+        self._embedding_grad_metrics = {}
+        self._output_proj_grad_metrics = {}
+
+        # Register backward hook on the embedding layer to capture input embedding gradients
+        def embedding_backward_hook(
+            module: nn.Module,
+            grad_input: Tuple[Optional[torch.Tensor], ...],
+            grad_output: Tuple[torch.Tensor, ...],
+        ) -> None:
+            # grad_output[0] is the gradient w.r.t. the embedding output (batch, seq, d_model)
+            # The gradient w.r.t. wte.weight from embedding is computed by PyTorch internally
+            # We need to compute it ourselves: for each token, we accumulate the gradient
+            # This is a sparse operation, but we can compute the norm by looking at grad_output
+            if grad_output[0] is not None:
+                grad = grad_output[0]
+                # The embedding gradient is scattered into wte.weight based on input_ids
+                # For scalar metrics, we can use the output gradient directly
+                self._embedding_grad_metrics = {
+                    "l1_norm": torch.linalg.vector_norm(grad, 1.0).item(),
+                    "l2_norm": torch.linalg.vector_norm(grad, 2.0).item(),
+                    "mean": grad.mean().item(),
+                    "abs_mean": grad.abs().mean().item(),
+                }
+
+        hook = self.transformer.wte.register_full_backward_hook(embedding_backward_hook)
+        self._grad_provenance_hooks.append(hook)
+
+    def disable_gradient_provenance_tracking(self) -> None:
+        """Disable gradient provenance tracking and remove hooks."""
+        self._grad_provenance_enabled = False
+        for hook in self._grad_provenance_hooks:
+            hook.remove()
+        self._grad_provenance_hooks.clear()
+        self._embedding_grad_metrics = {}
+        self._output_proj_grad_metrics = {}
+        self._output_proj_input_cache = None
+
+    def _compute_output_proj_gradient_metrics(self, grad_output: torch.Tensor, cached_input: torch.Tensor) -> None:
+        """
+        Compute gradient metrics for the output projection path.
+        The gradient w.r.t. wte.weight from F.linear(x, wte.weight) is: grad_output.T @ x
+        For scalar metrics, we compute this and extract norms/means.
+        """
+        # grad_output: (batch, seq, vocab_size)
+        # cached_input: (batch, seq, d_model)
+        # grad_weight: (vocab_size, d_model) = grad_output.T @ cached_input (summed over batch and seq)
+
+        # Reshape for matmul: (batch*seq, vocab_size).T @ (batch*seq, d_model)
+        batch_seq = grad_output.shape[0] * grad_output.shape[1]
+        grad_out_flat = grad_output.reshape(batch_seq, -1)  # (batch*seq, vocab_size)
+        input_flat = cached_input.reshape(batch_seq, -1)  # (batch*seq, d_model)
+
+        # grad_weight = grad_out_flat.T @ input_flat  # (vocab_size, d_model)
+        # Computing full gradient would be expensive, so we compute metrics efficiently
+        # For norm: ||grad_output.T @ input||_F = sqrt(sum((grad_output.T @ input)^2))
+        # We can compute this as: sqrt(trace((grad_output.T @ input) @ (grad_output.T @ input).T))
+        # = sqrt(trace(grad_output.T @ input @ input.T @ grad_output))
+        # But for large vocab this is still expensive. Instead, approximate with Frobenius:
+
+        # Actually compute the gradient for accurate metrics (memory permitting)
+        with torch.no_grad():
+            # Ensure both tensors have the same dtype (use float32 for numerical stability)
+            grad_out_f32 = grad_out_flat.float()
+            input_f32 = input_flat.float()
+            grad_weight = grad_out_f32.T @ input_f32  # (vocab_size, d_model)
+            self._output_proj_grad_metrics = {
+                "l1_norm": torch.linalg.vector_norm(grad_weight, 1.0).item(),
+                "l2_norm": torch.linalg.vector_norm(grad_weight, 2.0).item(),
+                "mean": grad_weight.mean().item(),
+                "abs_mean": grad_weight.abs().mean().item(),
+            }
+
+    def get_gradient_provenance_metrics(self) -> Dict[str, float]:
+        """
+        Get gradient provenance metrics from the last backward pass.
+
+        Returns a dict with keys:
+        - embedding_grad_norm: L2 norm of gradients from input embeddings
+        - embedding_grad_mean: Mean of gradients from input embeddings
+        - embedding_grad_abs_mean: Mean of absolute gradients from input embeddings
+        - output_proj_grad_norm: L2 norm of gradients from output projection
+        - output_proj_grad_mean: Mean of gradients from output projection
+        - output_proj_grad_abs_mean: Mean of absolute gradients from output projection
+
+        Returns empty dict if tracking is not enabled or no backward pass has occurred.
+        """
+        if not self._grad_provenance_enabled:
+            return {}
+
+        metrics: Dict[str, float] = {}
+
+        if self._embedding_grad_metrics:
+            metrics["embedding_grad_l1_norm"] = self._embedding_grad_metrics.get("l1_norm", 0.0)
+            metrics["embedding_grad_l2_norm"] = self._embedding_grad_metrics.get("l2_norm", 0.0)
+            metrics["embedding_grad_mean"] = self._embedding_grad_metrics.get("mean", 0.0)
+            metrics["embedding_grad_abs_mean"] = self._embedding_grad_metrics.get("abs_mean", 0.0)
+
+        if self._output_proj_grad_metrics:
+            metrics["output_proj_grad_l1_norm"] = self._output_proj_grad_metrics.get("l1_norm", 0.0)
+            metrics["output_proj_grad_l2_norm"] = self._output_proj_grad_metrics.get("l2_norm", 0.0)
+            metrics["output_proj_grad_mean"] = self._output_proj_grad_metrics.get("mean", 0.0)
+            metrics["output_proj_grad_abs_mean"] = self._output_proj_grad_metrics.get("abs_mean", 0.0)
+
+        return metrics
+
+    def clear_gradient_provenance_metrics(self) -> None:
+        """Clear the cached gradient provenance metrics."""
+        self._embedding_grad_metrics = {}
+        self._output_proj_grad_metrics = {}
+        self._output_proj_input_cache = None
 
     @property
     def device(self) -> torch.device:
@@ -1452,7 +1584,19 @@ class OLMo(nn.Module):
         # Get logits.
         # shape: (batch_size, seq_len or 1, vocab_size)
         if self.config.weight_tying:
-            logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+            # Cache input for gradient provenance tracking
+            if self._grad_provenance_enabled and self.training:
+                self._output_proj_input_cache = x.detach().clone()
+
+                # Register a hook on logits to capture output projection gradients
+                def output_proj_grad_hook(grad: torch.Tensor) -> None:
+                    if self._output_proj_input_cache is not None:
+                        self._compute_output_proj_gradient_metrics(grad, self._output_proj_input_cache)
+
+                logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+                logits.register_hook(output_proj_grad_hook)
+            else:
+                logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
         else:
             logits = self.transformer.ff_out(x)  # type: ignore
         if self.config.scale_logits:

@@ -1,0 +1,54 @@
+2025-12-21 12:13:49.629	quick-machine-smashes-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-21 12:13:49.738	quick-machine-smashes-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-1B-grad-provenance/train_data/global_indices.npy'
+2025-12-21 12:13:49.741	quick-machine-smashes-fin-03:0	py.warnings:110	WARNING	/home/vec_norm/.venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:627: UserWarning: This DataLoader will create 32 worker processes in total. Our suggested max number of worker in current system is 30, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+2025-12-21 12:13:49.793	quick-machine-smashes-fin-03:0	train:139	INFO	Building model...
+2025-12-21 12:13:49.940	quick-machine-smashes-fin-03:0	olmo.model:1299	INFO	Initializing model parameters...
+2025-12-21 12:13:49.979	quick-machine-smashes-fin-03:0	train:141	INFO	Total number of parameters: 1,176,764,416
+2025-12-21 12:13:49.980	quick-machine-smashes-fin-03:0	train:142	INFO	Number of non-embedding parameters: 1,073,741,824
+2025-12-21 12:13:49.987	quick-machine-smashes-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 4712
+2025-12-21 12:13:49.987	quick-machine-smashes-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-21 12:13:49.996	quick-machine-smashes-fin-03:0	olmo.model:1299	INFO	Initializing model parameters...
+2025-12-21 12:13:50.004	quick-machine-smashes-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 9420
+2025-12-21 12:13:50.004	quick-machine-smashes-fin-03:0	train:233	INFO	Model:
+2025-12-21 12:13:50.004	quick-machine-smashes-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 2048)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-15): 16 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=2048, out_features=2048, bias=False)
+          (ff_out): Linear(in_features=8192, out_features=2048, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=2048, out_features=6144, bias=False)
+          (ff_proj): Linear(in_features=2048, out_features=16384, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-21 12:13:50.005	quick-machine-smashes-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-21 12:13:50.006	quick-machine-smashes-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-21 12:13:50.007	quick-machine-smashes-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-21 12:13:52.832	quick-machine-smashes-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-21 12:13:52.833	quick-machine-smashes-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-21 12:13:52.834	quick-machine-smashes-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-21 12:13:53.059	quick-machine-smashes-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-grad-provenance/step0-unsharded
+2025-12-21 12:13:53.059	quick-machine-smashes-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-21 12:13:54.196	quick-machine-smashes-fin-03:0	olmo.train:412	INFO	Resetting learning rate...
+2025-12-21 12:13:54.196	quick-machine-smashes-fin-03:0	olmo.train:424	INFO	Restoring RNG states...
+2025-12-21 12:13:54.414	quick-machine-smashes-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-21 12:13:54.415	quick-machine-smashes-fin-03:0	train:375	INFO	Starting training...
+2025-12-21 12:13:54.415	quick-machine-smashes-fin-03:0	olmo.train:1146	INFO	Enabling gradient provenance tracking for tied embeddings
+2025-12-21 12:13:54.415	quick-machine-smashes-fin-03:0	olmo.train:1162	INFO	Gradient provenance CSV will be saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-grad-provenance/gradient_provenance.csv
+2025-12-21 12:13:54.416	quick-machine-smashes-fin-03:0	olmo.train:990	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=9,420
+2025-12-21 12:14:03.044	quick-machine-smashes-fin-03:0	olmo.train:1433	INFO	Gradient provenance CSV file saved
+wandb: WARNING The `quiet` argument to `wandb.run.finish()` is deprecated, use `wandb.Settings(quiet=...)` to set this instead.

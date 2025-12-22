@@ -17,6 +17,7 @@ from pathlib import Path
 from pstats import SortKey
 from typing import Any, Callable, Deque, Dict, List, Optional, TextIO, Tuple, Union
 
+import csv
 import numpy as np
 import torch
 import torch.distributed as dist
@@ -233,6 +234,8 @@ class Trainer:
     loss_fn: Callable[..., torch.Tensor] = field(default_factory=lambda: cross_entropy_loss)  # type: ignore
     last_sharded_checkpoint_step: Optional[int] = None
     last_unsharded_checkpoint_step: Optional[int] = None
+    _grad_provenance_csv_file: Optional[TextIO] = None
+    _grad_provenance_csv_writer: Optional[csv.DictWriter] = None
 
     def __post_init__(self):
         if self.cfg.fused_loss:
@@ -909,6 +912,14 @@ class Trainer:
             for key, value in optim_metrics.items():
                 metrics[f"optim/{key}"] = value.item()
 
+        # Collect gradient provenance metrics if enabled.
+        if self.cfg.model.track_embedding_gradient_provenance:
+            provenance_metrics = self.model.get_gradient_provenance_metrics()
+            for key, value in provenance_metrics.items():
+                metrics[f"grad_provenance/{key}"] = value
+            # Clear metrics for next step
+            self.model.clear_gradient_provenance_metrics()
+
         return metrics
 
     def eval_batch(self, batch: Dict[str, Any]) -> Tuple[torch.Tensor, torch.Tensor]:
@@ -1130,6 +1141,28 @@ class Trainer:
         # Set model to 'train' mode.
         self.dist_model.train()
 
+        # Enable gradient provenance tracking if configured.
+        if self.cfg.model.track_embedding_gradient_provenance:
+            log.info("Enabling gradient provenance tracking for tied embeddings")
+            self.model.enable_gradient_provenance_tracking()
+            
+            # Initialize CSV file for gradient provenance metrics (only on rank 0)
+            if get_global_rank() == 0:
+                csv_path = Path(self.cfg.save_folder) / "gradient_provenance.csv"
+                csv_path.parent.mkdir(parents=True, exist_ok=True)
+                self._grad_provenance_csv_file = open(csv_path, "w", newline="")
+                self._grad_provenance_csv_writer = csv.DictWriter(
+                    self._grad_provenance_csv_file,
+                    fieldnames=["step", "loss", 
+                                "embedding_grad_l1_norm", "embedding_grad_l2_norm",
+                                "output_proj_grad_l1_norm", "output_proj_grad_l2_norm",
+                                "embedding_grad_mean", "output_proj_grad_mean",
+                                "embedding_grad_abs_mean", "output_proj_grad_abs_mean"]
+                )
+                self._grad_provenance_csv_writer.writeheader()
+                self._grad_provenance_csv_file.flush()
+                log.info(f"Gradient provenance CSV will be saved to {csv_path}")
+
         # Initialize monitors.
         assert self.cfg.device_train_batch_size is not None
         speed_monitor = SpeedMonitor(self.cfg.speed_monitor)
@@ -1251,6 +1284,23 @@ class Trainer:
                         and self.global_step % self.cfg.wandb.log_interval == 0
                     ):
                         wandb.log(metrics, step=self.global_step)
+
+                    # Log gradient provenance metrics to CSV.
+                    if self._grad_provenance_csv_writer is not None:
+                        csv_row = {
+                            "step": self.global_step,
+                            "loss": metrics.get("train/CELoss", 0.0),
+                            "embedding_grad_l1_norm": metrics.get("grad_provenance/embedding_grad_l1_norm", 0.0),
+                            "embedding_grad_l2_norm": metrics.get("grad_provenance/embedding_grad_l2_norm", 0.0),
+                            "output_proj_grad_l1_norm": metrics.get("grad_provenance/output_proj_grad_l1_norm", 0.0),
+                            "output_proj_grad_l2_norm": metrics.get("grad_provenance/output_proj_grad_l2_norm", 0.0),
+                            "embedding_grad_mean": metrics.get("grad_provenance/embedding_grad_mean", 0.0),
+                            "output_proj_grad_mean": metrics.get("grad_provenance/output_proj_grad_mean", 0.0),
+                            "embedding_grad_abs_mean": metrics.get("grad_provenance/embedding_grad_abs_mean", 0.0),
+                            "output_proj_grad_abs_mean": metrics.get("grad_provenance/output_proj_grad_abs_mean", 0.0),
+                        }
+                        self._grad_provenance_csv_writer.writerow(csv_row)
+                        self._grad_provenance_csv_file.flush()
 
                     # Check if/when run should be canceled.
                     if not cancel_initiated and self.global_step % self.cfg.canceled_check_interval == 0:
@@ -1381,6 +1431,10 @@ class Trainer:
         if self.indices_file is not None:
             self.indices_file.flush()
             self.indices_file.close()
+        if self._grad_provenance_csv_file is not None:
+            self._grad_provenance_csv_file.flush()
+            self._grad_provenance_csv_file.close()
+            log.info("Gradient provenance CSV file saved")
         if self._gc_init_state:
             gc.enable()
         else:

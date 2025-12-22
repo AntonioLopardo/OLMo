@@ -420,6 +420,13 @@ class ModelConfig(BaseConfig):
     Whether to tie output linear weights to the input embedding.
     """
 
+    track_embedding_gradient_provenance: bool = False
+    """
+    When enabled with weight_tying, track separate gradient metrics for input embeddings
+    vs output projection. Records scalar metrics (norms, means) for each gradient source
+    without modifying training behavior.
+    """
+
     eos_token_id: int = 50256
     """
     The ID of the end-of-sentence special token.

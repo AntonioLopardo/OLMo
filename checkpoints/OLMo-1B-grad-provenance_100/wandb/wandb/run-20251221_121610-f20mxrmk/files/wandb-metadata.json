@@ -1,0 +1,47 @@
+{
+  "os":  "Linux-6.8.0-87-generic-x86_64-with-glibc2.39",
+  "python":  "CPython 3.12.3",
+  "startedAt":  "2025-12-21T12:16:10.019118Z",
+  "args":  [
+    "/home/vec_norm/OLMo/checkpoints/OLMo-1B-grad-provenance/config.yaml",
+    "--device_train_batch_size=8",
+    "--device_train_microbatch_size=2",
+    "--global_train_batch_size=8",
+    "--save_overwrite"
+  ],
+  "program":  "/home/vec_norm/OLMo/scripts/train.py",
+  "codePath":  "scripts/train.py",
+  "codePathLocal":  "scripts/train.py",
+  "git":  {
+    "remote":  "https://github.com/allenai/OLMo.git",
+    "commit":  "784e40eb33f13da93aa1e7f2afbd8771cf57e102"
+  },
+  "email":  "antonio.lopardo@outlook.com",
+  "root":  "/home/vec_norm/OLMo/checkpoints/OLMo-1B-grad-provenance/wandb",
+  "host":  "quick-machine-smashes-fin-03",
+  "executable":  "/home/vec_norm/.venv/bin/python",
+  "cpu_count":  30,
+  "cpu_count_logical":  30,
+  "gpu":  "NVIDIA B200",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "758162690048",
+      "used":  "492413231104"
+    }
+  },
+  "memory":  {
+    "total":  "194133336064"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA B200",
+      "memoryTotal":  "192265846784",
+      "cudaCores":  18944,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-1948007f-172b-1188-faa4-739fd6dcd410"
+    }
+  ],
+  "cudaVersion":  "13.0",
+  "writerId":  "69cw83bqpqvs0c0yw0g6gofzmc1fdd41"
+}
