@@ -59,3 +59,17 @@ site/
 /wandb/
 /scratch/
 core
+
+# large files and training artifacts
+checkpoints/
+pretrain_data/
+olmo_data/
+**/wandb/
+*.wandb
+*.csv
+*.jsonl
+*.jsonl.gz
+*.tar.gz
+*.bin
+*.safetensors
+*.ckpt
