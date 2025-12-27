@@ -1156,19 +1156,34 @@ class Trainer:
                     scale_factor=scale_factor
                 )
             
+            # Log gradient scale factors if configured.
+            if self.cfg.model.embedding_grad_scale_factor is not None:
+                log.info(f"Embedding gradient scale factor: {self.cfg.model.embedding_grad_scale_factor}")
+            if self.cfg.model.output_proj_grad_scale_factor is not None:
+                log.info(f"Output projection gradient scale factor: {self.cfg.model.output_proj_grad_scale_factor}")
+            
             # Initialize CSV file for gradient provenance metrics (only on rank 0)
             if get_global_rank() == 0:
                 csv_path = Path(self.cfg.save_folder) / "gradient_provenance.csv"
                 csv_path.parent.mkdir(parents=True, exist_ok=True)
                 self._grad_provenance_csv_file = open(csv_path, "w", newline="")
                 fieldnames = ["step", "loss", 
-                              "embedding_grad_l1_norm", "embedding_grad_l2_norm",
-                              "output_proj_grad_l1_norm", "output_proj_grad_l2_norm",
+                              # Raw gradient norms (before any clipping/scaling)
+                              "embedding_grad_l2_norm", "output_proj_grad_l2_norm",
+                              # Effective gradient norms (after clipping/scaling, always included)
+                              "embedding_grad_l2_norm_effective", "output_proj_grad_l2_norm_effective",
+                              # Other metrics
+                              "embedding_grad_l1_norm", "output_proj_grad_l1_norm",
                               "embedding_grad_mean", "output_proj_grad_mean",
                               "embedding_grad_abs_mean", "output_proj_grad_abs_mean"]
                 # Add clipping columns if clipping is enabled
                 if self.cfg.model.clip_output_proj_to_embedding_grad_norm:
-                    fieldnames.extend(["embedding_grad_rolling_avg", "output_proj_clip_threshold", "output_proj_grad_l2_norm_post_clip"])
+                    fieldnames.extend(["embedding_grad_rolling_avg", "output_proj_clip_threshold"])
+                # Add scale factor columns if configured
+                if self.cfg.model.embedding_grad_scale_factor is not None:
+                    fieldnames.append("embedding_grad_scale_factor")
+                if self.cfg.model.output_proj_grad_scale_factor is not None:
+                    fieldnames.append("output_proj_grad_scale_factor")
                 self._grad_provenance_csv_writer = csv.DictWriter(
                     self._grad_provenance_csv_file,
                     fieldnames=fieldnames
@@ -1304,10 +1319,15 @@ class Trainer:
                         csv_row = {
                             "step": self.global_step,
                             "loss": metrics.get("train/CELoss", 0.0),
-                            "embedding_grad_l1_norm": metrics.get("grad_provenance/embedding_grad_l1_norm", 0.0),
+                            # Raw gradient norms (before clipping/scaling)
                             "embedding_grad_l2_norm": metrics.get("grad_provenance/embedding_grad_l2_norm", 0.0),
-                            "output_proj_grad_l1_norm": metrics.get("grad_provenance/output_proj_grad_l1_norm", 0.0),
                             "output_proj_grad_l2_norm": metrics.get("grad_provenance/output_proj_grad_l2_norm", 0.0),
+                            # Effective gradient norms (after clipping/scaling)
+                            "embedding_grad_l2_norm_effective": metrics.get("grad_provenance/embedding_grad_l2_norm_effective", 0.0),
+                            "output_proj_grad_l2_norm_effective": metrics.get("grad_provenance/output_proj_grad_l2_norm_effective", 0.0),
+                            # Other metrics
+                            "embedding_grad_l1_norm": metrics.get("grad_provenance/embedding_grad_l1_norm", 0.0),
+                            "output_proj_grad_l1_norm": metrics.get("grad_provenance/output_proj_grad_l1_norm", 0.0),
                             "embedding_grad_mean": metrics.get("grad_provenance/embedding_grad_mean", 0.0),
                             "output_proj_grad_mean": metrics.get("grad_provenance/output_proj_grad_mean", 0.0),
                             "embedding_grad_abs_mean": metrics.get("grad_provenance/embedding_grad_abs_mean", 0.0),
@@ -1318,8 +1338,12 @@ class Trainer:
                             csv_row.update({
                                 "embedding_grad_rolling_avg": metrics.get("grad_provenance/embedding_grad_rolling_avg", ""),
                                 "output_proj_clip_threshold": metrics.get("grad_provenance/output_proj_clip_threshold", ""),
-                                "output_proj_grad_l2_norm_post_clip": metrics.get("grad_provenance/output_proj_grad_l2_norm_post_clip", ""),
                             })
+                        # Add scale factor columns if configured
+                        if self.cfg.model.embedding_grad_scale_factor is not None:
+                            csv_row["embedding_grad_scale_factor"] = self.cfg.model.embedding_grad_scale_factor
+                        if self.cfg.model.output_proj_grad_scale_factor is not None:
+                            csv_row["output_proj_grad_scale_factor"] = self.cfg.model.output_proj_grad_scale_factor
                         self._grad_provenance_csv_writer.writerow(csv_row)
                         self._grad_provenance_csv_file.flush()
 

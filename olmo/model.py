@@ -1087,6 +1087,11 @@ class OLMo(nn.Module):
         self._clip_scale_factor: float = 0.1  # Clip to 1/10 of rolling average
         self._output_proj_grad_l2_norm_post_clip: Optional[float] = None  # Post-clipping L2 norm
 
+        # Gradient scaling factors (from config, None means no scaling)
+        self._embedding_grad_scale_factor: Optional[float] = config.embedding_grad_scale_factor
+        self._output_proj_grad_scale_factor: Optional[float] = config.output_proj_grad_scale_factor
+        self._embedding_grad_l2_norm_raw: Optional[float] = None  # Raw embedding grad norm (before scaling)
+
         # Validate config.
         if self.config.alibi and self.config.flash_attention:
             raise OLMoConfigurationError("ALiBi is currently not supported with FlashAttention")
@@ -1329,15 +1334,34 @@ class OLMo(nn.Module):
 
         metrics: Dict[str, float] = {}
 
+        # Embedding gradient metrics
         if self._embedding_grad_metrics:
+            # If scaling is enabled, we captured the raw norm separately
+            if self._embedding_grad_scale_factor is not None and self._embedding_grad_l2_norm_raw is not None:
+                # Raw norm (before scaling)
+                metrics["embedding_grad_l2_norm"] = self._embedding_grad_l2_norm_raw
+                # Effective norm (after scaling) - captured in backward hook after scale hook ran
+                metrics["embedding_grad_l2_norm_effective"] = self._embedding_grad_metrics.get("l2_norm", 0.0)
+            else:
+                # No scaling - raw and effective are the same
+                metrics["embedding_grad_l2_norm"] = self._embedding_grad_metrics.get("l2_norm", 0.0)
+                metrics["embedding_grad_l2_norm_effective"] = self._embedding_grad_metrics.get("l2_norm", 0.0)
+            
             metrics["embedding_grad_l1_norm"] = self._embedding_grad_metrics.get("l1_norm", 0.0)
-            metrics["embedding_grad_l2_norm"] = self._embedding_grad_metrics.get("l2_norm", 0.0)
             metrics["embedding_grad_mean"] = self._embedding_grad_metrics.get("mean", 0.0)
             metrics["embedding_grad_abs_mean"] = self._embedding_grad_metrics.get("abs_mean", 0.0)
 
+        # Output projection gradient metrics
         if self._output_proj_grad_metrics:
-            metrics["output_proj_grad_l1_norm"] = self._output_proj_grad_metrics.get("l1_norm", 0.0)
+            # Raw norm (before any clipping/scaling)
             metrics["output_proj_grad_l2_norm"] = self._output_proj_grad_metrics.get("l2_norm", 0.0)
+            # Effective norm (after clipping and/or scaling)
+            if self._output_proj_grad_l2_norm_post_clip is not None:
+                metrics["output_proj_grad_l2_norm_effective"] = self._output_proj_grad_l2_norm_post_clip
+            else:
+                metrics["output_proj_grad_l2_norm_effective"] = self._output_proj_grad_metrics.get("l2_norm", 0.0)
+            
+            metrics["output_proj_grad_l1_norm"] = self._output_proj_grad_metrics.get("l1_norm", 0.0)
             metrics["output_proj_grad_mean"] = self._output_proj_grad_metrics.get("mean", 0.0)
             metrics["output_proj_grad_abs_mean"] = self._output_proj_grad_metrics.get("abs_mean", 0.0)
 
@@ -1346,8 +1370,12 @@ class OLMo(nn.Module):
             rolling_avg = sum(self._embedding_grad_norm_history) / len(self._embedding_grad_norm_history)
             metrics["embedding_grad_rolling_avg"] = rolling_avg
             metrics["output_proj_clip_threshold"] = rolling_avg * self._clip_scale_factor
-            if self._output_proj_grad_l2_norm_post_clip is not None:
-                metrics["output_proj_grad_l2_norm_post_clip"] = self._output_proj_grad_l2_norm_post_clip
+
+        # Add scale factors if configured
+        if self._embedding_grad_scale_factor is not None:
+            metrics["embedding_grad_scale_factor"] = self._embedding_grad_scale_factor
+        if self._output_proj_grad_scale_factor is not None:
+            metrics["output_proj_grad_scale_factor"] = self._output_proj_grad_scale_factor
 
         return metrics
 
@@ -1357,6 +1385,7 @@ class OLMo(nn.Module):
         self._output_proj_grad_metrics = {}
         self._output_proj_input_cache = None
         self._output_proj_grad_l2_norm_post_clip = None
+        self._embedding_grad_l2_norm_raw = None
 
     @property
     def device(self) -> torch.device:
@@ -1513,10 +1542,14 @@ class OLMo(nn.Module):
         # shape: (batch_size, seq_len, d_model)
         x = self.transformer.wte(input_ids) if input_embeddings is None else input_embeddings  # type: ignore
         
-        # Scale up embedding gradients if enabled
-        if self._grad_provenance_enabled and self.training and x.requires_grad:
-            def embedding_grad_scale_hook(grad: torch.Tensor) -> torch.Tensor:
-                return grad * 2.0  # Scale up embedding gradients by 2x
+        # Scale embedding gradients if a scale factor is configured
+        if (self._grad_provenance_enabled and self.training and x.requires_grad 
+                and self._embedding_grad_scale_factor is not None):
+            scale_factor = self._embedding_grad_scale_factor
+            def embedding_grad_scale_hook(grad: torch.Tensor, scale: float = scale_factor) -> torch.Tensor:
+                # Capture raw norm before scaling
+                self._embedding_grad_l2_norm_raw = torch.linalg.vector_norm(grad, 2.0).item()
+                return grad * scale
             x.register_hook(embedding_grad_scale_hook)
 
         # Apply embedding layer norm.
@@ -1658,23 +1691,37 @@ class OLMo(nn.Module):
             if self._grad_provenance_enabled and self.training:
                 self._output_proj_input_cache = x.detach().clone()
 
-                # Register a hook on logits to capture output projection gradients
-                # and optionally scale them down by a fixed factor
+                # Register a hook on logits to capture output projection gradients,
+                # optionally clip them, and optionally apply a scale factor
                 def output_proj_grad_hook(grad: torch.Tensor) -> Optional[torch.Tensor]:
                     if self._output_proj_input_cache is not None:
                         self._compute_output_proj_gradient_metrics(grad, self._output_proj_input_cache)
 
-                    # Apply fixed scaling if enabled (scale_factor is the multiplier, e.g., 0.1 = divide by 10)
-                    if self._clip_output_proj_enabled:
-                        scale = 1.0  # No scaling (reference run)
-                        scaled_grad = grad * scale
-                        # Compute post-scale weight gradient norm
-                        weight_grad_norm = self._output_proj_grad_metrics.get("l2_norm", 0.0)
-                        self._output_proj_grad_l2_norm_post_clip = weight_grad_norm * scale
-                        return scaled_grad
-                    else:
-                        self._output_proj_grad_l2_norm_post_clip = self._output_proj_grad_metrics.get("l2_norm", 0.0)
-                    return None  # Don't modify gradient
+                    modified_grad = grad
+                    was_modified = False
+                    output_proj_grad_norm = self._output_proj_grad_metrics.get("l2_norm", 0.0)
+
+                    # Apply clipping if enabled and we have history to compute threshold
+                    if self._clip_output_proj_enabled and len(self._embedding_grad_norm_history) > 0:
+                        # Compute clip threshold from rolling average of embedding gradient norms
+                        rolling_avg = sum(self._embedding_grad_norm_history) / len(self._embedding_grad_norm_history)
+                        clip_threshold = rolling_avg * self._clip_scale_factor
+                        
+                        # Clip if norm exceeds threshold
+                        if output_proj_grad_norm > clip_threshold and output_proj_grad_norm > 0:
+                            clip_scale = clip_threshold / output_proj_grad_norm
+                            modified_grad = modified_grad * clip_scale
+                            output_proj_grad_norm = output_proj_grad_norm * clip_scale
+                            was_modified = True
+
+                    # Apply output projection gradient scale factor if configured
+                    if self._output_proj_grad_scale_factor is not None:
+                        modified_grad = modified_grad * self._output_proj_grad_scale_factor
+                        output_proj_grad_norm = output_proj_grad_norm * self._output_proj_grad_scale_factor
+                        was_modified = True
+
+                    self._output_proj_grad_l2_norm_post_clip = output_proj_grad_norm
+                    return modified_grad if was_modified else None
 
                 logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
                 logits.register_hook(output_proj_grad_hook)

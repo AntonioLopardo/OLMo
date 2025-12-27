@@ -448,6 +448,22 @@ class ModelConfig(BaseConfig):
     Only used when clip_output_proj_to_embedding_grad_norm=True.
     """
 
+    embedding_grad_scale_factor: Optional[float] = None
+    """
+    Scale factor applied to input embedding gradients during backpropagation.
+    When set (not None), gradients flowing back through the embedding lookup
+    are multiplied by this factor. Use values > 1.0 to amplify embedding gradients,
+    < 1.0 to reduce them. Only applies when track_embedding_gradient_provenance=True.
+    """
+
+    output_proj_grad_scale_factor: Optional[float] = None
+    """
+    Scale factor applied to output projection gradients during backpropagation.
+    When set (not None), gradients flowing back through F.linear(x, wte.weight)
+    are multiplied by this factor. Use values > 1.0 to amplify output proj gradients,
+    < 1.0 to reduce them. Only applies when track_embedding_gradient_provenance=True.
+    """
+
     eos_token_id: int = 50256
     """
     The ID of the end-of-sentence special token.
