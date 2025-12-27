@@ -1,0 +1,46 @@
+{
+  "os":  "Linux-6.8.0-87-generic-x86_64-with-glibc2.39",
+  "python":  "CPython 3.12.3",
+  "startedAt":  "2025-12-27T21:42:06.350760Z",
+  "args":  [
+    "/home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/config.yaml",
+    "--save_overwrite=true",
+    "--load_path=null",
+    "--reset_trainer_state=true"
+  ],
+  "program":  "/home/vec_norm/OLMo/scripts/train.py",
+  "codePath":  "scripts/train.py",
+  "codePathLocal":  "scripts/train.py",
+  "git":  {
+    "remote":  "https://github.com/allenai/OLMo.git",
+    "commit":  "1bdeb0d108c247675303db575e564eb7f805153a"
+  },
+  "email":  "antonio.lopardo@outlook.com",
+  "root":  "/home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/wandb",
+  "host":  "fine-work-echoes-fin-03",
+  "executable":  "/home/vec_norm/.venv/bin/python",
+  "cpu_count":  30,
+  "cpu_count_logical":  30,
+  "gpu":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "758162690048",
+      "used":  "669306044416"
+    }
+  },
+  "memory":  {
+    "total":  "94879395840"
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "memoryTotal":  "102641958912",
+      "cudaCores":  24064,
+      "architecture":  "Blackwell",
+      "uuid":  "GPU-76c830b5-1a62-9888-2e48-d2f691168f81"
+    }
+  ],
+  "cudaVersion":  "13.0",
+  "writerId":  "bvctxq27t8epmq0wjskbcoco6bq9tpb6"
+}

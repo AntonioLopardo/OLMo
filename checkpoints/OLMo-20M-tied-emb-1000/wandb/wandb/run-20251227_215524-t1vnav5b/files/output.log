@@ -1,0 +1,56 @@
+2025-12-27 21:55:27.177	fine-work-echoes-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-27 21:55:27.300	fine-work-echoes-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/train_data/global_indices.npy'
+2025-12-27 21:55:27.302	fine-work-echoes-fin-03:0	py.warnings:110	WARNING	/home/vec_norm/.venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:627: UserWarning: This DataLoader will create 32 worker processes in total. Our suggested max number of worker in current system is 30, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+2025-12-27 21:55:27.346	fine-work-echoes-fin-03:0	train:139	INFO	Building model...
+2025-12-27 21:55:27.380	fine-work-echoes-fin-03:0	olmo.model:1399	INFO	Initializing model parameters...
+2025-12-27 21:55:27.393	fine-work-echoes-fin-03:0	train:141	INFO	Total number of parameters: 21,266,432
+2025-12-27 21:55:27.394	fine-work-echoes-fin-03:0	train:142	INFO	Number of non-embedding parameters: 8,388,608
+2025-12-27 21:55:27.394	fine-work-echoes-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 87
+2025-12-27 21:55:27.394	fine-work-echoes-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-27 21:55:27.396	fine-work-echoes-fin-03:0	olmo.model:1399	INFO	Initializing model parameters...
+2025-12-27 21:55:27.397	fine-work-echoes-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 173
+2025-12-27 21:55:27.398	fine-work-echoes-fin-03:0	train:233	INFO	Model:
+2025-12-27 21:55:27.398	fine-work-echoes-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 256)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-7): 8 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=256, out_features=256, bias=False)
+          (ff_out): Linear(in_features=1024, out_features=256, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=256, out_features=768, bias=False)
+          (ff_proj): Linear(in_features=256, out_features=2048, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-27 21:55:27.398	fine-work-echoes-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-27 21:55:27.399	fine-work-echoes-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-27 21:55:27.406	fine-work-echoes-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-27 21:55:27.457	fine-work-echoes-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-27 21:55:27.457	fine-work-echoes-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-27 21:55:27.458	fine-work-echoes-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-27 21:55:27.678	fine-work-echoes-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/step0-unsharded
+2025-12-27 21:55:27.678	fine-work-echoes-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-27 21:55:27.895	fine-work-echoes-fin-03:0	olmo.train:412	INFO	Resetting learning rate...
+2025-12-27 21:55:27.896	fine-work-echoes-fin-03:0	olmo.train:424	INFO	Restoring RNG states...
+2025-12-27 21:55:28.080	fine-work-echoes-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-27 21:55:28.081	fine-work-echoes-fin-03:0	train:375	INFO	Starting training...
+2025-12-27 21:55:28.081	fine-work-echoes-fin-03:0	olmo.train:1146	INFO	Enabling gradient provenance tracking for tied embeddings
+2025-12-27 21:55:28.081	fine-work-echoes-fin-03:0	olmo.train:1153	INFO	Enabling output projection gradient clipping (window=5, scale=0.1)
+2025-12-27 21:55:28.081	fine-work-echoes-fin-03:0	olmo.model:1272	INFO	Output projection gradient clipping enabled (window=5, scale=0.1, threshold=rolling_avg*0.1)
+2025-12-27 21:55:28.081	fine-work-echoes-fin-03:0	olmo.train:1193	INFO	Gradient provenance CSV will be saved to /home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/gradient_provenance.csv
+2025-12-27 21:55:28.082	fine-work-echoes-fin-03:0	olmo.train:990	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=173.0
+2025-12-27 21:55:36.897	fine-work-echoes-fin-03:0	olmo.train:1482	INFO	Gradient provenance CSV file saved
+wandb: WARNING The `quiet` argument to `wandb.run.finish()` is deprecated, use `wandb.Settings(quiet=...)` to set this instead.
