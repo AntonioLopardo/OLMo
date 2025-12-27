@@ -1,0 +1,332 @@
+_wandb:
+    value:
+        cli_version: 0.23.1
+        e:
+            lwkkdyvcoc83xauktwwa7hvwvgmg8t4h:
+                args:
+                    - configs/custom/OLMo-20M-tied-emb-1000.yaml
+                    - --dry_run=true
+                    - --device_train_microbatch_size=512
+                    - --max_duration=5
+                codePath: scripts/train.py
+                codePathLocal: scripts/train.py
+                cpu_count: 240
+                cpu_count_logical: 240
+                cudaVersion: "13.0"
+                disk:
+                    /:
+                        total: "758162690048"
+                        used: "668654149632"
+                email: antonio.lopardo@outlook.com
+                executable: /home/vec_norm/.venv/bin/python
+                git:
+                    commit: d8d9417494f7ef9bc99bb196bc339b30459b4542
+                    remote: https://github.com/allenai/OLMo.git
+                gpu: NVIDIA B200
+                gpu_count: 8
+                gpu_nvidia:
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "192265846784"
+                      name: NVIDIA B200
+                      uuid: GPU-0f65d127-947b-7598-fb7e-8f9bf6c5865c
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "192265846784"
+                      name: NVIDIA B200
+                      uuid: GPU-8646d0e7-eead-5171-b0f4-e696dde6facd
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "192265846784"
+                      name: NVIDIA B200
+                      uuid: GPU-a7d9f37a-50f0-2eb6-34d2-98c06864d794
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "192265846784"
+                      name: NVIDIA B200
+                      uuid: GPU-beec8963-a0d8-ed53-6cb3-1fcf9df9c461
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "192265846784"
+                      name: NVIDIA B200
+                      uuid: GPU-fc0e0414-abd4-f225-cba1-dd48074f9d12
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "192265846784"
+                      name: NVIDIA B200
+                      uuid: GPU-76a63f2c-d810-22d3-14b5-786bcc474a30
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "192265846784"
+                      name: NVIDIA B200
+                      uuid: GPU-47eed8f6-b709-2773-b70d-b38c73133c89
+                    - architecture: Blackwell
+                      cudaCores: 18944
+                      memoryTotal: "192265846784"
+                      name: NVIDIA B200
+                      uuid: GPU-a2ef0541-c423-a4e8-5203-cac460fb6045
+                host: agile-bird-purrs-fin-03
+                memory:
+                    total: "1555232055296"
+                os: Linux-6.8.0-87-generic-x86_64-with-glibc2.39
+                program: /home/vec_norm/OLMo/scripts/train.py
+                python: CPython 3.12.3
+                root: /home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/wandb
+                startedAt: "2025-12-27T00:46:59.744536Z"
+                writerId: lwkkdyvcoc83xauktwwa7hvwvgmg8t4h
+        m: []
+        python_version: 3.12.3
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 51
+                - 53
+                - 71
+            "2":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 51
+                - 53
+                - 71
+            "3":
+                - 2
+                - 13
+                - 15
+                - 16
+            "4": 3.12.3
+            "5": 0.23.1
+            "6": 4.57.1
+            "10":
+                - 19
+            "12": 0.23.1
+            "13": linux-x86_64
+activation_checkpointing:
+    value: null
+auxiliary_loss_multiplier:
+    value: 0.0001
+canceled_check_interval:
+    value: 50
+compile:
+    value: null
+console_log_interval:
+    value: 10
+data:
+    value:
+        custom_dataset: null
+        datasets: null
+        drop_last: true
+        generate_attention_mask: false
+        generate_doc_lengths: false
+        instance_filter: null
+        label_mask_paths: null
+        memmap_dtype: uint16
+        num_workers: 32
+        pad_direction: right
+        paths:
+            - /home/vec_norm/OLMo/data/dolma_v1_7/dolma_v1_7_30B.npy
+        persistent_workers: true
+        pin_memory: true
+        prefetch_factor: 4
+        seed: null
+        timeout: 0
+ddp:
+    value:
+        find_unused_params: false
+        grad_sync_mode: batch
+device_eval_batch_size:
+    value: 8
+device_train_batch_size:
+    value: 512
+device_train_grad_accum:
+    value: 1
+device_train_microbatch_size:
+    value: 512
+distributed_strategy:
+    value: ddp
+dry_run:
+    value: true
+early_stopping_factor:
+    value: null
+epoch:
+    value: null
+eval_interval:
+    value: 500
+eval_on_load:
+    value: false
+eval_subset_num_batches:
+    value: -1
+evaluators:
+    value: []
+extra_steps_after_cancel:
+    value: 10
+fast_forward_batches:
+    value: null
+force_save_unsharded:
+    value: false
+fsdp:
+    value:
+        hybrid_sharding_num_model_replicas: null
+        precision: pure
+        sharding_strategy: FULL_SHARD
+        use_orig_params: true
+        wrapping_strategy: null
+fused_loss:
+    value: null
+gen1_gc_interval:
+    value: 1
+global_train_batch_size:
+    value: 512
+hf_datasets_cache_dir:
+    value: null
+load_path:
+    value: null
+load_path_sharded_checkpointer:
+    value: null
+max_duration:
+    value: 5
+max_grad_norm:
+    value: 1
+max_grad_norm_ratio:
+    value: null
+model:
+    value:
+        activation_type: swiglu
+        alibi: false
+        alibi_bias_max: 8
+        attention_dropout: 0
+        attention_layer_norm: false
+        attention_layer_norm_with_affine: false
+        bias_for_layer_norm: false
+        block_group_size: 1
+        block_type: sequential
+        clip_output_proj_to_embedding_grad_norm: true
+        clip_qkv: 8
+        d_model: 256
+        emb_init_std: null
+        embedding_dropout: 0
+        embedding_layer_norm: false
+        embedding_size: 50304
+        eos_token_id: 50279
+        flash_attention: true
+        include_bias: false
+        init_cutoff_factor: null
+        init_device: cuda
+        init_fn: mitchell
+        init_std: 0.02
+        layer_norm_eps: 1e-05
+        layer_norm_type: default
+        layer_norm_with_affine: false
+        max_sequence_length: 4096
+        mlp_hidden_size: null
+        mlp_ratio: 8
+        multi_query_attention: false
+        n_heads: 8
+        n_kv_heads: null
+        n_layers: 8
+        norm_after: false
+        output_proj_clip_scale_factor: 0.1
+        output_proj_clip_window_size: 5
+        pad_token_id: 1
+        precision: amp_bf16
+        residual_dropout: 0
+        rope: true
+        rope_full_precision: true
+        rope_theta: 10000
+        scale_emb_init: false
+        scale_logits: false
+        track_embedding_gradient_provenance: true
+        vocab_size: 50280
+        weight_tying: true
+module_outputs_save_steps:
+    value: null
+new_style_checkpoints:
+    value: null
+no_pre_train_checkpoint:
+    value: false
+optimizer:
+    value:
+        betas:
+            - 0.9
+            - 0.95
+        decay_embeddings: true
+        decay_norm_and_bias: true
+        eps: 1e-08
+        learning_rate: 0.0006
+        metrics_log_interval: 10
+        name: adamw
+        no_decay_norm_and_bias: null
+        record_update_metrics: false
+        selective_updates: false
+        weight_decay: 0.1
+precision:
+    value: amp_bf16
+python_profiling:
+    value: false
+remote_save_folder:
+    value: null
+reset_optimizer_state:
+    value: false
+reset_trainer_state:
+    value: false
+restore_dataloader:
+    value: true
+run_name:
+    value: OLMo-20M-tied-emb-1000
+save_data_indices:
+    value: true
+save_folder:
+    value: /home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000
+save_interval:
+    value: 1000
+save_interval_ephemeral:
+    value: null
+save_interval_unsharded:
+    value: 500
+save_num_checkpoints_to_keep:
+    value: 2
+save_num_unsharded_checkpoints_to_keep:
+    value: 2
+save_overwrite:
+    value: true
+scheduler:
+    value:
+        alpha_f: 0.1
+        grad_clip_warmup_factor: null
+        grad_clip_warmup_steps: null
+        name: cosine_with_warmup
+        t_max: null
+        t_warmup: 100
+        units: steps
+        warmup_min_lr: null
+seed:
+    value: 6198
+sharded_checkpointer:
+    value: torch_legacy
+single:
+    value:
+        device: auto
+softmax_auxiliary_loss:
+    value: false
+speed_monitor:
+    value:
+        gpu_flops_available: null
+        window_size: 20
+stop_after:
+    value: null
+stop_at:
+    value: null
+time_limit:
+    value: null
+tokenizer:
+    value:
+        identifier: tokenizers/allenai_eleuther-ai-gpt-neox-20b-pii-special.json
+        truncate_direction: right
+torch_profiling:
+    value: false
+try_load_latest_save:
+    value: false

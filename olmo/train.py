@@ -1146,18 +1146,32 @@ class Trainer:
             log.info("Enabling gradient provenance tracking for tied embeddings")
             self.model.enable_gradient_provenance_tracking()
             
+            # Enable output projection gradient clipping if configured.
+            if self.cfg.model.clip_output_proj_to_embedding_grad_norm:
+                window_size = self.cfg.model.output_proj_clip_window_size
+                scale_factor = self.cfg.model.output_proj_clip_scale_factor
+                log.info(f"Enabling output projection gradient clipping (window={window_size}, scale={scale_factor})")
+                self.model.enable_output_proj_gradient_clipping(
+                    window_size=window_size,
+                    scale_factor=scale_factor
+                )
+            
             # Initialize CSV file for gradient provenance metrics (only on rank 0)
             if get_global_rank() == 0:
                 csv_path = Path(self.cfg.save_folder) / "gradient_provenance.csv"
                 csv_path.parent.mkdir(parents=True, exist_ok=True)
                 self._grad_provenance_csv_file = open(csv_path, "w", newline="")
+                fieldnames = ["step", "loss", 
+                              "embedding_grad_l1_norm", "embedding_grad_l2_norm",
+                              "output_proj_grad_l1_norm", "output_proj_grad_l2_norm",
+                              "embedding_grad_mean", "output_proj_grad_mean",
+                              "embedding_grad_abs_mean", "output_proj_grad_abs_mean"]
+                # Add clipping columns if clipping is enabled
+                if self.cfg.model.clip_output_proj_to_embedding_grad_norm:
+                    fieldnames.extend(["embedding_grad_rolling_avg", "output_proj_clip_threshold", "output_proj_grad_l2_norm_post_clip"])
                 self._grad_provenance_csv_writer = csv.DictWriter(
                     self._grad_provenance_csv_file,
-                    fieldnames=["step", "loss", 
-                                "embedding_grad_l1_norm", "embedding_grad_l2_norm",
-                                "output_proj_grad_l1_norm", "output_proj_grad_l2_norm",
-                                "embedding_grad_mean", "output_proj_grad_mean",
-                                "embedding_grad_abs_mean", "output_proj_grad_abs_mean"]
+                    fieldnames=fieldnames
                 )
                 self._grad_provenance_csv_writer.writeheader()
                 self._grad_provenance_csv_file.flush()
@@ -1299,6 +1313,13 @@ class Trainer:
                             "embedding_grad_abs_mean": metrics.get("grad_provenance/embedding_grad_abs_mean", 0.0),
                             "output_proj_grad_abs_mean": metrics.get("grad_provenance/output_proj_grad_abs_mean", 0.0),
                         }
+                        # Add clipping columns only if clipping is enabled
+                        if self.cfg.model.clip_output_proj_to_embedding_grad_norm:
+                            csv_row.update({
+                                "embedding_grad_rolling_avg": metrics.get("grad_provenance/embedding_grad_rolling_avg", ""),
+                                "output_proj_clip_threshold": metrics.get("grad_provenance/output_proj_clip_threshold", ""),
+                                "output_proj_grad_l2_norm_post_clip": metrics.get("grad_provenance/output_proj_grad_l2_norm_post_clip", ""),
+                            })
                         self._grad_provenance_csv_writer.writerow(csv_row)
                         self._grad_provenance_csv_file.flush()
 

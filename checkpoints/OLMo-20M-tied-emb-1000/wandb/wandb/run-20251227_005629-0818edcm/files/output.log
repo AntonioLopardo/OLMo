@@ -1,0 +1,95 @@
+2025-12-27 00:56:32.545	agile-bird-purrs-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-27 00:56:32.679	agile-bird-purrs-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/train_data/global_indices.npy'
+2025-12-27 00:56:32.731	agile-bird-purrs-fin-03:0	train:139	INFO	Building model...
+2025-12-27 00:56:32.777	agile-bird-purrs-fin-03:0	olmo.model:1370	INFO	Initializing model parameters...
+2025-12-27 00:56:32.795	agile-bird-purrs-fin-03:0	train:141	INFO	Total number of parameters: 21,266,432
+2025-12-27 00:56:32.795	agile-bird-purrs-fin-03:0	train:142	INFO	Number of non-embedding parameters: 8,388,608
+2025-12-27 00:56:32.796	agile-bird-purrs-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 87
+2025-12-27 00:56:32.796	agile-bird-purrs-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-27 00:56:32.802	agile-bird-purrs-fin-03:0	olmo.model:1370	INFO	Initializing model parameters...
+2025-12-27 00:56:32.805	agile-bird-purrs-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 173
+2025-12-27 00:56:32.805	agile-bird-purrs-fin-03:0	train:233	INFO	Model:
+2025-12-27 00:56:32.805	agile-bird-purrs-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 256)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-7): 8 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=256, out_features=256, bias=False)
+          (ff_out): Linear(in_features=1024, out_features=256, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=256, out_features=768, bias=False)
+          (ff_proj): Linear(in_features=256, out_features=2048, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-27 00:56:32.806	agile-bird-purrs-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-27 00:56:32.806	agile-bird-purrs-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-27 00:56:33.317	agile-bird-purrs-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-27 00:56:33.374	agile-bird-purrs-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-27 00:56:33.375	agile-bird-purrs-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-27 00:56:33.376	agile-bird-purrs-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-27 00:56:34.175	agile-bird-purrs-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/step0-unsharded
+2025-12-27 00:56:34.175	agile-bird-purrs-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-27 00:56:34.517	agile-bird-purrs-fin-03:0	olmo.train:412	INFO	Resetting learning rate...
+2025-12-27 00:56:34.517	agile-bird-purrs-fin-03:0	olmo.train:424	INFO	Restoring RNG states...
+2025-12-27 00:56:34.781	agile-bird-purrs-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-27 00:56:34.782	agile-bird-purrs-fin-03:0	train:375	INFO	Starting training...
+2025-12-27 00:56:34.782	agile-bird-purrs-fin-03:0	olmo.train:1146	INFO	Enabling gradient provenance tracking for tied embeddings
+2025-12-27 00:56:34.782	agile-bird-purrs-fin-03:0	olmo.train:1153	INFO	Enabling output projection gradient clipping (window=5, scale=0.1)
+2025-12-27 00:56:34.782	agile-bird-purrs-fin-03:0	olmo.model:1267	INFO	Output projection gradient clipping enabled (window=5, scale=0.1, threshold=rolling_avg*0.1)
+2025-12-27 00:56:34.782	agile-bird-purrs-fin-03:0	olmo.train:1178	INFO	Gradient provenance CSV will be saved to /home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/gradient_provenance.csv
+2025-12-27 00:56:34.790	agile-bird-purrs-fin-03:0	olmo.train:990	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=173.0
+2025-12-27 00:56:50.408	agile-bird-purrs-fin-03:0	py.warnings:110	WARNING	sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+
+2025-12-27 00:56:57.085	agile-bird-purrs-fin-03:0	olmo.train:990	INFO	[step=10/1000,epoch=0]
+    optim/total_grad_norm=0.9906
+    train/CrossEntropyLoss=9.362
+    train/Perplexity=11,633
+    grad_provenance/embedding_grad_l1_norm=9.787
+    grad_provenance/embedding_grad_l2_norm=0.0061
+    grad_provenance/embedding_grad_mean=8.977193988179977e-17
+    grad_provenance/embedding_grad_abs_mean=1.166758352155739e-06
+    grad_provenance/output_proj_grad_l1_norm=41.28
+    grad_provenance/output_proj_grad_l2_norm=0.1152
+    grad_provenance/output_proj_grad_mean=3.810871702838309e-13
+    grad_provenance/output_proj_grad_abs_mean=3.205130042260862e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0057
+    grad_provenance/output_proj_clip_threshold=0.0006
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1152
+    throughput/total_tokens=20,971,520
+    throughput/total_training_Gflops=4,246,863
+    throughput/total_training_log_Gflops=15.26
+    throughput/device/tokens_per_second=472,191
+    throughput/device/batches_per_second=1.801
+    System/Peak GPU Memory (MB)=21,313
+2025-12-27 00:57:02.593	agile-bird-purrs-fin-03:0	olmo.train:990	INFO	[step=20/1000,epoch=0]
+    optim/total_grad_norm=1.631
+    train/CrossEntropyLoss=8.242
+    train/Perplexity=3,796
+    grad_provenance/embedding_grad_l1_norm=21.98
+    grad_provenance/embedding_grad_l2_norm=0.0118
+    grad_provenance/embedding_grad_mean=1.5959455978986625e-16
+    grad_provenance/embedding_grad_abs_mean=2.620019586174749e-06
+    grad_provenance/output_proj_grad_l1_norm=33.45
+    grad_provenance/output_proj_grad_l2_norm=0.1030
+    grad_provenance/output_proj_grad_mean=4.39091783223898e-14
+    grad_provenance/output_proj_grad_abs_mean=2.597553248051554e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0108
+    grad_provenance/output_proj_clip_threshold=0.0011
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1030
+    throughput/total_tokens=41,943,040
+    throughput/total_training_Gflops=8,493,727
+    throughput/total_training_log_Gflops=15.95
+    throughput/device/tokens_per_second=474,148
+    throughput/device/batches_per_second=1.809
+    System/Peak GPU Memory (MB)=21,313

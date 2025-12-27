@@ -1,0 +1,55 @@
+2025-12-27 00:55:34.163	agile-bird-purrs-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-27 00:55:34.298	agile-bird-purrs-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/train_data/global_indices.npy'
+2025-12-27 00:55:34.349	agile-bird-purrs-fin-03:0	train:139	INFO	Building model...
+2025-12-27 00:55:34.394	agile-bird-purrs-fin-03:0	olmo.model:1370	INFO	Initializing model parameters...
+2025-12-27 00:55:34.411	agile-bird-purrs-fin-03:0	train:141	INFO	Total number of parameters: 21,266,432
+2025-12-27 00:55:34.411	agile-bird-purrs-fin-03:0	train:142	INFO	Number of non-embedding parameters: 8,388,608
+2025-12-27 00:55:34.412	agile-bird-purrs-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 87
+2025-12-27 00:55:34.412	agile-bird-purrs-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-27 00:55:34.418	agile-bird-purrs-fin-03:0	olmo.model:1370	INFO	Initializing model parameters...
+2025-12-27 00:55:34.421	agile-bird-purrs-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 173
+2025-12-27 00:55:34.421	agile-bird-purrs-fin-03:0	train:233	INFO	Model:
+2025-12-27 00:55:34.421	agile-bird-purrs-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 256)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-7): 8 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=256, out_features=256, bias=False)
+          (ff_out): Linear(in_features=1024, out_features=256, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=256, out_features=768, bias=False)
+          (ff_proj): Linear(in_features=256, out_features=2048, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-27 00:55:34.421	agile-bird-purrs-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-27 00:55:34.422	agile-bird-purrs-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-27 00:55:34.931	agile-bird-purrs-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-27 00:55:34.989	agile-bird-purrs-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-27 00:55:34.990	agile-bird-purrs-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-27 00:55:34.991	agile-bird-purrs-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-27 00:55:35.803	agile-bird-purrs-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/step0-unsharded
+2025-12-27 00:55:35.804	agile-bird-purrs-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-27 00:55:36.161	agile-bird-purrs-fin-03:0	olmo.train:412	INFO	Resetting learning rate...
+2025-12-27 00:55:36.161	agile-bird-purrs-fin-03:0	olmo.train:424	INFO	Restoring RNG states...
+2025-12-27 00:55:36.457	agile-bird-purrs-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-27 00:55:36.457	agile-bird-purrs-fin-03:0	train:375	INFO	Starting training...
+2025-12-27 00:55:36.458	agile-bird-purrs-fin-03:0	olmo.train:1146	INFO	Enabling gradient provenance tracking for tied embeddings
+2025-12-27 00:55:36.458	agile-bird-purrs-fin-03:0	olmo.train:1153	INFO	Enabling output projection gradient clipping (window=5, scale=0.1)
+2025-12-27 00:55:36.458	agile-bird-purrs-fin-03:0	olmo.model:1267	INFO	Output projection gradient clipping enabled (window=5, scale=0.1, threshold=rolling_avg*0.1)
+2025-12-27 00:55:36.458	agile-bird-purrs-fin-03:0	olmo.train:1178	INFO	Gradient provenance CSV will be saved to /home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/gradient_provenance.csv
+2025-12-27 00:55:36.466	agile-bird-purrs-fin-03:0	olmo.train:990	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=173.0
+2025-12-27 00:55:51.045	agile-bird-purrs-fin-03:0	py.warnings:110	WARNING	sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+
+2025-12-27 00:55:54.101	agile-bird-purrs-fin-03:0	olmo.train:1458	INFO	Gradient provenance CSV file saved
+wandb: WARNING The `quiet` argument to `wandb.run.finish()` is deprecated, use `wandb.Settings(quiet=...)` to set this instead.

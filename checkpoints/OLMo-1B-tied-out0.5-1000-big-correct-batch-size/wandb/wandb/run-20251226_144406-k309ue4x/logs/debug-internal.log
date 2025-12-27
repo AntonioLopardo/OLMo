@@ -1,0 +1,18 @@
+{"time":"2025-12-26T14:44:07.046169296Z","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2025-12-26T14:44:07.522361716Z","level":"INFO","msg":"stream: created new stream","id":"k309ue4x"}
+{"time":"2025-12-26T14:44:07.523207282Z","level":"INFO","msg":"stream: started","id":"k309ue4x"}
+{"time":"2025-12-26T14:44:07.523252642Z","level":"INFO","msg":"handler: started","stream_id":"k309ue4x"}
+{"time":"2025-12-26T14:44:07.523288342Z","level":"INFO","msg":"sender: started","stream_id":"k309ue4x"}
+{"time":"2025-12-26T14:44:07.523289282Z","level":"INFO","msg":"writer: started","stream_id":"k309ue4x"}
+{"time":"2025-12-26T16:03:03.631529865Z","level":"ERROR","msg":"writer: failed to save record: transactionlog: error writing: write /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-out0.5-1000/wandb/wandb/run-20251226_144406-k309ue4x/run-k309ue4x.wandb: no space left on device"}
+{"time":"2025-12-26T16:03:03.635638247Z","level":"ERROR","msg":"writer: failed to save record: transactionlog: error starting next record: write /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-out0.5-1000/wandb/wandb/run-20251226_144406-k309ue4x/run-k309ue4x.wandb: no space left on device"}
+{"time":"2025-12-26T16:03:03.635897435Z","level":"ERROR","msg":"writer: failed to save record: transactionlog: error starting next record: write /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-out0.5-1000/wandb/wandb/run-20251226_144406-k309ue4x/run-k309ue4x.wandb: no space left on device"}
+{"time":"2025-12-26T16:03:03.65057925Z","level":"ERROR","msg":"sender: failed to upload run summary: write /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-out0.5-1000/wandb/wandb/run-20251226_144406-k309ue4x/files/wandb-summary.json: no space left on device"}
+{"time":"2025-12-26T16:03:03.940085997Z","level":"ERROR","msg":"sender: failed to upload run config: write /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-out0.5-1000/wandb/wandb/run-20251226_144406-k309ue4x/files/config.yaml: no space left on device"}
+{"time":"2025-12-26T16:03:04.484890606Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-26T16:03:04.834100175Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-12-26T16:03:04.841037941Z","level":"INFO","msg":"stream: closing","id":"k309ue4x"}
+{"time":"2025-12-26T16:03:04.841044671Z","level":"INFO","msg":"handler: closed","stream_id":"k309ue4x"}
+{"time":"2025-12-26T16:03:04.841065521Z","level":"ERROR","msg":"writer: failed closing store: transactionlog: error closing writer: write /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-out0.5-1000/wandb/wandb/run-20251226_144406-k309ue4x/run-k309ue4x.wandb: no space left on device"}
+{"time":"2025-12-26T16:03:04.841238409Z","level":"INFO","msg":"sender: closed","stream_id":"k309ue4x"}
+{"time":"2025-12-26T16:03:04.841254429Z","level":"INFO","msg":"stream: closed","id":"k309ue4x"}

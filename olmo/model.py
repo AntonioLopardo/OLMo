@@ -1080,6 +1080,13 @@ class OLMo(nn.Module):
         self._output_proj_input_cache: Optional[torch.Tensor] = None
         self._grad_provenance_hooks: List[torch.utils.hooks.RemovableHandle] = []
 
+        # Output projection gradient clipping based on embedding gradient norm
+        self._clip_output_proj_enabled = False
+        self._embedding_grad_norm_history: List[float] = []  # Rolling history of embedding grad norms
+        self._clip_window_size: int = 5  # Number of steps for rolling average
+        self._clip_scale_factor: float = 0.1  # Clip to 1/10 of rolling average
+        self._output_proj_grad_l2_norm_post_clip: Optional[float] = None  # Post-clipping L2 norm
+
         # Validate config.
         if self.config.alibi and self.config.flash_attention:
             raise OLMoConfigurationError("ALiBi is currently not supported with FlashAttention")
@@ -1198,14 +1205,21 @@ class OLMo(nn.Module):
             # This is a sparse operation, but we can compute the norm by looking at grad_output
             if grad_output[0] is not None:
                 grad = grad_output[0]
+                l2_norm = torch.linalg.vector_norm(grad, 2.0).item()
                 # The embedding gradient is scattered into wte.weight based on input_ids
                 # For scalar metrics, we can use the output gradient directly
                 self._embedding_grad_metrics = {
                     "l1_norm": torch.linalg.vector_norm(grad, 1.0).item(),
-                    "l2_norm": torch.linalg.vector_norm(grad, 2.0).item(),
+                    "l2_norm": l2_norm,
                     "mean": grad.mean().item(),
                     "abs_mean": grad.abs().mean().item(),
                 }
+                # Update rolling history for output projection gradient clipping
+                if self._clip_output_proj_enabled:
+                    self._embedding_grad_norm_history.append(l2_norm)
+                    # Keep only the last N values (window size)
+                    if len(self._embedding_grad_norm_history) > self._clip_window_size:
+                        self._embedding_grad_norm_history.pop(0)
 
         hook = self.transformer.wte.register_full_backward_hook(embedding_backward_hook)
         self._grad_provenance_hooks.append(hook)
@@ -1219,6 +1233,46 @@ class OLMo(nn.Module):
         self._embedding_grad_metrics = {}
         self._output_proj_grad_metrics = {}
         self._output_proj_input_cache = None
+
+    def enable_output_proj_gradient_clipping(
+        self, window_size: int = 5, scale_factor: float = 0.1
+    ) -> None:
+        """
+        Enable clipping of output projection gradients based on embedding gradient norm.
+
+        When enabled, the gradient flowing through the output projection (F.linear with wte.weight)
+        will be scaled down if its norm exceeds a threshold based on the rolling average of
+        input embedding gradient norms.
+
+        Args:
+            window_size: Number of previous steps to use for rolling average (default: 5)
+            scale_factor: Clip threshold = rolling_avg * scale_factor (default: 0.1 = 1/10)
+
+        Note: This requires gradient provenance tracking to be enabled. The clipping uses
+        the rolling average of previous embedding gradient norms since the embedding gradient
+        is computed after the output projection gradient in the backward pass.
+        """
+        if not self.config.weight_tying:
+            log.warning("Output proj gradient clipping is only meaningful with weight_tying=True")
+            return
+
+        # Enable gradient provenance tracking if not already enabled
+        if not self._grad_provenance_enabled:
+            self.enable_gradient_provenance_tracking()
+
+        self._clip_output_proj_enabled = True
+        self._clip_window_size = window_size
+        self._clip_scale_factor = scale_factor
+        self._embedding_grad_norm_history = []
+        log.info(
+            f"Output projection gradient clipping enabled "
+            f"(window={window_size}, scale={scale_factor}, threshold=rolling_avg*{scale_factor})"
+        )
+
+    def disable_output_proj_gradient_clipping(self) -> None:
+        """Disable output projection gradient clipping."""
+        self._clip_output_proj_enabled = False
+        self._embedding_grad_norm_history = []
 
     def _compute_output_proj_gradient_metrics(self, grad_output: torch.Tensor, cached_input: torch.Tensor) -> None:
         """
@@ -1266,6 +1320,7 @@ class OLMo(nn.Module):
         - output_proj_grad_norm: L2 norm of gradients from output projection
         - output_proj_grad_mean: Mean of gradients from output projection
         - output_proj_grad_abs_mean: Mean of absolute gradients from output projection
+        - output_proj_clip_ratio: Ratio by which output proj grad was clipped (1.0 = no clipping)
 
         Returns empty dict if tracking is not enabled or no backward pass has occurred.
         """
@@ -1286,6 +1341,14 @@ class OLMo(nn.Module):
             metrics["output_proj_grad_mean"] = self._output_proj_grad_metrics.get("mean", 0.0)
             metrics["output_proj_grad_abs_mean"] = self._output_proj_grad_metrics.get("abs_mean", 0.0)
 
+        # Add clipping info if enabled
+        if self._clip_output_proj_enabled and len(self._embedding_grad_norm_history) > 0:
+            rolling_avg = sum(self._embedding_grad_norm_history) / len(self._embedding_grad_norm_history)
+            metrics["embedding_grad_rolling_avg"] = rolling_avg
+            metrics["output_proj_clip_threshold"] = rolling_avg * self._clip_scale_factor
+            if self._output_proj_grad_l2_norm_post_clip is not None:
+                metrics["output_proj_grad_l2_norm_post_clip"] = self._output_proj_grad_l2_norm_post_clip
+
         return metrics
 
     def clear_gradient_provenance_metrics(self) -> None:
@@ -1293,6 +1356,7 @@ class OLMo(nn.Module):
         self._embedding_grad_metrics = {}
         self._output_proj_grad_metrics = {}
         self._output_proj_input_cache = None
+        self._output_proj_grad_l2_norm_post_clip = None
 
     @property
     def device(self) -> torch.device:
@@ -1448,6 +1512,12 @@ class OLMo(nn.Module):
         # Get embeddings of input.
         # shape: (batch_size, seq_len, d_model)
         x = self.transformer.wte(input_ids) if input_embeddings is None else input_embeddings  # type: ignore
+        
+        # Scale up embedding gradients if enabled
+        if self._grad_provenance_enabled and self.training and x.requires_grad:
+            def embedding_grad_scale_hook(grad: torch.Tensor) -> torch.Tensor:
+                return grad * 2.0  # Scale up embedding gradients by 2x
+            x.register_hook(embedding_grad_scale_hook)
 
         # Apply embedding layer norm.
         if self.config.embedding_layer_norm:
@@ -1589,9 +1659,22 @@ class OLMo(nn.Module):
                 self._output_proj_input_cache = x.detach().clone()
 
                 # Register a hook on logits to capture output projection gradients
-                def output_proj_grad_hook(grad: torch.Tensor) -> None:
+                # and optionally scale them down by a fixed factor
+                def output_proj_grad_hook(grad: torch.Tensor) -> Optional[torch.Tensor]:
                     if self._output_proj_input_cache is not None:
                         self._compute_output_proj_gradient_metrics(grad, self._output_proj_input_cache)
+
+                    # Apply fixed scaling if enabled (scale_factor is the multiplier, e.g., 0.1 = divide by 10)
+                    if self._clip_output_proj_enabled:
+                        scale = 1.0  # No scaling (reference run)
+                        scaled_grad = grad * scale
+                        # Compute post-scale weight gradient norm
+                        weight_grad_norm = self._output_proj_grad_metrics.get("l2_norm", 0.0)
+                        self._output_proj_grad_l2_norm_post_clip = weight_grad_norm * scale
+                        return scaled_grad
+                    else:
+                        self._output_proj_grad_l2_norm_post_clip = self._output_proj_grad_metrics.get("l2_norm", 0.0)
+                    return None  # Don't modify gradient
 
                 logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
                 logits.register_hook(output_proj_grad_hook)

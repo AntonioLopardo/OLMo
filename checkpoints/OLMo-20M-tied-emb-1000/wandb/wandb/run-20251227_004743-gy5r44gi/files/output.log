@@ -1,0 +1,36 @@
+2025-12-27 00:47:46.890	agile-bird-purrs-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-27 00:47:47.016	agile-bird-purrs-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-20M-tied-emb-1000/train_data/global_indices.npy'
+2025-12-27 00:47:47.057	agile-bird-purrs-fin-03:0	train:139	INFO	Building model...
+2025-12-27 00:47:47.095	agile-bird-purrs-fin-03:0	olmo.model:1370	INFO	Initializing model parameters...
+2025-12-27 00:47:47.109	agile-bird-purrs-fin-03:0	train:141	INFO	Total number of parameters: 21,266,432
+2025-12-27 00:47:47.109	agile-bird-purrs-fin-03:0	train:142	INFO	Number of non-embedding parameters: 8,388,608
+2025-12-27 00:47:47.110	agile-bird-purrs-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 87
+2025-12-27 00:47:47.110	agile-bird-purrs-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-27 00:47:47.112	agile-bird-purrs-fin-03:0	olmo.model:1370	INFO	Initializing model parameters...
+2025-12-27 00:47:47.113	agile-bird-purrs-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 173
+2025-12-27 00:47:47.113	agile-bird-purrs-fin-03:0	train:233	INFO	Model:
+2025-12-27 00:47:47.113	agile-bird-purrs-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 256)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-7): 8 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=256, out_features=256, bias=False)
+          (ff_out): Linear(in_features=1024, out_features=256, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=256, out_features=768, bias=False)
+          (ff_proj): Linear(in_features=256, out_features=2048, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-27 00:47:47.113	agile-bird-purrs-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-27 00:47:47.114	agile-bird-purrs-fin-03:0	train:379	INFO	Dry run complete
+wandb: WARNING The `quiet` argument to `wandb.run.finish()` is deprecated, use `wandb.Settings(quiet=...)` to set this instead.

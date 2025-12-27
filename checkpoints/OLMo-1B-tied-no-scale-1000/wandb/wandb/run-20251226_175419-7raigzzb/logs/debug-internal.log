@@ -1,0 +1,13 @@
+{"time":"2025-12-26T17:54:19.525130556Z","level":"INFO","msg":"stream: starting","core version":"0.23.1"}
+{"time":"2025-12-26T17:54:19.822553724Z","level":"INFO","msg":"stream: created new stream","id":"7raigzzb"}
+{"time":"2025-12-26T17:54:19.822609763Z","level":"INFO","msg":"handler: started","stream_id":"7raigzzb"}
+{"time":"2025-12-26T17:54:19.822638493Z","level":"INFO","msg":"stream: started","id":"7raigzzb"}
+{"time":"2025-12-26T17:54:19.822647953Z","level":"INFO","msg":"writer: started","stream_id":"7raigzzb"}
+{"time":"2025-12-26T17:54:19.822669353Z","level":"INFO","msg":"sender: started","stream_id":"7raigzzb"}
+{"time":"2025-12-26T18:07:10.681631949Z","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/antoniolopardo/VecNorm/7raigzzb/file_stream\": dial tcp: lookup api.wandb.ai on 127.0.0.53:53: read udp 127.0.0.1:42744->127.0.0.53:53: i/o timeout"}
+{"time":"2025-12-26T19:14:10.572630618Z","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-12-26T19:14:11.116198412Z","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-12-26T19:14:11.132412772Z","level":"INFO","msg":"stream: closing","id":"7raigzzb"}
+{"time":"2025-12-26T19:14:11.132449482Z","level":"INFO","msg":"handler: closed","stream_id":"7raigzzb"}
+{"time":"2025-12-26T19:14:11.132592079Z","level":"INFO","msg":"sender: closed","stream_id":"7raigzzb"}
+{"time":"2025-12-26T19:14:11.132619829Z","level":"INFO","msg":"stream: closed","id":"7raigzzb"}

@@ -427,6 +427,27 @@ class ModelConfig(BaseConfig):
     without modifying training behavior.
     """
 
+    clip_output_proj_to_embedding_grad_norm: bool = False
+    """
+    When enabled with weight_tying, clip the output projection gradients so their norm
+    does not exceed the input embedding gradient norm from the previous step.
+    This helps balance the gradient contributions from input embeddings vs output projection.
+    Requires track_embedding_gradient_provenance=True.
+    """
+
+    output_proj_clip_window_size: int = 5
+    """
+    Number of steps to use for the rolling average of embedding gradient norms.
+    Only used when clip_output_proj_to_embedding_grad_norm=True.
+    """
+
+    output_proj_clip_scale_factor: float = 0.1
+    """
+    Scale factor for the clip threshold. The clip threshold is:
+    rolling_average_of_embedding_grad_norms * scale_factor.
+    Only used when clip_output_proj_to_embedding_grad_norm=True.
+    """
+
     eos_token_id: int = 50256
     """
     The ID of the end-of-sentence special token.

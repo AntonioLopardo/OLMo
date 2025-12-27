@@ -1,0 +1,2260 @@
+W1226 17:54:02.210000 99496 torch/distributed/run.py:803] 
+W1226 17:54:02.210000 99496 torch/distributed/run.py:803] *****************************************
+W1226 17:54:02.210000 99496 torch/distributed/run.py:803] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W1226 17:54:02.210000 99496 torch/distributed/run.py:803] *****************************************
+2025-12-26 17:54:18.123	ripe-sun-crunches-fin-03:0	train:417	INFO	CLI environment prepared
+2025-12-26 17:54:18.828	ripe-sun-crunches-fin-03:0	train:97	INFO	Configuration:
+2025-12-26 17:54:18.828	ripe-sun-crunches-fin-03:0	train:98	INFO	TrainConfig(run_name='OLMo-1B-tied-no-scale-1000', seed=6198, epoch=None, dry_run=False, model=ModelConfig(d_model=2048, n_heads=16, n_kv_heads=None, clip_qkv=8.0, n_layers=16, mlp_ratio=8, mlp_hidden_size=None, activation_type='swiglu', block_type='sequential', block_group_size=1, alibi=False, alibi_bias_max=8.0, rope=True, rope_full_precision=True, rope_theta=10000, flash_attention=True, attention_dropout=0.0, multi_query_attention=False, attention_layer_norm=False, residual_dropout=0.0, embedding_dropout=0.0, embedding_layer_norm=False, layer_norm_type='default', layer_norm_with_affine=False, layer_norm_eps=1e-05, attention_layer_norm_with_affine=False, max_sequence_length=4096, include_bias=False, bias_for_layer_norm=False, scale_logits=False, vocab_size=50280, embedding_size=50304, weight_tying=True, track_embedding_gradient_provenance=True, clip_output_proj_to_embedding_grad_norm=True, output_proj_clip_window_size=5, output_proj_clip_scale_factor=0.1, eos_token_id=50279, pad_token_id=1, init_device='cuda', init_fn='mitchell', init_std=0.02, init_cutoff_factor=None, precision='amp_bf16', scale_emb_init=False, emb_init_std=None, norm_after=False), optimizer=OptimizerConfig(name='adamw', learning_rate=0.0003, weight_decay=0.1, betas=(0.9, 0.95), eps=1e-05, no_decay_norm_and_bias=None, selective_updates=False, decay_norm_and_bias=True, decay_embeddings=True, metrics_log_interval=10, record_update_metrics=False), scheduler=SchedulerConfig(name='cosine_with_warmup', units='steps', t_warmup=100, t_max=None, alpha_f=0.1, grad_clip_warmup_steps=None, grad_clip_warmup_factor=None, warmup_min_lr=None), data=DataConfig(paths=['/home/vec_norm/OLMo/data/dolma_v1_7/dolma_v1_7_30B.npy'], memmap_dtype='uint16', datasets=None, label_mask_paths=None, pad_direction='right', generate_attention_mask=False, generate_doc_lengths=False, num_workers=32, drop_last=True, pin_memory=True, prefetch_factor=4, persistent_workers=True, timeout=0, seed=None, instance_filter=None, custom_dataset=None), restore_dataloader=True, fast_forward_batches=None, evaluators=[], eval_interval=500, tokenizer=TokenizerConfig(identifier='tokenizers/allenai_eleuther-ai-gpt-neox-20b-pii-special.json', truncate_direction='right'), save_folder='/home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-no-scale-1000', remote_save_folder=None, canceled_check_interval=50, save_interval=1000, save_interval_unsharded=500, save_interval_ephemeral=None, save_num_checkpoints_to_keep=2, save_num_unsharded_checkpoints_to_keep=2, save_overwrite=True, force_save_unsharded=False, no_pre_train_checkpoint=False, load_path=None, load_path_sharded_checkpointer=None, try_load_latest_save=False, reset_optimizer_state=False, reset_trainer_state=False, sharded_checkpointer='torch_legacy', new_style_checkpoints=None, max_duration=1000, global_train_batch_size=512, device_train_batch_size=64, device_train_microbatch_size=8, device_eval_batch_size=8, eval_subset_num_batches=-1, eval_on_load=False, device_train_grad_accum=8, max_grad_norm=1.0, max_grad_norm_ratio=None, precision='amp_bf16', wandb=WandbConfig(project='VecNorm', entity='antoniolopardo', group=None, name='OLMo-1B-tied-no-scale-1000', tags=['grad-provenance', 'grad-scaling', 'experiment', '1000-steps', 'tied'], log_artifacts=False, rank_zero_only=True, log_interval=1), speed_monitor=SpeedMonitorConfig(window_size=20, gpu_flops_available=None), console_log_interval=10, gen1_gc_interval=1, compile=None, distributed_strategy='ddp', fsdp=FSDPConfig(use_orig_params=True, sharding_strategy=<ShardingStrategy.FULL_SHARD: 1>, wrapping_strategy=None, precision='pure', hybrid_sharding_num_model_replicas=None), ddp=DDPConfig(grad_sync_mode='batch', find_unused_params=False), single=SingleGPUConfig(device='auto'), softmax_auxiliary_loss=False, auxiliary_loss_multiplier=0.0001, time_limit=None, extra_steps_after_cancel=10, early_stopping_factor=None, save_data_indices=True, python_profiling=False, torch_profiling=False, stop_at=None, stop_after=None, activation_checkpointing=None, fused_loss=None, hf_datasets_cache_dir=None, module_outputs_save_steps=None)
+2025-12-26 17:54:18.828	ripe-sun-crunches-fin-03:0	train:105	INFO	Saving config to /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-no-scale-1000/config.yaml
+wandb: Currently logged in as: antoniolopardo to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run 7raigzzb
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-no-scale-1000/wandb/wandb/run-20251226_175419-7raigzzb
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run OLMo-1B-tied-no-scale-1000
+wandb: ⭐️ View project at https://wandb.ai/antoniolopardo/VecNorm
+wandb: 🚀 View run at https://wandb.ai/antoniolopardo/VecNorm/runs/7raigzzb
+2025-12-26 17:54:22.327	ripe-sun-crunches-fin-03:0	olmo.data.iterable_dataset:79	INFO	Saving global data order indices...
+2025-12-26 17:54:22.485	ripe-sun-crunches-fin-03:0	olmo.data.iterable_dataset:88	INFO	Global data order indices saved to '/home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-no-scale-1000/train_data/global_indices.npy'
+2025-12-26 17:54:22.591	ripe-sun-crunches-fin-03:0	train:139	INFO	Building model...
+2025-12-26 17:54:22.672	ripe-sun-crunches-fin-03:0	olmo.model:1370	INFO	Initializing model parameters...
+2025-12-26 17:54:22.696	ripe-sun-crunches-fin-03:0	train:141	INFO	Total number of parameters: 1,176,764,416
+2025-12-26 17:54:22.696	ripe-sun-crunches-fin-03:0	train:142	INFO	Number of non-embedding parameters: 1,073,741,824
+2025-12-26 17:54:22.700	ripe-sun-crunches-fin-03:0	train:143	INFO	Peak GPU Memory (MB) before ddp: 4712
+2025-12-26 17:54:22.701	ripe-sun-crunches-fin-03:0	train:155	INFO	Wrapping model with DDP...
+2025-12-26 17:54:22.709	ripe-sun-crunches-fin-03:0	olmo.model:1370	INFO	Initializing model parameters...
+2025-12-26 17:54:22.725	ripe-sun-crunches-fin-03:0	train:232	INFO	Peak GPU Memory (MB) after ddp: 9420
+2025-12-26 17:54:22.725	ripe-sun-crunches-fin-03:0	train:233	INFO	Model:
+2025-12-26 17:54:22.725	ripe-sun-crunches-fin-03:0	train:234	INFO	DistributedDataParallel(
+  (module): OLMo(
+    (transformer): ModuleDict(
+      (wte): Embedding(50304, 2048)
+      (emb_drop): Dropout(p=0.0, inplace=False)
+      (ln_f): LayerNorm()
+      (blocks): ModuleList(
+        (0-15): 16 x OLMoSequentialBlock(
+          (dropout): Dropout(p=0.0, inplace=False)
+          (act): SwiGLU()
+          (attn_out): Linear(in_features=2048, out_features=2048, bias=False)
+          (ff_out): Linear(in_features=8192, out_features=2048, bias=False)
+          (rotary_emb): RotaryEmbedding()
+          (att_proj): Linear(in_features=2048, out_features=6144, bias=False)
+          (ff_proj): Linear(in_features=2048, out_features=16384, bias=False)
+          (attn_norm): LayerNorm()
+          (ff_norm): LayerNorm()
+        )
+      )
+    )
+  )
+)
+2025-12-26 17:54:22.727	ripe-sun-crunches-fin-03:0	olmo.optim:944	INFO	Constructing optimizer with 1 param groups
+2025-12-26 17:54:22.727	ripe-sun-crunches-fin-03:0	train:335	INFO	Saving pre-train checkpoint...
+2025-12-26 17:54:23.230	ripe-sun-crunches-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-26 17:54:27.540	ripe-sun-crunches-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-26 17:54:27.541	ripe-sun-crunches-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-26 17:54:27.542	ripe-sun-crunches-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-26 17:54:28.431	ripe-sun-crunches-fin-03:0	train:337	INFO	Checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-no-scale-1000/step0-unsharded
+2025-12-26 17:54:28.431	ripe-sun-crunches-fin-03:0	train:340	INFO	Attempting to load pre-train checkpoint...
+2025-12-26 17:54:31.130	ripe-sun-crunches-fin-03:0	olmo.train:412	INFO	Resetting learning rate...
+2025-12-26 17:54:31.130	ripe-sun-crunches-fin-03:0	olmo.train:424	INFO	Restoring RNG states...
+2025-12-26 17:54:31.490	ripe-sun-crunches-fin-03:0	train:344	INFO	Checkpoint successfully loaded
+2025-12-26 17:54:31.490	ripe-sun-crunches-fin-03:0	train:375	INFO	Starting training...
+2025-12-26 17:54:31.491	ripe-sun-crunches-fin-03:0	olmo.train:1146	INFO	Enabling gradient provenance tracking for tied embeddings
+2025-12-26 17:54:31.491	ripe-sun-crunches-fin-03:0	olmo.train:1153	INFO	Enabling output projection gradient clipping (window=5, scale=0.1)
+2025-12-26 17:54:31.491	ripe-sun-crunches-fin-03:0	olmo.model:1267	INFO	Output projection gradient clipping enabled (window=5, scale=0.1, threshold=rolling_avg*0.1)
+2025-12-26 17:54:31.492	ripe-sun-crunches-fin-03:0	olmo.train:1178	INFO	Gradient provenance CSV will be saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-no-scale-1000/gradient_provenance.csv
+2025-12-26 17:54:31.493	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	Pre-train system metrics
+    System/Peak GPU Memory (MB)=9,420
+2025-12-26 17:54:46.216	ripe-sun-crunches-fin-03:0	py.warnings:110	WARNING	sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+
+2025-12-26 17:54:46.399	ripe-sun-crunches-fin-03:6	py.warnings:110	WARNING	sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+
+2025-12-26 17:54:46.834	ripe-sun-crunches-fin-03:3	py.warnings:110	WARNING	sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+
+2025-12-26 17:54:47.004	ripe-sun-crunches-fin-03:1	py.warnings:110	WARNING	sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+
+2025-12-26 17:54:47.118	ripe-sun-crunches-fin-03:4	py.warnings:110	WARNING	sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+
+2025-12-26 17:54:47.373	ripe-sun-crunches-fin-03:7	py.warnings:110	WARNING	sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+
+2025-12-26 17:54:47.621	ripe-sun-crunches-fin-03:2	py.warnings:110	WARNING	sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+
+2025-12-26 17:54:47.635	ripe-sun-crunches-fin-03:5	py.warnings:110	WARNING	sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+
+2025-12-26 17:55:33.787	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=10/1000,epoch=0]
+    optim/total_grad_norm=6.914
+    train/CrossEntropyLoss=9.099
+    train/Perplexity=8,949
+    grad_provenance/embedding_grad_l1_norm=69.64
+    grad_provenance/embedding_grad_l2_norm=0.0368
+    grad_provenance/embedding_grad_mean=1.1828645701816853e-16
+    grad_provenance/embedding_grad_abs_mean=1.0377153785157134e-06
+    grad_provenance/output_proj_grad_l1_norm=301.2
+    grad_provenance/output_proj_grad_l2_norm=0.4825
+    grad_provenance/output_proj_grad_mean=2.642559565266267e-13
+    grad_provenance/output_proj_grad_abs_mean=2.9236173304525437e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0196
+    grad_provenance/output_proj_clip_threshold=0.0020
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.4825
+    throughput/total_tokens=20,971,520
+    throughput/total_training_Gflops=177,527,147
+    throughput/total_training_log_Gflops=18.99
+    throughput/device/tokens_per_second=56,503
+    throughput/device/batches_per_second=0.2155
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 17:56:20.160	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=20/1000,epoch=0]
+    optim/total_grad_norm=2.975
+    train/CrossEntropyLoss=8.370
+    train/Perplexity=4,315
+    grad_provenance/embedding_grad_l1_norm=22.43
+    grad_provenance/embedding_grad_l2_norm=0.0062
+    grad_provenance/embedding_grad_mean=2.72405795836983e-17
+    grad_provenance/embedding_grad_abs_mean=3.342860281918547e-07
+    grad_provenance/output_proj_grad_l1_norm=238.7
+    grad_provenance/output_proj_grad_l2_norm=0.3341
+    grad_provenance/output_proj_grad_mean=8.539411446841991e-14
+    grad_provenance/output_proj_grad_abs_mean=2.3168827283370774e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0093
+    grad_provenance/output_proj_clip_threshold=0.0009
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.3341
+    throughput/total_tokens=41,943,040
+    throughput/total_training_Gflops=355,054,294
+    throughput/total_training_log_Gflops=19.69
+    throughput/device/tokens_per_second=56,516
+    throughput/device/batches_per_second=0.2156
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 17:57:06.484	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=30/1000,epoch=0]
+    optim/total_grad_norm=1.584
+    train/CrossEntropyLoss=7.733
+    train/Perplexity=2,283
+    grad_provenance/embedding_grad_l1_norm=26.29
+    grad_provenance/embedding_grad_l2_norm=0.0076
+    grad_provenance/embedding_grad_mean=-3.7838655819744105e-17
+    grad_provenance/embedding_grad_abs_mean=3.9172221022454323e-07
+    grad_provenance/output_proj_grad_l1_norm=183.4
+    grad_provenance/output_proj_grad_l2_norm=0.1515
+    grad_provenance/output_proj_grad_mean=6.377078634036901e-14
+    grad_provenance/output_proj_grad_abs_mean=1.7805701872930513e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0093
+    grad_provenance/output_proj_clip_threshold=0.0009
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1515
+    throughput/total_tokens=62,914,560
+    throughput/total_training_Gflops=532,581,442
+    throughput/total_training_log_Gflops=20.09
+    throughput/device/tokens_per_second=56,562
+    throughput/device/batches_per_second=0.2158
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 17:57:52.901	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=40/1000,epoch=0]
+    optim/total_grad_norm=2.930
+    train/CrossEntropyLoss=7.458
+    train/Perplexity=1,733
+    grad_provenance/embedding_grad_l1_norm=50.59
+    grad_provenance/embedding_grad_l2_norm=0.0109
+    grad_provenance/embedding_grad_mean=1.0684812409844646e-16
+    grad_provenance/embedding_grad_abs_mean=7.53908011574822e-07
+    grad_provenance/output_proj_grad_l1_norm=168.6
+    grad_provenance/output_proj_grad_l2_norm=0.3726
+    grad_provenance/output_proj_grad_mean=-1.589126813266676e-14
+    grad_provenance/output_proj_grad_abs_mean=1.6369015156669775e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0112
+    grad_provenance/output_proj_clip_threshold=0.0011
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.3726
+    throughput/total_tokens=83,886,080
+    throughput/total_training_Gflops=710,108,589
+    throughput/total_training_log_Gflops=20.38
+    throughput/device/tokens_per_second=56,536
+    throughput/device/batches_per_second=0.2157
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 17:58:39.441	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=50/1000,epoch=0]
+    optim/total_grad_norm=1.079
+    train/CrossEntropyLoss=7.206
+    train/Perplexity=1,346
+    grad_provenance/embedding_grad_l1_norm=65.09
+    grad_provenance/embedding_grad_l2_norm=0.0138
+    grad_provenance/embedding_grad_mean=-9.947554932554503e-17
+    grad_provenance/embedding_grad_abs_mean=9.69988718679815e-07
+    grad_provenance/output_proj_grad_l1_norm=165.4
+    grad_provenance/output_proj_grad_l2_norm=0.1379
+    grad_provenance/output_proj_grad_mean=-4.734197246464983e-14
+    grad_provenance/output_proj_grad_abs_mean=1.6056410458986647e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0124
+    grad_provenance/output_proj_clip_threshold=0.0012
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1379
+    throughput/total_tokens=104,857,600
+    throughput/total_training_Gflops=887,635,737
+    throughput/total_training_log_Gflops=20.60
+    throughput/device/tokens_per_second=56,405
+    throughput/device/batches_per_second=0.2152
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 17:59:26.053	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=60/1000,epoch=0]
+    optim/total_grad_norm=1.481
+    train/CrossEntropyLoss=7.055
+    train/Perplexity=1,158
+    grad_provenance/embedding_grad_l1_norm=61.92
+    grad_provenance/embedding_grad_l2_norm=0.0126
+    grad_provenance/embedding_grad_mean=3.252606517456513e-17
+    grad_provenance/embedding_grad_abs_mean=9.226628776559664e-07
+    grad_provenance/output_proj_grad_l1_norm=132.7
+    grad_provenance/output_proj_grad_l2_norm=0.1956
+    grad_provenance/output_proj_grad_mean=-1.189570106508624e-15
+    grad_provenance/output_proj_grad_abs_mean=1.288092562390375e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0122
+    grad_provenance/output_proj_clip_threshold=0.0012
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1956
+    throughput/total_tokens=125,829,120
+    throughput/total_training_Gflops=1,065,162,884
+    throughput/total_training_log_Gflops=20.79
+    throughput/device/tokens_per_second=56,287
+    throughput/device/batches_per_second=0.2147
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:00:12.689	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=70/1000,epoch=0]
+    optim/total_grad_norm=0.9248
+    train/CrossEntropyLoss=6.860
+    train/Perplexity=953.7
+    grad_provenance/embedding_grad_l1_norm=80.74
+    grad_provenance/embedding_grad_l2_norm=0.0153
+    grad_provenance/embedding_grad_mean=-4.575333167888829e-17
+    grad_provenance/embedding_grad_abs_mean=1.2031746337015647e-06
+    grad_provenance/output_proj_grad_l1_norm=140.0
+    grad_provenance/output_proj_grad_l2_norm=0.1065
+    grad_provenance/output_proj_grad_mean=-7.758921407923988e-14
+    grad_provenance/output_proj_grad_abs_mean=1.3587545026894077e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0155
+    grad_provenance/output_proj_clip_threshold=0.0015
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1065
+    throughput/total_tokens=146,800,640
+    throughput/total_training_Gflops=1,242,690,031
+    throughput/total_training_log_Gflops=20.94
+    throughput/device/tokens_per_second=56,228
+    throughput/device/batches_per_second=0.2145
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:00:59.371	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=80/1000,epoch=0]
+    optim/total_grad_norm=1.984
+    train/CrossEntropyLoss=6.743
+    train/Perplexity=848.5
+    grad_provenance/embedding_grad_l1_norm=77.13
+    grad_provenance/embedding_grad_l2_norm=0.0143
+    grad_provenance/embedding_grad_mean=6.266688556966216e-17
+    grad_provenance/embedding_grad_abs_mean=1.1492804787849309e-06
+    grad_provenance/output_proj_grad_l1_norm=139.6
+    grad_provenance/output_proj_grad_l2_norm=0.2452
+    grad_provenance/output_proj_grad_mean=-5.0456529552362836e-14
+    grad_provenance/output_proj_grad_abs_mean=1.3550518360716524e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0151
+    grad_provenance/output_proj_clip_threshold=0.0015
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.2452
+    throughput/total_tokens=167,772,160
+    throughput/total_training_Gflops=1,420,217,179
+    throughput/total_training_log_Gflops=21.07
+    throughput/device/tokens_per_second=56,185
+    throughput/device/batches_per_second=0.2143
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:01:46.032	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=90/1000,epoch=0]
+    optim/total_grad_norm=1.194
+    train/CrossEntropyLoss=6.645
+    train/Perplexity=768.8
+    grad_provenance/embedding_grad_l1_norm=90.13
+    grad_provenance/embedding_grad_l2_norm=0.0170
+    grad_provenance/embedding_grad_mean=1.40241551011e-16
+    grad_provenance/embedding_grad_abs_mean=1.343051735602785e-06
+    grad_provenance/output_proj_grad_l1_norm=144.1
+    grad_provenance/output_proj_grad_l2_norm=0.1701
+    grad_provenance/output_proj_grad_mean=-1.424090608891787e-13
+    grad_provenance/output_proj_grad_abs_mean=1.3987533975523547e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0174
+    grad_provenance/output_proj_clip_threshold=0.0017
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1701
+    throughput/total_tokens=188,743,680
+    throughput/total_training_Gflops=1,597,744,326
+    throughput/total_training_log_Gflops=21.19
+    throughput/device/tokens_per_second=56,169
+    throughput/device/batches_per_second=0.2143
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:02:32.733	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=100/1000,epoch=0]
+    optim/total_grad_norm=0.9400
+    train/CrossEntropyLoss=6.536
+    train/Perplexity=689.7
+    grad_provenance/embedding_grad_l1_norm=88.03
+    grad_provenance/embedding_grad_l2_norm=0.0163
+    grad_provenance/embedding_grad_mean=-1.0191500421363742e-17
+    grad_provenance/embedding_grad_abs_mean=1.3116950867697597e-06
+    grad_provenance/output_proj_grad_l1_norm=124.4
+    grad_provenance/output_proj_grad_l2_norm=0.1153
+    grad_provenance/output_proj_grad_mean=-5.0902631312495575e-14
+    grad_provenance/output_proj_grad_abs_mean=1.207586706186703e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0170
+    grad_provenance/output_proj_clip_threshold=0.0017
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1153
+    throughput/total_tokens=209,715,200
+    throughput/total_training_Gflops=1,775,271,474
+    throughput/total_training_log_Gflops=21.30
+    throughput/device/tokens_per_second=56,159
+    throughput/device/batches_per_second=0.2142
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:03:19.436	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=110/1000,epoch=0]
+    optim/total_grad_norm=0.8568
+    train/CrossEntropyLoss=6.382
+    train/Perplexity=591.3
+    grad_provenance/embedding_grad_l1_norm=101.0
+    grad_provenance/embedding_grad_l2_norm=0.0189
+    grad_provenance/embedding_grad_mean=-1.4495783046131194e-16
+    grad_provenance/embedding_grad_abs_mean=1.5052631852086051e-06
+    grad_provenance/output_proj_grad_l1_norm=155.1
+    grad_provenance/output_proj_grad_l2_norm=0.1571
+    grad_provenance/output_proj_grad_mean=-7.399498900976034e-14
+    grad_provenance/output_proj_grad_abs_mean=1.5059455336086103e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0193
+    grad_provenance/output_proj_clip_threshold=0.0019
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1571
+    throughput/total_tokens=230,686,720
+    throughput/total_training_Gflops=1,952,798,621
+    throughput/total_training_log_Gflops=21.39
+    throughput/device/tokens_per_second=56,134
+    throughput/device/batches_per_second=0.2141
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:04:06.133	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=120/1000,epoch=0]
+    optim/total_grad_norm=0.7118
+    train/CrossEntropyLoss=6.269
+    train/Perplexity=527.8
+    grad_provenance/embedding_grad_l1_norm=101.3
+    grad_provenance/embedding_grad_l2_norm=0.0188
+    grad_provenance/embedding_grad_mean=1.6403978869705682e-16
+    grad_provenance/embedding_grad_abs_mean=1.508964032836957e-06
+    grad_provenance/output_proj_grad_l1_norm=124.6
+    grad_provenance/output_proj_grad_l2_norm=0.1096
+    grad_provenance/output_proj_grad_mean=-4.699467540374841e-14
+    grad_provenance/output_proj_grad_abs_mean=1.209844640470692e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0188
+    grad_provenance/output_proj_clip_threshold=0.0019
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1096
+    throughput/total_tokens=251,658,240
+    throughput/total_training_Gflops=2,130,325,769
+    throughput/total_training_log_Gflops=21.48
+    throughput/device/tokens_per_second=56,136
+    throughput/device/batches_per_second=0.2141
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:04:52.895	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=130/1000,epoch=0]
+    optim/total_grad_norm=0.8063
+    train/CrossEntropyLoss=6.217
+    train/Perplexity=501.1
+    grad_provenance/embedding_grad_l1_norm=110.2
+    grad_provenance/embedding_grad_l2_norm=0.0204
+    grad_provenance/embedding_grad_mean=2.598832607447754e-16
+    grad_provenance/embedding_grad_abs_mean=1.6414610399806406e-06
+    grad_provenance/output_proj_grad_l1_norm=139.2
+    grad_provenance/output_proj_grad_l2_norm=0.1109
+    grad_provenance/output_proj_grad_mean=-2.832318764017707e-14
+    grad_provenance/output_proj_grad_abs_mean=1.3514409147319384e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0195
+    grad_provenance/output_proj_clip_threshold=0.0020
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1109
+    throughput/total_tokens=272,629,760
+    throughput/total_training_Gflops=2,307,852,916
+    throughput/total_training_log_Gflops=21.56
+    throughput/device/tokens_per_second=56,102
+    throughput/device/batches_per_second=0.2140
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:05:39.654	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=140/1000,epoch=0]
+    optim/total_grad_norm=0.8339
+    train/CrossEntropyLoss=6.106
+    train/Perplexity=448.7
+    grad_provenance/embedding_grad_l1_norm=108.3
+    grad_provenance/embedding_grad_l2_norm=0.0200
+    grad_provenance/embedding_grad_mean=5.697482416411326e-17
+    grad_provenance/embedding_grad_abs_mean=1.613432459635078e-06
+    grad_provenance/output_proj_grad_l1_norm=124.3
+    grad_provenance/output_proj_grad_l2_norm=0.1022
+    grad_provenance/output_proj_grad_mean=-4.128772654711857e-14
+    grad_provenance/output_proj_grad_abs_mean=1.20689526283968e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0205
+    grad_provenance/output_proj_clip_threshold=0.0020
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1022
+    throughput/total_tokens=293,601,280
+    throughput/total_training_Gflops=2,485,380,063
+    throughput/total_training_log_Gflops=21.63
+    throughput/device/tokens_per_second=56,063
+    throughput/device/batches_per_second=0.2139
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:06:26.431	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=150/1000,epoch=0]
+    optim/total_grad_norm=0.9332
+    train/CrossEntropyLoss=5.999
+    train/Perplexity=402.9
+    grad_provenance/embedding_grad_l1_norm=110.9
+    grad_provenance/embedding_grad_l2_norm=0.0206
+    grad_provenance/embedding_grad_mean=-4.622495962391948e-16
+    grad_provenance/embedding_grad_abs_mean=1.6527055777260102e-06
+    grad_provenance/output_proj_grad_l1_norm=124.2
+    grad_provenance/output_proj_grad_l2_norm=0.1144
+    grad_provenance/output_proj_grad_mean=-3.640682116131007e-14
+    grad_provenance/output_proj_grad_abs_mean=1.2058865195285762e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0210
+    grad_provenance/output_proj_clip_threshold=0.0021
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1144
+    throughput/total_tokens=314,572,800
+    throughput/total_training_Gflops=2,662,907,211
+    throughput/total_training_log_Gflops=21.70
+    throughput/device/tokens_per_second=56,054
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:07:13.212	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=160/1000,epoch=0]
+    optim/total_grad_norm=0.6259
+    train/CrossEntropyLoss=5.861
+    train/Perplexity=351.2
+    grad_provenance/embedding_grad_l1_norm=111.6
+    grad_provenance/embedding_grad_l2_norm=0.0209
+    grad_provenance/embedding_grad_mean=-1.5737194533627097e-16
+    grad_provenance/embedding_grad_abs_mean=1.6634714938845718e-06
+    grad_provenance/output_proj_grad_l1_norm=111.5
+    grad_provenance/output_proj_grad_l2_norm=0.0870
+    grad_provenance/output_proj_grad_mean=-5.237597058534507e-14
+    grad_provenance/output_proj_grad_abs_mean=1.0823695220096852e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0219
+    grad_provenance/output_proj_clip_threshold=0.0022
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0870
+    throughput/total_tokens=335,544,320
+    throughput/total_training_Gflops=2,840,434,358
+    throughput/total_training_log_Gflops=21.77
+    throughput/device/tokens_per_second=56,042
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:08:00.015	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=170/1000,epoch=0]
+    optim/total_grad_norm=0.8365
+    train/CrossEntropyLoss=5.849
+    train/Perplexity=347.0
+    grad_provenance/embedding_grad_l1_norm=120.1
+    grad_provenance/embedding_grad_l2_norm=0.0225
+    grad_provenance/embedding_grad_mean=-9.150666335777657e-17
+    grad_provenance/embedding_grad_abs_mean=1.7900187003760948e-06
+    grad_provenance/output_proj_grad_l1_norm=127.9
+    grad_provenance/output_proj_grad_l2_norm=0.0722
+    grad_provenance/output_proj_grad_mean=-1.3004342340385694e-13
+    grad_provenance/output_proj_grad_abs_mean=1.2411361467457027e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0230
+    grad_provenance/output_proj_clip_threshold=0.0023
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0722
+    throughput/total_tokens=356,515,840
+    throughput/total_training_Gflops=3,017,961,506
+    throughput/total_training_log_Gflops=21.83
+    throughput/device/tokens_per_second=56,025
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:08:46.785	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=180/1000,epoch=0]
+    optim/total_grad_norm=0.3738
+    train/CrossEntropyLoss=5.764
+    train/Perplexity=318.7
+    grad_provenance/embedding_grad_l1_norm=123.0
+    grad_provenance/embedding_grad_l2_norm=0.0229
+    grad_provenance/embedding_grad_mean=2.2741140567883456e-16
+    grad_provenance/embedding_grad_abs_mean=1.8328141777601559e-06
+    grad_provenance/output_proj_grad_l1_norm=123.1
+    grad_provenance/output_proj_grad_l2_norm=0.0648
+    grad_provenance/output_proj_grad_mean=-1.2916177560818014e-14
+    grad_provenance/output_proj_grad_abs_mean=1.1944817970288568e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0228
+    grad_provenance/output_proj_clip_threshold=0.0023
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0648
+    throughput/total_tokens=377,487,360
+    throughput/total_training_Gflops=3,195,488,653
+    throughput/total_training_log_Gflops=21.89
+    throughput/device/tokens_per_second=56,032
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:09:33.564	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=190/1000,epoch=0]
+    optim/total_grad_norm=1.124
+    train/CrossEntropyLoss=5.661
+    train/Perplexity=287.5
+    grad_provenance/embedding_grad_l1_norm=130.0
+    grad_provenance/embedding_grad_l2_norm=0.0243
+    grad_provenance/embedding_grad_mean=3.2742905609062234e-17
+    grad_provenance/embedding_grad_abs_mean=1.9369140318303835e-06
+    grad_provenance/output_proj_grad_l1_norm=121.0
+    grad_provenance/output_proj_grad_l2_norm=0.1125
+    grad_provenance/output_proj_grad_mean=-8.181171397888404e-14
+    grad_provenance/output_proj_grad_abs_mean=1.1743594541258062e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0243
+    grad_provenance/output_proj_clip_threshold=0.0024
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1125
+    throughput/total_tokens=398,458,880
+    throughput/total_training_Gflops=3,373,015,800
+    throughput/total_training_log_Gflops=21.94
+    throughput/device/tokens_per_second=56,048
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:10:20.320	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=200/1000,epoch=0]
+    optim/total_grad_norm=0.8526
+    train/CrossEntropyLoss=5.611
+    train/Perplexity=273.3
+    grad_provenance/embedding_grad_l1_norm=123.6
+    grad_provenance/embedding_grad_l2_norm=0.0229
+    grad_provenance/embedding_grad_mean=-2.5370330836160804e-17
+    grad_provenance/embedding_grad_abs_mean=1.8411382143312949e-06
+    grad_provenance/output_proj_grad_l1_norm=118.1
+    grad_provenance/output_proj_grad_l2_norm=0.0870
+    grad_provenance/output_proj_grad_mean=-1.5546866230379056e-14
+    grad_provenance/output_proj_grad_abs_mean=1.1463445162007702e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0231
+    grad_provenance/output_proj_clip_threshold=0.0023
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0870
+    throughput/total_tokens=419,430,400
+    throughput/total_training_Gflops=3,550,542,948
+    throughput/total_training_log_Gflops=21.99
+    throughput/device/tokens_per_second=56,056
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:11:07.112	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=210/1000,epoch=0]
+    optim/total_grad_norm=0.4511
+    train/CrossEntropyLoss=5.527
+    train/Perplexity=251.3
+    grad_provenance/embedding_grad_l1_norm=131.9
+    grad_provenance/embedding_grad_l2_norm=0.0250
+    grad_provenance/embedding_grad_mean=1.7688758444101005e-16
+    grad_provenance/embedding_grad_abs_mean=1.9651695311040385e-06
+    grad_provenance/output_proj_grad_l1_norm=117.6
+    grad_provenance/output_proj_grad_l2_norm=0.0650
+    grad_provenance/output_proj_grad_mean=-4.000238793097806e-14
+    grad_provenance/output_proj_grad_abs_mean=1.1414322216296569e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0245
+    grad_provenance/output_proj_clip_threshold=0.0025
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0650
+    throughput/total_tokens=440,401,920
+    throughput/total_training_Gflops=3,728,070,095
+    throughput/total_training_log_Gflops=22.04
+    throughput/device/tokens_per_second=56,047
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:11:53.958	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=220/1000,epoch=0]
+    optim/total_grad_norm=0.6528
+    train/CrossEntropyLoss=5.441
+    train/Perplexity=230.6
+    grad_provenance/embedding_grad_l1_norm=137.1
+    grad_provenance/embedding_grad_l2_norm=0.0253
+    grad_provenance/embedding_grad_mean=3.423910460709223e-16
+    grad_provenance/embedding_grad_abs_mean=2.043220774794463e-06
+    grad_provenance/output_proj_grad_l1_norm=132.3
+    grad_provenance/output_proj_grad_l2_norm=0.0704
+    grad_provenance/output_proj_grad_mean=-2.7732375383203618e-14
+    grad_provenance/output_proj_grad_abs_mean=1.2840840781791485e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0257
+    grad_provenance/output_proj_clip_threshold=0.0026
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0704
+    throughput/total_tokens=461,373,440
+    throughput/total_training_Gflops=3,905,597,243
+    throughput/total_training_log_Gflops=22.09
+    throughput/device/tokens_per_second=55,993
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:12:40.737	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=230/1000,epoch=0]
+    optim/total_grad_norm=0.5953
+    train/CrossEntropyLoss=5.439
+    train/Perplexity=230.2
+    grad_provenance/embedding_grad_l1_norm=128.6
+    grad_provenance/embedding_grad_l2_norm=0.0242
+    grad_provenance/embedding_grad_mean=3.5236570605778894e-17
+    grad_provenance/embedding_grad_abs_mean=1.916504970722599e-06
+    grad_provenance/output_proj_grad_l1_norm=105.8
+    grad_provenance/output_proj_grad_l2_norm=0.0590
+    grad_provenance/output_proj_grad_mean=-2.7372011992057854e-14
+    grad_provenance/output_proj_grad_abs_mean=1.0265447372148628e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0249
+    grad_provenance/output_proj_clip_threshold=0.0025
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0590
+    throughput/total_tokens=482,344,960
+    throughput/total_training_Gflops=4,083,124,390
+    throughput/total_training_log_Gflops=22.13
+    throughput/device/tokens_per_second=56,001
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:13:27.532	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=240/1000,epoch=0]
+    optim/total_grad_norm=0.5159
+    train/CrossEntropyLoss=5.286
+    train/Perplexity=197.6
+    grad_provenance/embedding_grad_l1_norm=135.3
+    grad_provenance/embedding_grad_l2_norm=0.0252
+    grad_provenance/embedding_grad_mean=1.20346441145891e-16
+    grad_provenance/embedding_grad_abs_mean=2.0167587990727043e-06
+    grad_provenance/output_proj_grad_l1_norm=114.6
+    grad_provenance/output_proj_grad_l2_norm=0.0779
+    grad_provenance/output_proj_grad_mean=-2.6147871506356467e-14
+    grad_provenance/output_proj_grad_abs_mean=1.112838958761131e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0255
+    grad_provenance/output_proj_clip_threshold=0.0025
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0779
+    throughput/total_tokens=503,316,480
+    throughput/total_training_Gflops=4,260,651,538
+    throughput/total_training_log_Gflops=22.17
+    throughput/device/tokens_per_second=56,031
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:14:14.351	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=250/1000,epoch=0]
+    optim/total_grad_norm=1.032
+    train/CrossEntropyLoss=5.277
+    train/Perplexity=195.7
+    grad_provenance/embedding_grad_l1_norm=144.4
+    grad_provenance/embedding_grad_l2_norm=0.0267
+    grad_provenance/embedding_grad_mean=7.806255641895632e-18
+    grad_provenance/embedding_grad_abs_mean=2.1516234482987784e-06
+    grad_provenance/output_proj_grad_l1_norm=123.6
+    grad_provenance/output_proj_grad_l2_norm=0.0694
+    grad_provenance/output_proj_grad_mean=1.2743164305077746e-14
+    grad_provenance/output_proj_grad_abs_mean=1.2002009270872804e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0262
+    grad_provenance/output_proj_clip_threshold=0.0026
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0694
+    throughput/total_tokens=524,288,000
+    throughput/total_training_Gflops=4,438,178,685
+    throughput/total_training_log_Gflops=22.21
+    throughput/device/tokens_per_second=56,008
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:15:01.170	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=260/1000,epoch=0]
+    optim/total_grad_norm=0.7335
+    train/CrossEntropyLoss=5.230
+    train/Perplexity=186.8
+    grad_provenance/embedding_grad_l1_norm=133.8
+    grad_provenance/embedding_grad_l2_norm=0.0276
+    grad_provenance/embedding_grad_mean=1.6534083130403943e-17
+    grad_provenance/embedding_grad_abs_mean=1.9935184809583006e-06
+    grad_provenance/output_proj_grad_l1_norm=120.6
+    grad_provenance/output_proj_grad_l2_norm=0.1103
+    grad_provenance/output_proj_grad_mean=1.0878596607517485e-14
+    grad_provenance/output_proj_grad_abs_mean=1.170731479760434e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0257
+    grad_provenance/output_proj_clip_threshold=0.0026
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1103
+    throughput/total_tokens=545,259,520
+    throughput/total_training_Gflops=4,615,705,832
+    throughput/total_training_log_Gflops=22.25
+    throughput/device/tokens_per_second=55,996
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:15:47.979	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=270/1000,epoch=0]
+    optim/total_grad_norm=0.4294
+    train/CrossEntropyLoss=5.139
+    train/Perplexity=170.6
+    grad_provenance/embedding_grad_l1_norm=145.2
+    grad_provenance/embedding_grad_l2_norm=0.0269
+    grad_provenance/embedding_grad_mean=-1.2880321809127793e-16
+    grad_provenance/embedding_grad_abs_mean=2.163985755032627e-06
+    grad_provenance/output_proj_grad_l1_norm=123.0
+    grad_provenance/output_proj_grad_l2_norm=0.0629
+    grad_provenance/output_proj_grad_mean=-3.761706861261059e-14
+    grad_provenance/output_proj_grad_abs_mean=1.194046831187734e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0263
+    grad_provenance/output_proj_clip_threshold=0.0026
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0629
+    throughput/total_tokens=566,231,040
+    throughput/total_training_Gflops=4,793,232,980
+    throughput/total_training_log_Gflops=22.29
+    throughput/device/tokens_per_second=56,000
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:16:34.790	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=280/1000,epoch=0]
+    optim/total_grad_norm=0.6220
+    train/CrossEntropyLoss=5.108
+    train/Perplexity=165.4
+    grad_provenance/embedding_grad_l1_norm=141.6
+    grad_provenance/embedding_grad_l2_norm=0.0261
+    grad_provenance/embedding_grad_mean=1.4582519219930035e-16
+    grad_provenance/embedding_grad_abs_mean=2.1105565792822745e-06
+    grad_provenance/output_proj_grad_l1_norm=118.0
+    grad_provenance/output_proj_grad_l2_norm=0.0816
+    grad_provenance/output_proj_grad_mean=-9.167101485459822e-14
+    grad_provenance/output_proj_grad_abs_mean=1.14538897832972e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0255
+    grad_provenance/output_proj_clip_threshold=0.0025
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0816
+    throughput/total_tokens=587,202,560
+    throughput/total_training_Gflops=4,970,760,127
+    throughput/total_training_log_Gflops=22.33
+    throughput/device/tokens_per_second=56,004
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:17:21.582	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=290/1000,epoch=0]
+    optim/total_grad_norm=0.6607
+    train/CrossEntropyLoss=5.058
+    train/Perplexity=157.3
+    grad_provenance/embedding_grad_l1_norm=129.2
+    grad_provenance/embedding_grad_l2_norm=0.0242
+    grad_provenance/embedding_grad_mean=1.1188966420050406e-16
+    grad_provenance/embedding_grad_abs_mean=1.9250189779995708e-06
+    grad_provenance/output_proj_grad_l1_norm=110.6
+    grad_provenance/output_proj_grad_l2_norm=0.0797
+    grad_provenance/output_proj_grad_mean=-8.08490983037792e-14
+    grad_provenance/output_proj_grad_abs_mean=1.0738460787251825e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0261
+    grad_provenance/output_proj_clip_threshold=0.0026
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0797
+    throughput/total_tokens=608,174,080
+    throughput/total_training_Gflops=5,148,287,275
+    throughput/total_training_log_Gflops=22.36
+    throughput/device/tokens_per_second=56,015
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:18:08.367	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=300/1000,epoch=0]
+    optim/total_grad_norm=0.6823
+    train/CrossEntropyLoss=5.044
+    train/Perplexity=155.2
+    grad_provenance/embedding_grad_l1_norm=137.7
+    grad_provenance/embedding_grad_l2_norm=0.0252
+    grad_provenance/embedding_grad_mean=-1.315137235224917e-16
+    grad_provenance/embedding_grad_abs_mean=2.051370529443375e-06
+    grad_provenance/output_proj_grad_l1_norm=111.4
+    grad_provenance/output_proj_grad_l2_norm=0.0788
+    grad_provenance/output_proj_grad_mean=-5.731791316533272e-14
+    grad_provenance/output_proj_grad_abs_mean=1.081342134057195e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0257
+    grad_provenance/output_proj_clip_threshold=0.0026
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0788
+    throughput/total_tokens=629,145,600
+    throughput/total_training_Gflops=5,325,814,422
+    throughput/total_training_log_Gflops=22.40
+    throughput/device/tokens_per_second=56,030
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:18:55.178	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=310/1000,epoch=0]
+    optim/total_grad_norm=0.5235
+    train/CrossEntropyLoss=4.950
+    train/Perplexity=141.1
+    grad_provenance/embedding_grad_l1_norm=152.1
+    grad_provenance/embedding_grad_l2_norm=0.0283
+    grad_provenance/embedding_grad_mean=1.9960161995458137e-16
+    grad_provenance/embedding_grad_abs_mean=2.265749117214e-06
+    grad_provenance/output_proj_grad_l1_norm=121.8
+    grad_provenance/output_proj_grad_l2_norm=0.0929
+    grad_provenance/output_proj_grad_mean=-6.915587792363526e-15
+    grad_provenance/output_proj_grad_abs_mean=1.1819126939371927e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0274
+    grad_provenance/output_proj_clip_threshold=0.0027
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0929
+    throughput/total_tokens=650,117,120
+    throughput/total_training_Gflops=5,503,341,570
+    throughput/total_training_log_Gflops=22.43
+    throughput/device/tokens_per_second=56,018
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:19:41.968	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=320/1000,epoch=0]
+    optim/total_grad_norm=0.4921
+    train/CrossEntropyLoss=4.923
+    train/Perplexity=137.4
+    grad_provenance/embedding_grad_l1_norm=129.8
+    grad_provenance/embedding_grad_l2_norm=0.0240
+    grad_provenance/embedding_grad_mean=-1.2891163830852648e-16
+    grad_provenance/embedding_grad_abs_mean=1.9334877379151294e-06
+    grad_provenance/output_proj_grad_l1_norm=119.0
+    grad_provenance/output_proj_grad_l2_norm=0.0930
+    grad_provenance/output_proj_grad_mean=4.359288605548968e-14
+    grad_provenance/output_proj_grad_abs_mean=1.1553705689948401e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0261
+    grad_provenance/output_proj_clip_threshold=0.0026
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0930
+    throughput/total_tokens=671,088,640
+    throughput/total_training_Gflops=5,680,868,717
+    throughput/total_training_log_Gflops=22.46
+    throughput/device/tokens_per_second=56,015
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:20:28.736	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=330/1000,epoch=0]
+    optim/total_grad_norm=0.9866
+    train/CrossEntropyLoss=4.901
+    train/Perplexity=134.4
+    grad_provenance/embedding_grad_l1_norm=146.9
+    grad_provenance/embedding_grad_l2_norm=0.0269
+    grad_provenance/embedding_grad_mean=-1.5406512871019018e-16
+    grad_provenance/embedding_grad_abs_mean=2.189048927903059e-06
+    grad_provenance/output_proj_grad_l1_norm=111.1
+    grad_provenance/output_proj_grad_l2_norm=0.0586
+    grad_provenance/output_proj_grad_mean=-4.269807028561487e-14
+    grad_provenance/output_proj_grad_abs_mean=1.0787471182993613e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0282
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0586
+    throughput/total_tokens=692,060,160
+    throughput/total_training_Gflops=5,858,395,864
+    throughput/total_training_log_Gflops=22.49
+    throughput/device/tokens_per_second=56,041
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:21:15.534	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=340/1000,epoch=0]
+    optim/total_grad_norm=0.5927
+    train/CrossEntropyLoss=4.891
+    train/Perplexity=133.1
+    grad_provenance/embedding_grad_l1_norm=135.4
+    grad_provenance/embedding_grad_l2_norm=0.0249
+    grad_provenance/embedding_grad_mean=6.494371013188172e-17
+    grad_provenance/embedding_grad_abs_mean=2.01772104446718e-06
+    grad_provenance/output_proj_grad_l1_norm=99.88
+    grad_provenance/output_proj_grad_l2_norm=0.0611
+    grad_provenance/output_proj_grad_mean=-8.976633252368894e-15
+    grad_provenance/output_proj_grad_abs_mean=9.695082781036035e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0258
+    grad_provenance/output_proj_clip_threshold=0.0026
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0611
+    throughput/total_tokens=713,031,680
+    throughput/total_training_Gflops=6,035,923,012
+    throughput/total_training_log_Gflops=22.52
+    throughput/device/tokens_per_second=56,036
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:22:02.317	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=350/1000,epoch=0]
+    optim/total_grad_norm=0.4732
+    train/CrossEntropyLoss=4.778
+    train/Perplexity=118.9
+    grad_provenance/embedding_grad_l1_norm=144.3
+    grad_provenance/embedding_grad_l2_norm=0.0265
+    grad_provenance/embedding_grad_mean=-7.838781707070197e-17
+    grad_provenance/embedding_grad_abs_mean=2.149554802599596e-06
+    grad_provenance/output_proj_grad_l1_norm=103.2
+    grad_provenance/output_proj_grad_l2_norm=0.0461
+    grad_provenance/output_proj_grad_mean=-5.986973205607607e-14
+    grad_provenance/output_proj_grad_abs_mean=1.0019750789069803e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0281
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0461
+    throughput/total_tokens=734,003,200
+    throughput/total_training_Gflops=6,213,450,159
+    throughput/total_training_log_Gflops=22.55
+    throughput/device/tokens_per_second=56,027
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:22:49.101	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=360/1000,epoch=0]
+    optim/total_grad_norm=0.5724
+    train/CrossEntropyLoss=4.716
+    train/Perplexity=111.7
+    grad_provenance/embedding_grad_l1_norm=158.0
+    grad_provenance/embedding_grad_l2_norm=0.0293
+    grad_provenance/embedding_grad_mean=-1.0397498834135988e-16
+    grad_provenance/embedding_grad_abs_mean=2.353714762648451e-06
+    grad_provenance/output_proj_grad_l1_norm=108.9
+    grad_provenance/output_proj_grad_l2_norm=0.0453
+    grad_provenance/output_proj_grad_mean=-7.698849153678355e-14
+    grad_provenance/output_proj_grad_abs_mean=1.056875134963775e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0282
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0453
+    throughput/total_tokens=754,974,720
+    throughput/total_training_Gflops=6,390,977,307
+    throughput/total_training_log_Gflops=22.58
+    throughput/device/tokens_per_second=56,036
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:23:35.869	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=370/1000,epoch=0]
+    optim/total_grad_norm=0.5806
+    train/CrossEntropyLoss=4.693
+    train/Perplexity=109.2
+    grad_provenance/embedding_grad_l1_norm=154.3
+    grad_provenance/embedding_grad_l2_norm=0.0286
+    grad_provenance/embedding_grad_mean=1.8789223649173792e-16
+    grad_provenance/embedding_grad_abs_mean=2.2986823751125485e-06
+    grad_provenance/output_proj_grad_l1_norm=108.0
+    grad_provenance/output_proj_grad_l2_norm=0.0517
+    grad_provenance/output_proj_grad_mean=-6.87981979328664e-14
+    grad_provenance/output_proj_grad_abs_mean=1.0484930044185603e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0289
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0517
+    throughput/total_tokens=775,946,240
+    throughput/total_training_Gflops=6,568,504,454
+    throughput/total_training_log_Gflops=22.61
+    throughput/device/tokens_per_second=56,048
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:24:22.633	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=380/1000,epoch=0]
+    optim/total_grad_norm=0.6853
+    train/CrossEntropyLoss=4.649
+    train/Perplexity=104.5
+    grad_provenance/embedding_grad_l1_norm=161.2
+    grad_provenance/embedding_grad_l2_norm=0.0294
+    grad_provenance/embedding_grad_mean=3.3458479042902667e-16
+    grad_provenance/embedding_grad_abs_mean=2.4024925551202614e-06
+    grad_provenance/output_proj_grad_l1_norm=114.8
+    grad_provenance/output_proj_grad_l2_norm=0.0609
+    grad_provenance/output_proj_grad_mean=-1.3051650146929383e-13
+    grad_provenance/output_proj_grad_abs_mean=1.114710926231055e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0281
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0609
+    throughput/total_tokens=796,917,760
+    throughput/total_training_Gflops=6,746,031,601
+    throughput/total_training_log_Gflops=22.63
+    throughput/device/tokens_per_second=56,056
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:25:09.422	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=390/1000,epoch=0]
+    optim/total_grad_norm=0.4667
+    train/CrossEntropyLoss=4.627
+    train/Perplexity=102.2
+    grad_provenance/embedding_grad_l1_norm=158.4
+    grad_provenance/embedding_grad_l2_norm=0.0298
+    grad_provenance/embedding_grad_mean=1.9461428996114805e-16
+    grad_provenance/embedding_grad_abs_mean=2.3606889953953214e-06
+    grad_provenance/output_proj_grad_l1_norm=107.3
+    grad_provenance/output_proj_grad_l2_norm=0.0501
+    grad_provenance/output_proj_grad_mean=-8.062221544665946e-14
+    grad_provenance/output_proj_grad_abs_mean=1.0410341246824828e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0298
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0501
+    throughput/total_tokens=817,889,280
+    throughput/total_training_Gflops=6,923,558,749
+    throughput/total_training_log_Gflops=22.66
+    throughput/device/tokens_per_second=56,045
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:25:56.220	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=400/1000,epoch=0]
+    optim/total_grad_norm=0.5303
+    train/CrossEntropyLoss=4.560
+    train/Perplexity=95.58
+    grad_provenance/embedding_grad_l1_norm=155.8
+    grad_provenance/embedding_grad_l2_norm=0.0291
+    grad_provenance/embedding_grad_mean=-1.1346175735060804e-16
+    grad_provenance/embedding_grad_abs_mean=2.321291049156571e-06
+    grad_provenance/output_proj_grad_l1_norm=102.4
+    grad_provenance/output_proj_grad_l2_norm=0.0423
+    grad_provenance/output_proj_grad_mean=-3.488021368047364e-14
+    grad_provenance/output_proj_grad_abs_mean=9.941575171978911e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0307
+    grad_provenance/output_proj_clip_threshold=0.0031
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0423
+    throughput/total_tokens=838,860,800
+    throughput/total_training_Gflops=7,101,085,896
+    throughput/total_training_log_Gflops=22.68
+    throughput/device/tokens_per_second=56,025
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:26:42.995	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=410/1000,epoch=0]
+    optim/total_grad_norm=0.5950
+    train/CrossEntropyLoss=4.471
+    train/Perplexity=87.47
+    grad_provenance/embedding_grad_l1_norm=163.5
+    grad_provenance/embedding_grad_l2_norm=0.0313
+    grad_provenance/embedding_grad_mean=-1.573177352276467e-16
+    grad_provenance/embedding_grad_abs_mean=2.4366604520764668e-06
+    grad_provenance/output_proj_grad_l1_norm=108.8
+    grad_provenance/output_proj_grad_l2_norm=0.0633
+    grad_provenance/output_proj_grad_mean=-2.6733280963675858e-15
+    grad_provenance/output_proj_grad_abs_mean=1.056152314049541e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0293
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0633
+    throughput/total_tokens=859,832,320
+    throughput/total_training_Gflops=7,278,613,044
+    throughput/total_training_log_Gflops=22.71
+    throughput/device/tokens_per_second=56,034
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:27:29.811	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=420/1000,epoch=0]
+    optim/total_grad_norm=0.6354
+    train/CrossEntropyLoss=4.497
+    train/Perplexity=89.71
+    grad_provenance/embedding_grad_l1_norm=151.1
+    grad_provenance/embedding_grad_l2_norm=0.0280
+    grad_provenance/embedding_grad_mean=-1.7867651802561113e-16
+    grad_provenance/embedding_grad_abs_mean=2.2510512280859984e-06
+    grad_provenance/output_proj_grad_l1_norm=99.84
+    grad_provenance/output_proj_grad_l2_norm=0.0448
+    grad_provenance/output_proj_grad_mean=-1.9720619383908726e-14
+    grad_provenance/output_proj_grad_abs_mean=9.691545983514516e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0294
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0448
+    throughput/total_tokens=880,803,840
+    throughput/total_training_Gflops=7,456,140,191
+    throughput/total_training_log_Gflops=22.73
+    throughput/device/tokens_per_second=56,021
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:28:16.569	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=430/1000,epoch=0]
+    optim/total_grad_norm=0.5343
+    train/CrossEntropyLoss=4.405
+    train/Perplexity=81.88
+    grad_provenance/embedding_grad_l1_norm=156.0
+    grad_provenance/embedding_grad_l2_norm=0.0295
+    grad_provenance/embedding_grad_mean=6.754579534584693e-17
+    grad_provenance/embedding_grad_abs_mean=2.3244401745614596e-06
+    grad_provenance/output_proj_grad_l1_norm=100.00
+    grad_provenance/output_proj_grad_l2_norm=0.0520
+    grad_provenance/output_proj_grad_mean=-1.2353285712071727e-13
+    grad_provenance/output_proj_grad_abs_mean=9.706226364869508e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0301
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0520
+    throughput/total_tokens=901,775,360
+    throughput/total_training_Gflops=7,633,667,339
+    throughput/total_training_log_Gflops=22.76
+    throughput/device/tokens_per_second=56,031
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:29:03.356	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=440/1000,epoch=0]
+    optim/total_grad_norm=0.4354
+    train/CrossEntropyLoss=4.441
+    train/Perplexity=84.83
+    grad_provenance/embedding_grad_l1_norm=165.4
+    grad_provenance/embedding_grad_l2_norm=0.0319
+    grad_provenance/embedding_grad_mean=-2.4123498337802474e-17
+    grad_provenance/embedding_grad_abs_mean=2.465336137902341e-06
+    grad_provenance/output_proj_grad_l1_norm=100.1
+    grad_provenance/output_proj_grad_l2_norm=0.0424
+    grad_provenance/output_proj_grad_mean=-1.9232813109584974e-14
+    grad_provenance/output_proj_grad_abs_mean=9.72089878814586e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0299
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0424
+    throughput/total_tokens=922,746,880
+    throughput/total_training_Gflops=7,811,194,486
+    throughput/total_training_log_Gflops=22.78
+    throughput/device/tokens_per_second=56,052
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:29:50.175	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=450/1000,epoch=0]
+    optim/total_grad_norm=0.5149
+    train/CrossEntropyLoss=4.424
+    train/Perplexity=83.40
+    grad_provenance/embedding_grad_l1_norm=165.8
+    grad_provenance/embedding_grad_l2_norm=0.0328
+    grad_provenance/embedding_grad_mean=3.157196726277789e-16
+    grad_provenance/embedding_grad_abs_mean=2.4713394850550685e-06
+    grad_provenance/output_proj_grad_l1_norm=104.2
+    grad_provenance/output_proj_grad_l2_norm=0.1133
+    grad_provenance/output_proj_grad_mean=-3.233268416457519e-14
+    grad_provenance/output_proj_grad_abs_mean=1.0109932873092475e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0303
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.1133
+    throughput/total_tokens=943,718,400
+    throughput/total_training_Gflops=7,988,721,633
+    throughput/total_training_log_Gflops=22.80
+    throughput/device/tokens_per_second=56,013
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:30:36.948	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=460/1000,epoch=0]
+    optim/total_grad_norm=0.3953
+    train/CrossEntropyLoss=4.364
+    train/Perplexity=78.55
+    grad_provenance/embedding_grad_l1_norm=167.6
+    grad_provenance/embedding_grad_l2_norm=0.0313
+    grad_provenance/embedding_grad_mean=1.97758476261356e-16
+    grad_provenance/embedding_grad_abs_mean=2.49794902629219e-06
+    grad_provenance/output_proj_grad_l1_norm=101.9
+    grad_provenance/output_proj_grad_l2_norm=0.0447
+    grad_provenance/output_proj_grad_mean=-9.729798347221652e-14
+    grad_provenance/output_proj_grad_abs_mean=9.894201866700314e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0301
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0447
+    throughput/total_tokens=964,689,920
+    throughput/total_training_Gflops=8,166,248,781
+    throughput/total_training_log_Gflops=22.82
+    throughput/device/tokens_per_second=56,021
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:31:23.701	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=470/1000,epoch=0]
+    optim/total_grad_norm=0.7907
+    train/CrossEntropyLoss=4.282
+    train/Perplexity=72.37
+    grad_provenance/embedding_grad_l1_norm=160.4
+    grad_provenance/embedding_grad_l2_norm=0.0305
+    grad_provenance/embedding_grad_mean=-2.5261910618912253e-16
+    grad_provenance/embedding_grad_abs_mean=2.3900186079117702e-06
+    grad_provenance/output_proj_grad_l1_norm=97.24
+    grad_provenance/output_proj_grad_l2_norm=0.0441
+    grad_provenance/output_proj_grad_mean=-2.311878851335089e-14
+    grad_provenance/output_proj_grad_abs_mean=9.439046380066429e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0303
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0441
+    throughput/total_tokens=985,661,440
+    throughput/total_training_Gflops=8,343,775,928
+    throughput/total_training_log_Gflops=22.84
+    throughput/device/tokens_per_second=56,061
+    throughput/device/batches_per_second=0.2139
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:32:10.502	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=480/1000,epoch=0]
+    optim/total_grad_norm=0.4685
+    train/CrossEntropyLoss=4.305
+    train/Perplexity=74.09
+    grad_provenance/embedding_grad_l1_norm=154.8
+    grad_provenance/embedding_grad_l2_norm=0.0287
+    grad_provenance/embedding_grad_mean=-1.093959992037874e-16
+    grad_provenance/embedding_grad_abs_mean=2.306411943209241e-06
+    grad_provenance/output_proj_grad_l1_norm=96.97
+    grad_provenance/output_proj_grad_l2_norm=0.0463
+    grad_provenance/output_proj_grad_mean=-3.89678388298606e-14
+    grad_provenance/output_proj_grad_abs_mean=9.412873964720347e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0297
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0463
+    throughput/total_tokens=1,006,632,960
+    throughput/total_training_Gflops=8,521,303,076
+    throughput/total_training_log_Gflops=22.87
+    throughput/device/tokens_per_second=56,045
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:32:57.270	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=490/1000,epoch=0]
+    optim/total_grad_norm=0.3929
+    train/CrossEntropyLoss=4.282
+    train/Perplexity=72.35
+    grad_provenance/embedding_grad_l1_norm=159.6
+    grad_provenance/embedding_grad_l2_norm=0.0305
+    grad_provenance/embedding_grad_mean=-5.919743861770854e-17
+    grad_provenance/embedding_grad_abs_mean=2.3786883502907585e-06
+    grad_provenance/output_proj_grad_l1_norm=96.51
+    grad_provenance/output_proj_grad_l2_norm=0.0503
+    grad_provenance/output_proj_grad_mean=-5.2506345896586454e-14
+    grad_provenance/output_proj_grad_abs_mean=9.367825555273157e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0293
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0503
+    throughput/total_tokens=1,027,604,480
+    throughput/total_training_Gflops=8,698,830,223
+    throughput/total_training_log_Gflops=22.89
+    throughput/device/tokens_per_second=56,035
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:33:44.026	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=500/1000,epoch=0]
+    optim/total_grad_norm=0.5627
+    train/CrossEntropyLoss=4.315
+    train/Perplexity=74.84
+    grad_provenance/embedding_grad_l1_norm=149.7
+    grad_provenance/embedding_grad_l2_norm=0.0278
+    grad_provenance/embedding_grad_mean=-4.4777549723651333e-17
+    grad_provenance/embedding_grad_abs_mean=2.230369773315033e-06
+    grad_provenance/output_proj_grad_l1_norm=91.75
+    grad_provenance/output_proj_grad_l2_norm=0.0397
+    grad_provenance/output_proj_grad_mean=-2.6369209262287014e-15
+    grad_provenance/output_proj_grad_abs_mean=8.905407753445616e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0276
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0397
+    throughput/total_tokens=1,048,576,000
+    throughput/total_training_Gflops=8,876,357,371
+    throughput/total_training_log_Gflops=22.91
+    throughput/device/tokens_per_second=56,062
+    throughput/device/batches_per_second=0.2139
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:33:44.030	ripe-sun-crunches-fin-03:0	olmo.train:1375	INFO	Saving unsharded checkpoint...
+2025-12-26 18:33:44.534	ripe-sun-crunches-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-26 18:33:48.145	ripe-sun-crunches-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-26 18:33:54.962	ripe-sun-crunches-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-26 18:33:54.963	ripe-sun-crunches-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-26 18:33:56.166	ripe-sun-crunches-fin-03:0	olmo.train:1377	INFO	Unsharded checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-no-scale-1000/step500-unsharded
+2025-12-26 18:34:42.986	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=510/1000,epoch=0]
+    optim/total_grad_norm=0.4455
+    train/CrossEntropyLoss=4.238
+    train/Perplexity=69.24
+    grad_provenance/embedding_grad_l1_norm=150.2
+    grad_provenance/embedding_grad_l2_norm=0.0285
+    grad_provenance/embedding_grad_mean=-1.428436362249652e-16
+    grad_provenance/embedding_grad_abs_mean=2.238710067103966e-06
+    grad_provenance/output_proj_grad_l1_norm=90.97
+    grad_provenance/output_proj_grad_l2_norm=0.0453
+    grad_provenance/output_proj_grad_mean=-2.150029489839632e-14
+    grad_provenance/output_proj_grad_abs_mean=8.829911735119822e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0284
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0453
+    throughput/total_tokens=1,069,547,520
+    throughput/total_training_Gflops=9,053,884,518
+    throughput/total_training_log_Gflops=22.93
+    throughput/device/tokens_per_second=55,992
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:35:29.761	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=520/1000,epoch=0]
+    optim/total_grad_norm=0.3756
+    train/CrossEntropyLoss=4.197
+    train/Perplexity=66.51
+    grad_provenance/embedding_grad_l1_norm=213.1
+    grad_provenance/embedding_grad_l2_norm=0.0506
+    grad_provenance/embedding_grad_mean=9.64939933512099e-18
+    grad_provenance/embedding_grad_abs_mean=3.175184701831313e-06
+    grad_provenance/output_proj_grad_l1_norm=113.4
+    grad_provenance/output_proj_grad_l2_norm=0.2296
+    grad_provenance/output_proj_grad_mean=-8.693392211070634e-15
+    grad_provenance/output_proj_grad_abs_mean=1.1003198778780643e-06
+    grad_provenance/embedding_grad_rolling_avg=0.0330
+    grad_provenance/output_proj_clip_threshold=0.0033
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.2296
+    throughput/total_tokens=1,090,519,040
+    throughput/total_training_Gflops=9,231,411,665
+    throughput/total_training_log_Gflops=22.95
+    throughput/device/tokens_per_second=56,018
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:36:16.554	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=530/1000,epoch=0]
+    optim/total_grad_norm=0.5990
+    train/CrossEntropyLoss=4.174
+    train/Perplexity=64.97
+    grad_provenance/embedding_grad_l1_norm=153.1
+    grad_provenance/embedding_grad_l2_norm=0.0285
+    grad_provenance/embedding_grad_mean=-1.1384122811097797e-16
+    grad_provenance/embedding_grad_abs_mean=2.2818942397861974e-06
+    grad_provenance/output_proj_grad_l1_norm=93.62
+    grad_provenance/output_proj_grad_l2_norm=0.0449
+    grad_provenance/output_proj_grad_mean=-5.360925733281091e-14
+    grad_provenance/output_proj_grad_abs_mean=9.086914474210062e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0285
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0449
+    throughput/total_tokens=1,111,490,560
+    throughput/total_training_Gflops=9,408,938,813
+    throughput/total_training_log_Gflops=22.96
+    throughput/device/tokens_per_second=56,037
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:37:03.350	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=540/1000,epoch=0]
+    optim/total_grad_norm=0.4368
+    train/CrossEntropyLoss=4.215
+    train/Perplexity=67.71
+    grad_provenance/embedding_grad_l1_norm=152.7
+    grad_provenance/embedding_grad_l2_norm=0.0280
+    grad_provenance/embedding_grad_mean=3.0899761915836876e-17
+    grad_provenance/embedding_grad_abs_mean=2.2747658476873767e-06
+    grad_provenance/output_proj_grad_l1_norm=90.93
+    grad_provenance/output_proj_grad_l2_norm=0.0369
+    grad_provenance/output_proj_grad_mean=-3.182632448057478e-14
+    grad_provenance/output_proj_grad_abs_mean=8.825846293802897e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0296
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0369
+    throughput/total_tokens=1,132,462,080
+    throughput/total_training_Gflops=9,586,465,960
+    throughput/total_training_log_Gflops=22.98
+    throughput/device/tokens_per_second=56,023
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:37:50.147	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=550/1000,epoch=0]
+    optim/total_grad_norm=0.3814
+    train/CrossEntropyLoss=4.148
+    train/Perplexity=63.30
+    grad_provenance/embedding_grad_l1_norm=159.2
+    grad_provenance/embedding_grad_l2_norm=0.0300
+    grad_provenance/embedding_grad_mean=-6.098637220230962e-17
+    grad_provenance/embedding_grad_abs_mean=2.3726329345663544e-06
+    grad_provenance/output_proj_grad_l1_norm=101.4
+    grad_provenance/output_proj_grad_l2_norm=0.0420
+    grad_provenance/output_proj_grad_mean=3.539955329735778e-14
+    grad_provenance/output_proj_grad_abs_mean=9.843424777500331e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0302
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0420
+    throughput/total_tokens=1,153,433,600
+    throughput/total_training_Gflops=9,763,993,108
+    throughput/total_training_log_Gflops=23.00
+    throughput/device/tokens_per_second=56,020
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:38:36.938	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=560/1000,epoch=0]
+    optim/total_grad_norm=0.4131
+    train/CrossEntropyLoss=4.150
+    train/Perplexity=63.41
+    grad_provenance/embedding_grad_l1_norm=148.4
+    grad_provenance/embedding_grad_l2_norm=0.0270
+    grad_provenance/embedding_grad_mean=1.748276003132876e-16
+    grad_provenance/embedding_grad_abs_mean=2.21137474909483e-06
+    grad_provenance/output_proj_grad_l1_norm=89.52
+    grad_provenance/output_proj_grad_l2_norm=0.0362
+    grad_provenance/output_proj_grad_mean=-8.599002247560404e-15
+    grad_provenance/output_proj_grad_abs_mean=8.689278843121429e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0286
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0362
+    throughput/total_tokens=1,174,405,120
+    throughput/total_training_Gflops=9,941,520,255
+    throughput/total_training_log_Gflops=23.02
+    throughput/device/tokens_per_second=56,025
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:39:23.738	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=570/1000,epoch=0]
+    optim/total_grad_norm=0.5040
+    train/CrossEntropyLoss=4.096
+    train/Perplexity=60.10
+    grad_provenance/embedding_grad_l1_norm=174.2
+    grad_provenance/embedding_grad_l2_norm=0.0332
+    grad_provenance/embedding_grad_mean=2.8915671940188403e-16
+    grad_provenance/embedding_grad_abs_mean=2.5955368982977234e-06
+    grad_provenance/output_proj_grad_l1_norm=99.41
+    grad_provenance/output_proj_grad_l2_norm=0.0481
+    grad_provenance/output_proj_grad_mean=-7.73451872752677e-15
+    grad_provenance/output_proj_grad_abs_mean=9.6489088718954e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0308
+    grad_provenance/output_proj_clip_threshold=0.0031
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0481
+    throughput/total_tokens=1,195,376,640
+    throughput/total_training_Gflops=10,119,047,402
+    throughput/total_training_log_Gflops=23.04
+    throughput/device/tokens_per_second=56,023
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:40:10.511	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=580/1000,epoch=0]
+    optim/total_grad_norm=0.4028
+    train/CrossEntropyLoss=4.124
+    train/Perplexity=61.78
+    grad_provenance/embedding_grad_l1_norm=152.3
+    grad_provenance/embedding_grad_l2_norm=0.0279
+    grad_provenance/embedding_grad_mean=-2.0946785972419946e-16
+    grad_provenance/embedding_grad_abs_mean=2.2688705030304845e-06
+    grad_provenance/output_proj_grad_l1_norm=90.01
+    grad_provenance/output_proj_grad_l2_norm=0.0339
+    grad_provenance/output_proj_grad_mean=3.8039970140318034e-15
+    grad_provenance/output_proj_grad_abs_mean=8.736769245842879e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0282
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0339
+    throughput/total_tokens=1,216,348,160
+    throughput/total_training_Gflops=10,296,574,550
+    throughput/total_training_log_Gflops=23.06
+    throughput/device/tokens_per_second=56,031
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:40:57.331	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=590/1000,epoch=0]
+    optim/total_grad_norm=0.3949
+    train/CrossEntropyLoss=4.087
+    train/Perplexity=59.55
+    grad_provenance/embedding_grad_l1_norm=149.6
+    grad_provenance/embedding_grad_l2_norm=0.0276
+    grad_provenance/embedding_grad_mean=-4.445228907190568e-18
+    grad_provenance/embedding_grad_abs_mean=2.229256097052712e-06
+    grad_provenance/output_proj_grad_l1_norm=90.21
+    grad_provenance/output_proj_grad_l2_norm=0.0354
+    grad_provenance/output_proj_grad_mean=-6.5760232952375916e-15
+    grad_provenance/output_proj_grad_abs_mean=8.756479132898676e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0286
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0354
+    throughput/total_tokens=1,237,319,680
+    throughput/total_training_Gflops=10,474,101,697
+    throughput/total_training_log_Gflops=23.07
+    throughput/device/tokens_per_second=56,020
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:41:44.140	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=600/1000,epoch=0]
+    optim/total_grad_norm=0.4337
+    train/CrossEntropyLoss=4.058
+    train/Perplexity=57.85
+    grad_provenance/embedding_grad_l1_norm=151.4
+    grad_provenance/embedding_grad_l2_norm=0.0281
+    grad_provenance/embedding_grad_mean=1.5298092653770468e-16
+    grad_provenance/embedding_grad_abs_mean=2.256148491142085e-06
+    grad_provenance/output_proj_grad_l1_norm=93.39
+    grad_provenance/output_proj_grad_l2_norm=0.0365
+    grad_provenance/output_proj_grad_mean=-1.3971330738377433e-14
+    grad_provenance/output_proj_grad_abs_mean=9.065366270988306e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0276
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0365
+    throughput/total_tokens=1,258,291,200
+    throughput/total_training_Gflops=10,651,628,845
+    throughput/total_training_log_Gflops=23.09
+    throughput/device/tokens_per_second=56,001
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:42:30.932	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=610/1000,epoch=0]
+    optim/total_grad_norm=0.3244
+    train/CrossEntropyLoss=4.072
+    train/Perplexity=58.69
+    grad_provenance/embedding_grad_l1_norm=150.2
+    grad_provenance/embedding_grad_l2_norm=0.0276
+    grad_provenance/embedding_grad_mean=1.0099343236702474e-16
+    grad_provenance/embedding_grad_abs_mean=2.2385670490621123e-06
+    grad_provenance/output_proj_grad_l1_norm=88.68
+    grad_provenance/output_proj_grad_l2_norm=0.0385
+    grad_provenance/output_proj_grad_mean=2.107163862884523e-15
+    grad_provenance/output_proj_grad_abs_mean=8.607810855210118e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0292
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0385
+    throughput/total_tokens=1,279,262,720
+    throughput/total_training_Gflops=10,829,155,992
+    throughput/total_training_log_Gflops=23.11
+    throughput/device/tokens_per_second=56,015
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:43:17.739	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=620/1000,epoch=0]
+    optim/total_grad_norm=0.4947
+    train/CrossEntropyLoss=4.092
+    train/Perplexity=59.84
+    grad_provenance/embedding_grad_l1_norm=159.3
+    grad_provenance/embedding_grad_l2_norm=0.0294
+    grad_provenance/embedding_grad_mean=5.399326818977812e-17
+    grad_provenance/embedding_grad_abs_mean=2.3733584839646937e-06
+    grad_provenance/output_proj_grad_l1_norm=95.83
+    grad_provenance/output_proj_grad_l2_norm=0.0416
+    grad_provenance/output_proj_grad_mean=-1.136368695539916e-13
+    grad_provenance/output_proj_grad_abs_mean=9.302105468123045e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0278
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0416
+    throughput/total_tokens=1,300,234,240
+    throughput/total_training_Gflops=11,006,683,140
+    throughput/total_training_log_Gflops=23.12
+    throughput/device/tokens_per_second=56,016
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:44:04.529	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=630/1000,epoch=0]
+    optim/total_grad_norm=0.3681
+    train/CrossEntropyLoss=4.097
+    train/Perplexity=60.17
+    grad_provenance/embedding_grad_l1_norm=157.7
+    grad_provenance/embedding_grad_l2_norm=0.0292
+    grad_provenance/embedding_grad_mean=-7.697835424647081e-18
+    grad_provenance/embedding_grad_abs_mean=2.3500313091062708e-06
+    grad_provenance/output_proj_grad_l1_norm=96.97
+    grad_provenance/output_proj_grad_l2_norm=0.0354
+    grad_provenance/output_proj_grad_mean=-2.3958853767581077e-14
+    grad_provenance/output_proj_grad_abs_mean=9.412877943759668e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0302
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0354
+    throughput/total_tokens=1,321,205,760
+    throughput/total_training_Gflops=11,184,210,287
+    throughput/total_training_log_Gflops=23.14
+    throughput/device/tokens_per_second=56,019
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:44:51.338	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=640/1000,epoch=0]
+    optim/total_grad_norm=0.3902
+    train/CrossEntropyLoss=4.036
+    train/Perplexity=56.62
+    grad_provenance/embedding_grad_l1_norm=155.6
+    grad_provenance/embedding_grad_l2_norm=0.0288
+    grad_provenance/embedding_grad_mean=7.871307772244762e-17
+    grad_provenance/embedding_grad_abs_mean=2.3190450519905426e-06
+    grad_provenance/output_proj_grad_l1_norm=91.18
+    grad_provenance/output_proj_grad_l2_norm=0.0357
+    grad_provenance/output_proj_grad_mean=-1.6668034614748632e-14
+    grad_provenance/output_proj_grad_abs_mean=8.850294079820742e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0287
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0357
+    throughput/total_tokens=1,342,177,280
+    throughput/total_training_Gflops=11,361,737,434
+    throughput/total_training_log_Gflops=23.15
+    throughput/device/tokens_per_second=56,016
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:45:38.106	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=650/1000,epoch=0]
+    optim/total_grad_norm=0.3973
+    train/CrossEntropyLoss=4.053
+    train/Perplexity=57.57
+    grad_provenance/embedding_grad_l1_norm=165.5
+    grad_provenance/embedding_grad_l2_norm=0.0312
+    grad_provenance/embedding_grad_mean=-1.5439038936193583e-16
+    grad_provenance/embedding_grad_abs_mean=2.4656874302309006e-06
+    grad_provenance/output_proj_grad_l1_norm=94.75
+    grad_provenance/output_proj_grad_l2_norm=0.0397
+    grad_provenance/output_proj_grad_mean=-4.707790486114562e-14
+    grad_provenance/output_proj_grad_abs_mean=9.197294730256544e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0304
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0397
+    throughput/total_tokens=1,363,148,800
+    throughput/total_training_Gflops=11,539,264,582
+    throughput/total_training_log_Gflops=23.17
+    throughput/device/tokens_per_second=56,030
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:46:24.919	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=660/1000,epoch=0]
+    optim/total_grad_norm=0.3409
+    train/CrossEntropyLoss=4.012
+    train/Perplexity=55.27
+    grad_provenance/embedding_grad_l1_norm=162.4
+    grad_provenance/embedding_grad_l2_norm=0.0301
+    grad_provenance/embedding_grad_mean=-9.855397747893235e-17
+    grad_provenance/embedding_grad_abs_mean=2.4194901016016956e-06
+    grad_provenance/output_proj_grad_l1_norm=87.99
+    grad_provenance/output_proj_grad_l2_norm=0.0351
+    grad_provenance/output_proj_grad_mean=-7.058550013201107e-15
+    grad_provenance/output_proj_grad_abs_mean=8.540681051272259e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0292
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0351
+    throughput/total_tokens=1,384,120,320
+    throughput/total_training_Gflops=11,716,791,729
+    throughput/total_training_log_Gflops=23.18
+    throughput/device/tokens_per_second=56,027
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:47:11.703	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=670/1000,epoch=0]
+    optim/total_grad_norm=0.3806
+    train/CrossEntropyLoss=4.013
+    train/Perplexity=55.30
+    grad_provenance/embedding_grad_l1_norm=147.2
+    grad_provenance/embedding_grad_l2_norm=0.0268
+    grad_provenance/embedding_grad_mean=-1.3010426069826053e-17
+    grad_provenance/embedding_grad_abs_mean=2.1938133158982964e-06
+    grad_provenance/output_proj_grad_l1_norm=88.75
+    grad_provenance/output_proj_grad_l2_norm=0.0342
+    grad_provenance/output_proj_grad_mean=-1.5062697115530814e-14
+    grad_provenance/output_proj_grad_abs_mean=8.614919693172851e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0278
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0342
+    throughput/total_tokens=1,405,091,840
+    throughput/total_training_Gflops=11,894,318,877
+    throughput/total_training_log_Gflops=23.20
+    throughput/device/tokens_per_second=56,018
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:47:58.507	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=680/1000,epoch=0]
+    optim/total_grad_norm=0.4059
+    train/CrossEntropyLoss=3.973
+    train/Perplexity=53.12
+    grad_provenance/embedding_grad_l1_norm=157.3
+    grad_provenance/embedding_grad_l2_norm=0.0298
+    grad_provenance/embedding_grad_mean=-4.694595406862234e-17
+    grad_provenance/embedding_grad_abs_mean=2.3432364741893252e-06
+    grad_provenance/output_proj_grad_l1_norm=92.09
+    grad_provenance/output_proj_grad_l2_norm=0.0342
+    grad_provenance/output_proj_grad_mean=-3.022575069465232e-14
+    grad_provenance/output_proj_grad_abs_mean=8.938648647927039e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0289
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0342
+    throughput/total_tokens=1,426,063,360
+    throughput/total_training_Gflops=12,071,846,024
+    throughput/total_training_log_Gflops=23.21
+    throughput/device/tokens_per_second=56,024
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:48:45.325	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=690/1000,epoch=0]
+    optim/total_grad_norm=0.3814
+    train/CrossEntropyLoss=3.996
+    train/Perplexity=54.39
+    grad_provenance/embedding_grad_l1_norm=142.5
+    grad_provenance/embedding_grad_l2_norm=0.0265
+    grad_provenance/embedding_grad_mean=-2.1651517384535524e-16
+    grad_provenance/embedding_grad_abs_mean=2.1239707166387234e-06
+    grad_provenance/output_proj_grad_l1_norm=86.45
+    grad_provenance/output_proj_grad_l2_norm=0.0352
+    grad_provenance/output_proj_grad_mean=-1.8829474654827316e-14
+    grad_provenance/output_proj_grad_abs_mean=8.391432402277132e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0278
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0352
+    throughput/total_tokens=1,447,034,880
+    throughput/total_training_Gflops=12,249,373,172
+    throughput/total_training_log_Gflops=23.23
+    throughput/device/tokens_per_second=56,003
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:49:32.097	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=700/1000,epoch=0]
+    optim/total_grad_norm=0.4704
+    train/CrossEntropyLoss=3.958
+    train/Perplexity=52.36
+    grad_provenance/embedding_grad_l1_norm=164.4
+    grad_provenance/embedding_grad_l2_norm=0.0305
+    grad_provenance/embedding_grad_mean=-1.0814916670542907e-16
+    grad_provenance/embedding_grad_abs_mean=2.4503208351234207e-06
+    grad_provenance/output_proj_grad_l1_norm=88.11
+    grad_provenance/output_proj_grad_l2_norm=0.0389
+    grad_provenance/output_proj_grad_mean=1.9577003253635865e-14
+    grad_provenance/output_proj_grad_abs_mean=8.552774488634896e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0288
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0389
+    throughput/total_tokens=1,468,006,400
+    throughput/total_training_Gflops=12,426,900,319
+    throughput/total_training_log_Gflops=23.24
+    throughput/device/tokens_per_second=56,022
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:50:18.865	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=710/1000,epoch=0]
+    optim/total_grad_norm=0.3485
+    train/CrossEntropyLoss=3.953
+    train/Perplexity=52.08
+    grad_provenance/embedding_grad_l1_norm=147.7
+    grad_provenance/embedding_grad_l2_norm=0.0268
+    grad_provenance/embedding_grad_mean=-7.85504473965748e-17
+    grad_provenance/embedding_grad_abs_mean=2.200433300458826e-06
+    grad_provenance/output_proj_grad_l1_norm=86.44
+    grad_provenance/output_proj_grad_l2_norm=0.0351
+    grad_provenance/output_proj_grad_mean=-1.4121832399478524e-14
+    grad_provenance/output_proj_grad_abs_mean=8.390067023356096e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0276
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0351
+    throughput/total_tokens=1,488,977,920
+    throughput/total_training_Gflops=12,604,427,466
+    throughput/total_training_log_Gflops=23.26
+    throughput/device/tokens_per_second=56,052
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:51:05.665	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=720/1000,epoch=0]
+    optim/total_grad_norm=0.3083
+    train/CrossEntropyLoss=3.955
+    train/Perplexity=52.21
+    grad_provenance/embedding_grad_l1_norm=149.6
+    grad_provenance/embedding_grad_l2_norm=0.0281
+    grad_provenance/embedding_grad_mean=2.802662615875029e-17
+    grad_provenance/embedding_grad_abs_mean=2.228748826382798e-06
+    grad_provenance/output_proj_grad_l1_norm=89.50
+    grad_provenance/output_proj_grad_l2_norm=0.0386
+    grad_provenance/output_proj_grad_mean=4.571124261173922e-15
+    grad_provenance/output_proj_grad_abs_mean=8.687177910360333e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0281
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0386
+    throughput/total_tokens=1,509,949,440
+    throughput/total_training_Gflops=12,781,954,614
+    throughput/total_training_log_Gflops=23.27
+    throughput/device/tokens_per_second=56,036
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:51:52.462	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=730/1000,epoch=0]
+    optim/total_grad_norm=0.3264
+    train/CrossEntropyLoss=3.907
+    train/Perplexity=49.77
+    grad_provenance/embedding_grad_l1_norm=158.1
+    grad_provenance/embedding_grad_l2_norm=0.0299
+    grad_provenance/embedding_grad_mean=-4.755310728521422e-16
+    grad_provenance/embedding_grad_abs_mean=2.355467131565092e-06
+    grad_provenance/output_proj_grad_l1_norm=87.46
+    grad_provenance/output_proj_grad_l2_norm=0.0357
+    grad_provenance/output_proj_grad_mean=-5.970291399931202e-15
+    grad_provenance/output_proj_grad_abs_mean=8.488975709042279e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0284
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0357
+    throughput/total_tokens=1,530,920,960
+    throughput/total_training_Gflops=12,959,481,761
+    throughput/total_training_log_Gflops=23.29
+    throughput/device/tokens_per_second=56,017
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:52:39.192	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=740/1000,epoch=0]
+    optim/total_grad_norm=0.3237
+    train/CrossEntropyLoss=3.903
+    train/Perplexity=49.56
+    grad_provenance/embedding_grad_l1_norm=150.8
+    grad_provenance/embedding_grad_l2_norm=0.0275
+    grad_provenance/embedding_grad_mean=-2.7592945289756088e-17
+    grad_provenance/embedding_grad_abs_mean=2.2476183403341565e-06
+    grad_provenance/output_proj_grad_l1_norm=87.61
+    grad_provenance/output_proj_grad_l2_norm=0.0341
+    grad_provenance/output_proj_grad_mean=-1.712384845465459e-14
+    grad_provenance/output_proj_grad_abs_mean=8.504134143549891e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0281
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0341
+    throughput/total_tokens=1,551,892,480
+    throughput/total_training_Gflops=13,137,008,909
+    throughput/total_training_log_Gflops=23.30
+    throughput/device/tokens_per_second=56,061
+    throughput/device/batches_per_second=0.2139
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:53:25.982	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=750/1000,epoch=0]
+    optim/total_grad_norm=0.3144
+    train/CrossEntropyLoss=3.979
+    train/Perplexity=53.48
+    grad_provenance/embedding_grad_l1_norm=153.3
+    grad_provenance/embedding_grad_l2_norm=0.0287
+    grad_provenance/embedding_grad_mean=1.2457482961858446e-16
+    grad_provenance/embedding_grad_abs_mean=2.283949470438529e-06
+    grad_provenance/output_proj_grad_l1_norm=88.34
+    grad_provenance/output_proj_grad_l2_norm=0.0411
+    grad_provenance/output_proj_grad_mean=-1.7010601843672583e-14
+    grad_provenance/output_proj_grad_abs_mean=8.57460065617488e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0288
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0411
+    throughput/total_tokens=1,572,864,000
+    throughput/total_training_Gflops=13,314,536,056
+    throughput/total_training_log_Gflops=23.31
+    throughput/device/tokens_per_second=56,064
+    throughput/device/batches_per_second=0.2139
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:54:12.756	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=760/1000,epoch=0]
+    optim/total_grad_norm=0.2887
+    train/CrossEntropyLoss=3.925
+    train/Perplexity=50.67
+    grad_provenance/embedding_grad_l1_norm=152.2
+    grad_provenance/embedding_grad_l2_norm=0.0283
+    grad_provenance/embedding_grad_mean=-2.927345865710862e-18
+    grad_provenance/embedding_grad_abs_mean=2.267543550260598e-06
+    grad_provenance/output_proj_grad_l1_norm=92.21
+    grad_provenance/output_proj_grad_l2_norm=0.0400
+    grad_provenance/output_proj_grad_mean=-2.502080438454221e-14
+    grad_provenance/output_proj_grad_abs_mean=8.95056075478351e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0279
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0400
+    throughput/total_tokens=1,593,835,520
+    throughput/total_training_Gflops=13,492,063,203
+    throughput/total_training_log_Gflops=23.33
+    throughput/device/tokens_per_second=56,038
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:54:59.529	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=770/1000,epoch=0]
+    optim/total_grad_norm=0.4104
+    train/CrossEntropyLoss=3.900
+    train/Perplexity=49.39
+    grad_provenance/embedding_grad_l1_norm=160.1
+    grad_provenance/embedding_grad_l2_norm=0.0297
+    grad_provenance/embedding_grad_mean=-3.350184712980209e-17
+    grad_provenance/embedding_grad_abs_mean=2.386320375080686e-06
+    grad_provenance/output_proj_grad_l1_norm=86.82
+    grad_provenance/output_proj_grad_l2_norm=0.0363
+    grad_provenance/output_proj_grad_mean=-3.904241838680045e-14
+    grad_provenance/output_proj_grad_abs_mean=8.427295483670605e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0282
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0363
+    throughput/total_tokens=1,614,807,040
+    throughput/total_training_Gflops=13,669,590,351
+    throughput/total_training_log_Gflops=23.34
+    throughput/device/tokens_per_second=56,048
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:55:46.304	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=780/1000,epoch=0]
+    optim/total_grad_norm=0.3297
+    train/CrossEntropyLoss=3.849
+    train/Perplexity=46.93
+    grad_provenance/embedding_grad_l1_norm=159.4
+    grad_provenance/embedding_grad_l2_norm=0.0292
+    grad_provenance/embedding_grad_mean=3.0666658448752493e-16
+    grad_provenance/embedding_grad_abs_mean=2.375630629103398e-06
+    grad_provenance/output_proj_grad_l1_norm=89.61
+    grad_provenance/output_proj_grad_l2_norm=0.0346
+    grad_provenance/output_proj_grad_mean=-2.34791688451556e-14
+    grad_provenance/output_proj_grad_abs_mean=8.69776442868897e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0294
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0346
+    throughput/total_tokens=1,635,778,560
+    throughput/total_training_Gflops=13,847,117,498
+    throughput/total_training_log_Gflops=23.35
+    throughput/device/tokens_per_second=56,047
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:56:33.075	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=790/1000,epoch=0]
+    optim/total_grad_norm=0.2976
+    train/CrossEntropyLoss=3.928
+    train/Perplexity=50.79
+    grad_provenance/embedding_grad_l1_norm=147.6
+    grad_provenance/embedding_grad_l2_norm=0.0269
+    grad_provenance/embedding_grad_mean=-5.079487178094588e-17
+    grad_provenance/embedding_grad_abs_mean=2.1998348529450595e-06
+    grad_provenance/output_proj_grad_l1_norm=85.18
+    grad_provenance/output_proj_grad_l2_norm=0.0347
+    grad_provenance/output_proj_grad_mean=-8.682057216170477e-15
+    grad_provenance/output_proj_grad_abs_mean=8.268358442364843e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0279
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0347
+    throughput/total_tokens=1,656,750,080
+    throughput/total_training_Gflops=14,024,644,646
+    throughput/total_training_log_Gflops=23.36
+    throughput/device/tokens_per_second=56,049
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:57:19.864	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=800/1000,epoch=0]
+    optim/total_grad_norm=0.3029
+    train/CrossEntropyLoss=3.884
+    train/Perplexity=48.61
+    grad_provenance/embedding_grad_l1_norm=147.7
+    grad_provenance/embedding_grad_l2_norm=0.0272
+    grad_provenance/embedding_grad_mean=5.833007687972014e-17
+    grad_provenance/embedding_grad_abs_mean=2.2014082787791267e-06
+    grad_provenance/output_proj_grad_l1_norm=81.03
+    grad_provenance/output_proj_grad_l2_norm=0.0378
+    grad_provenance/output_proj_grad_mean=-2.2269329663735654e-14
+    grad_provenance/output_proj_grad_abs_mean=7.864782674005255e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0284
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0378
+    throughput/total_tokens=1,677,721,600
+    throughput/total_training_Gflops=14,202,171,793
+    throughput/total_training_log_Gflops=23.38
+    throughput/device/tokens_per_second=56,040
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:58:06.632	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=810/1000,epoch=0]
+    optim/total_grad_norm=0.2917
+    train/CrossEntropyLoss=3.873
+    train/Perplexity=48.07
+    grad_provenance/embedding_grad_l1_norm=165.5
+    grad_provenance/embedding_grad_l2_norm=0.0313
+    grad_provenance/embedding_grad_mean=-2.4936649967166602e-17
+    grad_provenance/embedding_grad_abs_mean=2.466665819156333e-06
+    grad_provenance/output_proj_grad_l1_norm=94.59
+    grad_provenance/output_proj_grad_l2_norm=0.0416
+    grad_provenance/output_proj_grad_mean=-2.6365855011815887e-15
+    grad_provenance/output_proj_grad_abs_mean=9.181143241221434e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0292
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0416
+    throughput/total_tokens=1,698,693,120
+    throughput/total_training_Gflops=14,379,698,941
+    throughput/total_training_log_Gflops=23.39
+    throughput/device/tokens_per_second=56,042
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:58:53.405	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=820/1000,epoch=0]
+    optim/total_grad_norm=0.3103
+    train/CrossEntropyLoss=3.904
+    train/Perplexity=49.61
+    grad_provenance/embedding_grad_l1_norm=146.0
+    grad_provenance/embedding_grad_l2_norm=0.0265
+    grad_provenance/embedding_grad_mean=-1.975416358268589e-16
+    grad_provenance/embedding_grad_abs_mean=2.17559636439546e-06
+    grad_provenance/output_proj_grad_l1_norm=84.44
+    grad_provenance/output_proj_grad_l2_norm=0.0340
+    grad_provenance/output_proj_grad_mean=-2.554621722765816e-14
+    grad_provenance/output_proj_grad_abs_mean=8.196561225304322e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0293
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0340
+    throughput/total_tokens=1,719,664,640
+    throughput/total_training_Gflops=14,557,226,088
+    throughput/total_training_log_Gflops=23.40
+    throughput/device/tokens_per_second=56,052
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 18:59:40.237	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=830/1000,epoch=0]
+    optim/total_grad_norm=0.2903
+    train/CrossEntropyLoss=3.907
+    train/Perplexity=49.76
+    grad_provenance/embedding_grad_l1_norm=162.4
+    grad_provenance/embedding_grad_l2_norm=0.0298
+    grad_provenance/embedding_grad_mean=7.789992609308349e-17
+    grad_provenance/embedding_grad_abs_mean=2.4193950594053604e-06
+    grad_provenance/output_proj_grad_l1_norm=88.42
+    grad_provenance/output_proj_grad_l2_norm=0.0344
+    grad_provenance/output_proj_grad_mean=-1.10104889547674e-14
+    grad_provenance/output_proj_grad_abs_mean=8.582516102251248e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0294
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0344
+    throughput/total_tokens=1,740,636,160
+    throughput/total_training_Gflops=14,734,753,235
+    throughput/total_training_log_Gflops=23.41
+    throughput/device/tokens_per_second=56,013
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:00:27.058	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=840/1000,epoch=0]
+    optim/total_grad_norm=0.3320
+    train/CrossEntropyLoss=3.914
+    train/Perplexity=50.12
+    grad_provenance/embedding_grad_l1_norm=154.5
+    grad_provenance/embedding_grad_l2_norm=0.0285
+    grad_provenance/embedding_grad_mean=-7.48099499014998e-17
+    grad_provenance/embedding_grad_abs_mean=2.3023985704639927e-06
+    grad_provenance/output_proj_grad_l1_norm=85.76
+    grad_provenance/output_proj_grad_l2_norm=0.0352
+    grad_provenance/output_proj_grad_mean=-4.0537231638928736e-14
+    grad_provenance/output_proj_grad_abs_mean=8.324480518240307e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0294
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0352
+    throughput/total_tokens=1,761,607,680
+    throughput/total_training_Gflops=14,912,280,383
+    throughput/total_training_log_Gflops=23.43
+    throughput/device/tokens_per_second=55,984
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:01:13.885	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=850/1000,epoch=0]
+    optim/total_grad_norm=0.2764
+    train/CrossEntropyLoss=3.896
+    train/Perplexity=49.19
+    grad_provenance/embedding_grad_l1_norm=151.7
+    grad_provenance/embedding_grad_l2_norm=0.0278
+    grad_provenance/embedding_grad_mean=1.0278236595162582e-16
+    grad_provenance/embedding_grad_abs_mean=2.260978817503201e-06
+    grad_provenance/output_proj_grad_l1_norm=86.37
+    grad_provenance/output_proj_grad_l2_norm=0.0342
+    grad_provenance/output_proj_grad_mean=5.283305751577075e-15
+    grad_provenance/output_proj_grad_abs_mean=8.383474892070808e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0289
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0342
+    throughput/total_tokens=1,782,579,200
+    throughput/total_training_Gflops=15,089,807,530
+    throughput/total_training_log_Gflops=23.44
+    throughput/device/tokens_per_second=55,988
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:02:00.685	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=860/1000,epoch=0]
+    optim/total_grad_norm=0.3743
+    train/CrossEntropyLoss=3.933
+    train/Perplexity=51.07
+    grad_provenance/embedding_grad_l1_norm=138.8
+    grad_provenance/embedding_grad_l2_norm=0.0259
+    grad_provenance/embedding_grad_mean=-1.478851763270228e-16
+    grad_provenance/embedding_grad_abs_mean=2.0680049601651262e-06
+    grad_provenance/output_proj_grad_l1_norm=77.34
+    grad_provenance/output_proj_grad_l2_norm=0.0335
+    grad_provenance/output_proj_grad_mean=-4.695718911363472e-14
+    grad_provenance/output_proj_grad_abs_mean=7.507210852963908e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0282
+    grad_provenance/output_proj_clip_threshold=0.0028
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0335
+    throughput/total_tokens=1,803,550,720
+    throughput/total_training_Gflops=15,267,334,678
+    throughput/total_training_log_Gflops=23.45
+    throughput/device/tokens_per_second=56,000
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:02:47.503	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=870/1000,epoch=0]
+    optim/total_grad_norm=0.3474
+    train/CrossEntropyLoss=3.918
+    train/Perplexity=50.31
+    grad_provenance/embedding_grad_l1_norm=156.3
+    grad_provenance/embedding_grad_l2_norm=0.0286
+    grad_provenance/embedding_grad_mean=-1.2576745200831851e-16
+    grad_provenance/embedding_grad_abs_mean=2.329208655282855e-06
+    grad_provenance/output_proj_grad_l1_norm=87.19
+    grad_provenance/output_proj_grad_l2_norm=0.0326
+    grad_provenance/output_proj_grad_mean=-2.46813101911509e-14
+    grad_provenance/output_proj_grad_abs_mean=8.463625249532924e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0296
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0326
+    throughput/total_tokens=1,824,522,240
+    throughput/total_training_Gflops=15,444,861,825
+    throughput/total_training_log_Gflops=23.46
+    throughput/device/tokens_per_second=56,005
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:03:34.267	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=880/1000,epoch=0]
+    optim/total_grad_norm=0.3347
+    train/CrossEntropyLoss=3.867
+    train/Perplexity=47.80
+    grad_provenance/embedding_grad_l1_norm=155.6
+    grad_provenance/embedding_grad_l2_norm=0.0297
+    grad_provenance/embedding_grad_mean=1.349831704744453e-16
+    grad_provenance/embedding_grad_abs_mean=2.319229906788678e-06
+    grad_provenance/output_proj_grad_l1_norm=83.18
+    grad_provenance/output_proj_grad_l2_norm=0.0335
+    grad_provenance/output_proj_grad_mean=4.004977603624515e-15
+    grad_provenance/output_proj_grad_abs_mean=8.073763524407696e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0295
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0335
+    throughput/total_tokens=1,845,493,760
+    throughput/total_training_Gflops=15,622,388,973
+    throughput/total_training_log_Gflops=23.47
+    throughput/device/tokens_per_second=56,027
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:04:21.082	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=890/1000,epoch=0]
+    optim/total_grad_norm=0.3026
+    train/CrossEntropyLoss=3.861
+    train/Perplexity=47.50
+    grad_provenance/embedding_grad_l1_norm=147.4
+    grad_provenance/embedding_grad_l2_norm=0.0273
+    grad_provenance/embedding_grad_mean=6.662422349923425e-17
+    grad_provenance/embedding_grad_abs_mean=2.196406740040402e-06
+    grad_provenance/output_proj_grad_l1_norm=81.29
+    grad_provenance/output_proj_grad_l2_norm=0.0325
+    grad_provenance/output_proj_grad_mean=-2.5347001854727526e-14
+    grad_provenance/output_proj_grad_abs_mean=7.89020248248562e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0299
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0325
+    throughput/total_tokens=1,866,465,280
+    throughput/total_training_Gflops=15,799,916,120
+    throughput/total_training_log_Gflops=23.48
+    throughput/device/tokens_per_second=56,028
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:05:07.897	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=900/1000,epoch=0]
+    optim/total_grad_norm=0.3167
+    train/CrossEntropyLoss=3.891
+    train/Perplexity=48.98
+    grad_provenance/embedding_grad_l1_norm=155.8
+    grad_provenance/embedding_grad_l2_norm=0.0291
+    grad_provenance/embedding_grad_mean=-2.47198095326695e-17
+    grad_provenance/embedding_grad_abs_mean=2.320873136341106e-06
+    grad_provenance/output_proj_grad_l1_norm=82.85
+    grad_provenance/output_proj_grad_l2_norm=0.0310
+    grad_provenance/output_proj_grad_mean=7.298374686721953e-16
+    grad_provenance/output_proj_grad_abs_mean=8.042190415835648e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0298
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0310
+    throughput/total_tokens=1,887,436,800
+    throughput/total_training_Gflops=15,977,443,267
+    throughput/total_training_log_Gflops=23.49
+    throughput/device/tokens_per_second=55,998
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:05:54.722	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=910/1000,epoch=0]
+    optim/total_grad_norm=0.2813
+    train/CrossEntropyLoss=3.827
+    train/Perplexity=45.93
+    grad_provenance/embedding_grad_l1_norm=163.1
+    grad_provenance/embedding_grad_l2_norm=0.0310
+    grad_provenance/embedding_grad_mean=-1.235990476633475e-17
+    grad_provenance/embedding_grad_abs_mean=2.4296805349877104e-06
+    grad_provenance/output_proj_grad_l1_norm=88.44
+    grad_provenance/output_proj_grad_l2_norm=0.0344
+    grad_provenance/output_proj_grad_mean=-3.515780331794782e-14
+    grad_provenance/output_proj_grad_abs_mean=8.584385113863391e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0291
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0344
+    throughput/total_tokens=1,908,408,320
+    throughput/total_training_Gflops=16,154,970,415
+    throughput/total_training_log_Gflops=23.51
+    throughput/device/tokens_per_second=55,992
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:06:41.523	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=920/1000,epoch=0]
+    optim/total_grad_norm=0.3167
+    train/CrossEntropyLoss=3.874
+    train/Perplexity=48.14
+    grad_provenance/embedding_grad_l1_norm=145.8
+    grad_provenance/embedding_grad_l2_norm=0.0274
+    grad_provenance/embedding_grad_mean=1.8323016715005025e-16
+    grad_provenance/embedding_grad_abs_mean=2.172941549360985e-06
+    grad_provenance/output_proj_grad_l1_norm=80.80
+    grad_provenance/output_proj_grad_l2_norm=0.0404
+    grad_provenance/output_proj_grad_mean=-1.6195873038960668e-14
+    grad_provenance/output_proj_grad_abs_mean=7.842637614885462e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0274
+    grad_provenance/output_proj_clip_threshold=0.0027
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0404
+    throughput/total_tokens=1,929,379,840
+    throughput/total_training_Gflops=16,332,497,562
+    throughput/total_training_log_Gflops=23.52
+    throughput/device/tokens_per_second=56,001
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:07:28.323	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=930/1000,epoch=0]
+    optim/total_grad_norm=0.2952
+    train/CrossEntropyLoss=3.960
+    train/Perplexity=52.45
+    grad_provenance/embedding_grad_l1_norm=151.0
+    grad_provenance/embedding_grad_l2_norm=0.0276
+    grad_provenance/embedding_grad_mean=2.667137344314341e-17
+    grad_provenance/embedding_grad_abs_mean=2.2500380509882234e-06
+    grad_provenance/output_proj_grad_l1_norm=87.48
+    grad_provenance/output_proj_grad_l2_norm=0.0339
+    grad_provenance/output_proj_grad_mean=-6.430889281923251e-15
+    grad_provenance/output_proj_grad_abs_mean=8.491655876241566e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0288
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0339
+    throughput/total_tokens=1,950,351,360
+    throughput/total_training_Gflops=16,510,024,710
+    throughput/total_training_log_Gflops=23.53
+    throughput/device/tokens_per_second=56,016
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:08:15.159	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=940/1000,epoch=0]
+    optim/total_grad_norm=0.2793
+    train/CrossEntropyLoss=3.905
+    train/Perplexity=49.66
+    grad_provenance/embedding_grad_l1_norm=157.5
+    grad_provenance/embedding_grad_l2_norm=0.0292
+    grad_provenance/embedding_grad_mean=2.458970527197124e-16
+    grad_provenance/embedding_grad_abs_mean=2.3473401142837247e-06
+    grad_provenance/output_proj_grad_l1_norm=83.91
+    grad_provenance/output_proj_grad_l2_norm=0.0326
+    grad_provenance/output_proj_grad_mean=-1.7912144749214487e-14
+    grad_provenance/output_proj_grad_abs_mean=8.145299261741457e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0292
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0326
+    throughput/total_tokens=1,971,322,880
+    throughput/total_training_Gflops=16,687,551,857
+    throughput/total_training_log_Gflops=23.54
+    throughput/device/tokens_per_second=55,994
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:09:01.940	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=950/1000,epoch=0]
+    optim/total_grad_norm=0.3233
+    train/CrossEntropyLoss=3.859
+    train/Perplexity=47.41
+    grad_provenance/embedding_grad_l1_norm=146.2
+    grad_provenance/embedding_grad_l2_norm=0.0274
+    grad_provenance/embedding_grad_mean=-1.6815975695250174e-16
+    grad_provenance/embedding_grad_abs_mean=2.1786488559882855e-06
+    grad_provenance/output_proj_grad_l1_norm=85.93
+    grad_provenance/output_proj_grad_l2_norm=0.0383
+    grad_provenance/output_proj_grad_mean=9.823388711629674e-14
+    grad_provenance/output_proj_grad_abs_mean=8.340799126926868e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0290
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0383
+    throughput/total_tokens=1,992,294,400
+    throughput/total_training_Gflops=16,865,079,004
+    throughput/total_training_log_Gflops=23.55
+    throughput/device/tokens_per_second=56,006
+    throughput/device/batches_per_second=0.2136
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:09:48.732	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=960/1000,epoch=0]
+    optim/total_grad_norm=0.3485
+    train/CrossEntropyLoss=3.834
+    train/Perplexity=46.24
+    grad_provenance/embedding_grad_l1_norm=152.5
+    grad_provenance/embedding_grad_l2_norm=0.0281
+    grad_provenance/embedding_grad_mean=-1.0538445116559103e-16
+    grad_provenance/embedding_grad_abs_mean=2.2718977561453357e-06
+    grad_provenance/output_proj_grad_l1_norm=94.61
+    grad_provenance/output_proj_grad_l2_norm=0.0441
+    grad_provenance/output_proj_grad_mean=4.907567272482635e-14
+    grad_provenance/output_proj_grad_abs_mean=9.183730753647978e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0292
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0441
+    throughput/total_tokens=2,013,265,920
+    throughput/total_training_Gflops=17,042,606,152
+    throughput/total_training_log_Gflops=23.56
+    throughput/device/tokens_per_second=56,033
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:10:35.524	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=970/1000,epoch=0]
+    optim/total_grad_norm=0.2604
+    train/CrossEntropyLoss=3.832
+    train/Perplexity=46.16
+    grad_provenance/embedding_grad_l1_norm=154.0
+    grad_provenance/embedding_grad_l2_norm=0.0282
+    grad_provenance/embedding_grad_mean=1.5092094240998222e-16
+    grad_provenance/embedding_grad_abs_mean=2.2946178432903253e-06
+    grad_provenance/output_proj_grad_l1_norm=82.65
+    grad_provenance/output_proj_grad_l2_norm=0.0325
+    grad_provenance/output_proj_grad_mean=-2.3053053674446274e-14
+    grad_provenance/output_proj_grad_abs_mean=8.022540782803844e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0299
+    grad_provenance/output_proj_clip_threshold=0.0030
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0325
+    throughput/total_tokens=2,034,237,440
+    throughput/total_training_Gflops=17,220,133,299
+    throughput/total_training_log_Gflops=23.57
+    throughput/device/tokens_per_second=56,026
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:11:22.288	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=980/1000,epoch=0]
+    optim/total_grad_norm=0.2662
+    train/CrossEntropyLoss=3.904
+    train/Perplexity=49.61
+    grad_provenance/embedding_grad_l1_norm=151.9
+    grad_provenance/embedding_grad_l2_norm=0.0281
+    grad_provenance/embedding_grad_mean=-4.5644911461639737e-17
+    grad_provenance/embedding_grad_abs_mean=2.2633512344327755e-06
+    grad_provenance/output_proj_grad_l1_norm=89.88
+    grad_provenance/output_proj_grad_l2_norm=0.0325
+    grad_provenance/output_proj_grad_mean=1.3605952912183923e-14
+    grad_provenance/output_proj_grad_abs_mean=8.724780968805135e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0287
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0325
+    throughput/total_tokens=2,055,208,960
+    throughput/total_training_Gflops=17,397,660,447
+    throughput/total_training_log_Gflops=23.58
+    throughput/device/tokens_per_second=56,043
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:12:09.086	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=990/1000,epoch=0]
+    optim/total_grad_norm=0.3817
+    train/CrossEntropyLoss=3.837
+    train/Perplexity=46.40
+    grad_provenance/embedding_grad_l1_norm=153.8
+    grad_provenance/embedding_grad_l2_norm=0.0286
+    grad_provenance/embedding_grad_mean=-1.7705021476688287e-16
+    grad_provenance/embedding_grad_abs_mean=2.2918375179870054e-06
+    grad_provenance/output_proj_grad_l1_norm=79.15
+    grad_provenance/output_proj_grad_l2_norm=0.0318
+    grad_provenance/output_proj_grad_mean=-7.079013482173824e-15
+    grad_provenance/output_proj_grad_abs_mean=7.682866112190823e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0288
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0318
+    throughput/total_tokens=2,076,180,480
+    throughput/total_training_Gflops=17,575,187,594
+    throughput/total_training_log_Gflops=23.59
+    throughput/device/tokens_per_second=56,042
+    throughput/device/batches_per_second=0.2138
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:12:55.885	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=1000/1000,epoch=0]
+    optim/total_grad_norm=0.2932
+    train/CrossEntropyLoss=3.853
+    train/Perplexity=47.12
+    grad_provenance/embedding_grad_l1_norm=157.2
+    grad_provenance/embedding_grad_l2_norm=0.0288
+    grad_provenance/embedding_grad_mean=-2.6454533008646308e-17
+    grad_provenance/embedding_grad_abs_mean=2.341741492273286e-06
+    grad_provenance/output_proj_grad_l1_norm=83.03
+    grad_provenance/output_proj_grad_l2_norm=0.0308
+    grad_provenance/output_proj_grad_mean=-9.808771125245728e-15
+    grad_provenance/output_proj_grad_abs_mean=8.059324727582862e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0290
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0308
+    throughput/total_tokens=2,097,152,000
+    throughput/total_training_Gflops=17,752,714,742
+    throughput/total_training_log_Gflops=23.60
+    throughput/device/tokens_per_second=56,019
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:12:55.888	ripe-sun-crunches-fin-03:0	olmo.train:1375	INFO	Saving unsharded checkpoint...
+2025-12-26 19:12:56.393	ripe-sun-crunches-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-26 19:13:00.154	ripe-sun-crunches-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-26 19:13:07.625	ripe-sun-crunches-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-26 19:13:07.626	ripe-sun-crunches-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-26 19:13:09.239	ripe-sun-crunches-fin-03:0	olmo.train:1377	INFO	Unsharded checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-no-scale-1000/step1000-unsharded
+2025-12-26 19:13:56.031	ripe-sun-crunches-fin-03:0	olmo.train:990	INFO	[step=1010/1000,epoch=0]
+    optim/total_grad_norm=0.2814
+    train/CrossEntropyLoss=3.803
+    train/Perplexity=44.84
+    grad_provenance/embedding_grad_l1_norm=153.4
+    grad_provenance/embedding_grad_l2_norm=0.0289
+    grad_provenance/embedding_grad_mean=-1.2891163830852648e-16
+    grad_provenance/embedding_grad_abs_mean=2.2863162030262174e-06
+    grad_provenance/output_proj_grad_l1_norm=81.36
+    grad_provenance/output_proj_grad_l2_norm=0.0339
+    grad_provenance/output_proj_grad_mean=8.682163095288884e-15
+    grad_provenance/output_proj_grad_abs_mean=7.897358500486007e-07
+    grad_provenance/embedding_grad_rolling_avg=0.0289
+    grad_provenance/output_proj_clip_threshold=0.0029
+    grad_provenance/output_proj_grad_l2_norm_post_clip=0.0339
+    throughput/total_tokens=2,118,123,520
+    throughput/total_training_Gflops=17,930,241,889
+    throughput/total_training_log_Gflops=23.61
+    throughput/device/tokens_per_second=56,028
+    throughput/device/batches_per_second=0.2137
+    System/Peak GPU Memory (MB)=114,391
+2025-12-26 19:13:56.036	ripe-sun-crunches-fin-03:0	olmo.train:1437	INFO	Saving final unsharded model checkpoint...
+2025-12-26 19:13:56.539	ripe-sun-crunches-fin-03:0	olmo.checkpoint:796	INFO	Saving model state...
+2025-12-26 19:14:00.062	ripe-sun-crunches-fin-03:0	olmo.checkpoint:811	INFO	Saving optim state...
+2025-12-26 19:14:07.161	ripe-sun-crunches-fin-03:0	olmo.checkpoint:669	INFO	Saving trainer state...
+2025-12-26 19:14:07.162	ripe-sun-crunches-fin-03:0	olmo.checkpoint:607	INFO	Saving config...
+2025-12-26 19:14:09.342	ripe-sun-crunches-fin-03:0	olmo.train:1439	INFO	Unsharded checkpoint saved to /home/vec_norm/OLMo/checkpoints/OLMo-1B-tied-no-scale-1000/step1010-unsharded
+2025-12-26 19:14:09.342	ripe-sun-crunches-fin-03:0	train:377	INFO	Training complete
+2025-12-26 19:14:09.678	ripe-sun-crunches-fin-03:0	olmo.train:1458	INFO	Gradient provenance CSV file saved
+wandb: WARNING The `quiet` argument to `wandb.run.finish()` is deprecated, use `wandb.Settings(quiet=...)` to set this instead.
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 1010-1010, summary, console lines 2189-2194
+wandb: 
+wandb: Run history:
+wandb:                System/Peak GPU Memory (MB) ▁███████████████████████████████████████
+wandb:    grad_provenance/embedding_grad_abs_mean ▁▂▃▄▄▄▄▅▅▅▆▇▆▇▇▇▇▇▇█▇██▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+wandb:     grad_provenance/embedding_grad_l1_norm ▂▁▄▅▅▆▇▆▆▆▇▆▇▇▇▇▇██▇▇▇▇▇█▇█▇▇▇██▇█▇█▇█▇▇
+wandb:     grad_provenance/embedding_grad_l2_norm ▁▂▃▃▄▆▅▆▅▆▇▆▇▆▇█▆▇█▆▇▆▆▆▆▆▆▆▇▇▆▆▆▇▇▇▆▆▆▆
+wandb:        grad_provenance/embedding_grad_mean ▁█▄▄▄▃▄▇▄█▅▃▆▂▃▅▃▅▄▅▃▅▅▃▂▄▃▃▆▆▃▄▄▆▂▄▆▃▃▅
+wandb: grad_provenance/embedding_grad_rolling_avg █▁▁▁▁▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂▂
+wandb: grad_provenance/output_proj_clip_threshold █▁▁▂▂▃▃▃▃▃▄▄▄▄▄▄▄▄▄▅▄▄▄▄▄▅▄▄▄▄▄▄▄▅▄▄▄▄▄▄
+wandb:  grad_provenance/output_proj_grad_abs_mean █▅▄▃▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:   grad_provenance/output_proj_grad_l1_norm ██▆▇▅▄▄▄▅▄▄▃▃▃▃▂▃▂▂▃▂▂▂▂▂▂▁▁▁▂▂▂▁▁▁▁▁▁▂▁
+wandb:   grad_provenance/output_proj_grad_l2_norm █▂▂▂▂▁▂▁▃▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                                     +1,052 ...
+wandb: 
+wandb: Run summary:
+wandb:                System/Peak GPU Memory (MB) 114391.46094
+wandb:    grad_provenance/embedding_grad_abs_mean 0.0
+wandb:     grad_provenance/embedding_grad_l1_norm 153.43208
+wandb:     grad_provenance/embedding_grad_l2_norm 0.0289
+wandb:        grad_provenance/embedding_grad_mean -0.0
+wandb: grad_provenance/embedding_grad_rolling_avg 0.02887
+wandb: grad_provenance/output_proj_clip_threshold 0.00289
+wandb:  grad_provenance/output_proj_grad_abs_mean 0.0
+wandb:   grad_provenance/output_proj_grad_l1_norm 81.36063
+wandb:   grad_provenance/output_proj_grad_l2_norm 0.03395
+wandb:                                     +1,052 ...
+wandb: 
+wandb: 🚀 View run OLMo-1B-tied-no-scale-1000 at: https://wandb.ai/antoniolopardo/VecNorm/runs/7raigzzb
+wandb: ⭐️ View project at: https://wandb.ai/antoniolopardo/VecNorm
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./checkpoints/OLMo-1B-tied-no-scale-1000/wandb/wandb/run-20251226_175419-7raigzzb/logs
+[rank0]:[W1226 19:14:15.804835408 ProcessGroupNCCL.cpp:1524] Warning: WARNING: destroy_process_group() was not called before program exit, which can leak resources. For more info, please see https://pytorch.org/docs/stable/distributed.html#shutdown (function operator())

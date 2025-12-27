@@ -10,6 +10,12 @@ With gradient provenance tracking enabled, OLMo records scalar metrics (norms, m
 
 The tracking is implemented using PyTorch backward hooks that observe gradient contributions **without modifying them**, ensuring training behavior remains mathematically identical.
 
+## Output Projection Gradient Clipping
+
+In addition to tracking, you can optionally **clip** the output projection gradients so their norm does not exceed the input embedding gradient norm. This can help balance the gradient contributions from both sources.
+
+**Important**: Since the output projection gradient is computed before the input embedding gradient during backpropagation, the clipping uses the embedding gradient norm from the **previous training step** as the threshold.
+
 ## Configuration
 
 Enable gradient provenance tracking in your config YAML:
@@ -20,6 +26,15 @@ model:
   track_embedding_gradient_provenance: true
 ```
 
+To also enable output projection gradient clipping:
+
+```yaml
+model:
+  weight_tying: true
+  track_embedding_gradient_provenance: true
+  clip_output_proj_to_embedding_grad_norm: true
+```
+
 Or programmatically:
 
 ```python
@@ -28,6 +43,7 @@ from olmo.config import ModelConfig
 config = ModelConfig(
     weight_tying=True,
     track_embedding_gradient_provenance=True,
+    clip_output_proj_to_embedding_grad_norm=True,  # Optional: clip output proj gradients
     # ... other config options
 )
 ```
@@ -44,6 +60,7 @@ When enabled, the following metrics are logged each training step under the `gra
 | `output_proj_grad_norm` | L2 norm of gradients from output projection |
 | `output_proj_grad_mean` | Mean of gradients from output projection |
 | `output_proj_grad_abs_mean` | Mean of absolute gradients from output projection |
+| `output_proj_clip_threshold` | The embedding grad norm used as clip threshold (when clipping enabled) |
 
 These metrics are automatically logged to W&B (if configured) and included in console output.
 
@@ -60,6 +77,9 @@ model = OLMo(config)
 # Enable tracking
 model.enable_gradient_provenance_tracking()
 
+# Optionally enable gradient clipping
+model.enable_output_proj_gradient_clipping()
+
 # Run forward-backward pass
 output = model(input_ids)
 loss = compute_loss(output.logits, labels)
@@ -67,14 +87,17 @@ loss.backward()
 
 # Get metrics
 metrics = model.get_gradient_provenance_metrics()
-print(f"Embedding grad norm: {metrics['embedding_grad_norm']}")
-print(f"Output proj grad norm: {metrics['output_proj_grad_norm']}")
+print(f"Embedding grad norm: {metrics['embedding_grad_l2_norm']}")
+print(f"Output proj grad norm: {metrics['output_proj_grad_l2_norm']}")
+# When clipping is enabled:
+print(f"Clip threshold: {metrics.get('output_proj_clip_threshold', 'N/A')}")
 
 # Clear metrics for next step
 model.clear_gradient_provenance_metrics()
 
 # Disable tracking when done
 model.disable_gradient_provenance_tracking()
+model.disable_output_proj_gradient_clipping()
 ```
 
 ## Implementation Details
@@ -87,11 +110,20 @@ model.disable_gradient_provenance_tracking()
 
 ### Mathematical Guarantee
 
-The implementation only **observes** gradients without modifying them. The actual gradient accumulation into `wte.weight.grad` happens normally through PyTorch's autograd. This ensures:
+When only tracking is enabled (without clipping), the implementation only **observes** gradients without modifying them. The actual gradient accumulation into `wte.weight.grad` happens normally through PyTorch's autograd. This ensures:
 
 - Losses are identical with/without tracking
 - Gradients are identical with/without tracking  
 - Final weights after optimization are identical
+
+### Gradient Clipping Behavior
+
+When `clip_output_proj_to_embedding_grad_norm=True`:
+
+1. The output projection gradient (flowing back through `F.linear(x, wte.weight)`) is scaled down if its L2 norm exceeds the threshold
+2. The threshold is the **previous step's** input embedding gradient L2 norm
+3. On the first step, no clipping occurs (no previous reference available)
+4. This modifies training behavior intentionally - use with care and monitor metrics
 
 ### Verification
 
@@ -117,8 +149,8 @@ For large models, consider enabling tracking only for specific analysis runs rat
 
 ## Files Modified
 
-- `olmo/config.py`: Added `track_embedding_gradient_provenance` config option
-- `olmo/model.py`: Added tracking methods and hooks to `OLMo` class
+- `olmo/config.py`: Added `track_embedding_gradient_provenance` and `clip_output_proj_to_embedding_grad_norm` config options
+- `olmo/model.py`: Added tracking/clipping methods and hooks to `OLMo` class
 - `olmo/train.py`: Integrated metrics logging in `Trainer`
 - `scripts/verify_gradient_provenance.py`: Verification test script
 
